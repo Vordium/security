@@ -1,0 +1,12 @@
+{
+  "domains": "check_site_headers.py",
+  "hosted-server": "check_hosted_ai_server.py",
+  "block-links": "verify_block_links.py",
+  "finality-public": "finality_probe.py",
+  "state-checkpoint": "verify_state_checkpoint.py",
+  "state-root": "verify_state_checkpoint.py",
+  "reserves-coverage": "verify_reserves.py",
+  "reserves-inclusion": "verify_reserves.py",
+  "records-digest": "verify_records_digest.py",
+  "op-order": "verify_op_order.py"
+}
