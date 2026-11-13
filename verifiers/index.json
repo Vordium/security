@@ -8,5 +8,8 @@
   "reserves-coverage": "verify_reserves.py",
   "reserves-inclusion": "verify_reserves.py",
   "records-digest": "verify_records_digest.py",
-  "op-order": "verify_op_order.py"
+  "op-order": "verify_op_order.py",
+  "agent-limits": "agent_control_proof.py",
+  "revoked-keys": "agent_control_proof.py",
+  "planted-data": "agent_control_proof.py"
 }

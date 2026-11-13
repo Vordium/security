@@ -12,11 +12,11 @@ The release the hosted server reports in the `version` field of `https://mcp.vor
 
 ## Check it yourself
 
-`curl -s https://mcp.vordium.com/testnet/health` shows the server's request limits and counters.
+`curl -s https://mcp.vordium.com/testnet/health` shows the server's request limits and counters; the agent-control proof script (step 8) lists the hosted server's tools and asks it for an order.
 
 ## Last run (UTC date)
 
-10 Nov 2026 (testnet); 9 Nov 2026 (mainnet)
+13 Nov 2026 (testnet: tools listed, order request, text handling); 10 Nov 2026 (testnet); 9 Nov 2026 (mainnet)
 
 ## Verifier
 
@@ -24,10 +24,10 @@ The release the hosted server reports in the `version` field of `https://mcp.vor
 
 ## Result
 
-Long or crafted text in a request cannot stall the server; request size and per-client rates are capped, and their tests pass. The MCP Inspector checks pass 26 of 26 on both networks.
+Long or crafted text in a request cannot stall the server; request size and per-client rates are capped, and their tests pass. The MCP Inspector checks pass 26 of 26 on both networks. The hosted testnet server lists no tool that signs or sends an order, refuses an order request by name, and marks the text in its results as data from the network, never instructions.
 
 ## Limits
 
-Text inside tool results is passed to your AI as it is; the server does not yet tell your AI that such text is data and never an instruction. No flood test has been recorded against the hosted server.
+The hosted mainnet server has not yet been checked for how it marks text from the network. No flood test has been recorded against the hosted server.
 
 Also on the docs: https://docs.vordium.com/security/ai-audit/#hosted-server

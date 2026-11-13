@@ -18,22 +18,22 @@ Every item has exactly one status:
 Each item names the network it was tested on, the code version where one is recorded, the date of the last run (UTC),
 the result and its limits. "Local test" means the code was tested on its own, against a stand-in for the network.
 
-Today: 39 items — 19 proved, 17 built but not proven, 3 missing or failing.
+Today: 39 items — 19 proved, 18 built but not proven, 2 missing or failing.
 
 ## Items
 
 | Item | Status | Network | Last run |
 | --- | --- | --- | --- |
-| [Agent limits are enforced by the network](proofs/agent-limits/README.md) | BUILT, NOT PROVEN | testnet | 7 Nov 2026 (refusals); 5 Nov 2026 (1,000 orders compared with the pre-trade check) |
+| [Agent limits are enforced by the network](proofs/agent-limits/README.md) | BUILT, NOT PROVEN | testnet | 13 Nov 2026 (public agent-control proof on the testnet, daily loss included); 5 Nov 2026 (1,000 orders compared with the pre-trade check) |
 | [Two agents cannot overspend one account](proofs/shared-collateral/README.md) | PROVED | testnet | 11 Nov 2026 |
-| [A revoked agent or session key cannot trade](proofs/revoked-keys/README.md) | BUILT, NOT PROVEN | testnet; local test for the AI server | 9 Nov 2026 |
+| [A revoked agent or session key cannot trade](proofs/revoked-keys/README.md) | BUILT, NOT PROVEN | testnet; local test for the AI server | 13 Nov 2026 (orders in flight during a revoke, on the testnet) |
 | [The network stop ends every signer at once](proofs/stop-signers/README.md) | PROVED | testnet | 11 Nov 2026 |
 | [One tap stops everything](proofs/stop-everything/README.md) | BUILT, NOT PROVEN | local test; testnet for the network stop | 11 Nov 2026 |
 | [Order numbers stay unique across devices](proofs/nonces/README.md) | BUILT, NOT PROVEN | local test; testnet for the network's refusal | 10 Nov 2026 (packages); 9 Nov 2026 (testnet) |
 | [A lost answer never becomes a duplicate order](proofs/lost-answer/README.md) | BUILT, NOT PROVEN | local test | 11 Nov 2026 |
 | [Keys stored in your browser cannot be copied out](proofs/browser-keys/README.md) | BUILT, NOT PROVEN | testnet | 10 Nov 2026 |
-| [The hosted AI server withstands floods and crafted input](proofs/hosted-server/README.md) | BUILT, NOT PROVEN | testnet and mainnet (hosted server); local test | 10 Nov 2026 (testnet); 9 Nov 2026 (mainnet) |
-| [Market data cannot steer your AI into an order you did not want](proofs/planted-data/README.md) | MISSING OR FAILING | local test; testnet end-to-end run | 5 Nov 2026 |
+| [The hosted AI server withstands floods and crafted input](proofs/hosted-server/README.md) | BUILT, NOT PROVEN | testnet and mainnet (hosted server); local test | 13 Nov 2026 (testnet: tools listed, order request, text handling); 10 Nov 2026 (testnet); 9 Nov 2026 (mainnet) |
+| [Market data cannot steer your AI into an order you did not want](proofs/planted-data/README.md) | BUILT, NOT PROVEN | local test; testnet end-to-end run | 13 Nov 2026 (local AI server, testnet) |
 | [Signing in from a look-alike site is refused](proofs/phishing/README.md) | BUILT, NOT PROVEN | testnet; a test copy of the mainnet setup | 10 Nov 2026 |
 | [Our domains cannot be quietly redirected](proofs/domains/README.md) | BUILT, NOT PROVEN | websites | checked every day |
 | [Changes reach the live sites only through the release process](proofs/releases/README.md) | BUILT, NOT PROVEN | release process | 10 Nov 2026 |
@@ -98,7 +98,7 @@ https://github.com/Vordium/node, fingerprint `C5EB 4728 F660 369C E519  D834 B48
 
 ```bash
 sha256sum results.json
-# 418beb0734add4dc61dea78ba32317ed0b62110f443ce07414d26e21899ed230  results.json
+# 96cf24c0d8f6988d9550c6b7c8bb5c5bebdc751e49e37f14c6cd9b1934274105  results.json
 curl -sO https://raw.githubusercontent.com/Vordium/node/main/pub_key.asc
 gpg --import pub_key.asc
 gpg --verify results.json.asc results.json
@@ -110,4 +110,4 @@ gpg --verify results.json.asc results.json
 
 See [SECURITY.md](SECURITY.md).
 
-List date: 2026-11-12.
+List date: 2026-11-13.
