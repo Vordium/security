@@ -11,5 +11,6 @@
   "op-order": "verify_op_order.py",
   "agent-limits": "agent_control_proof.py",
   "revoked-keys": "agent_control_proof.py",
-  "planted-data": "agent_control_proof.py"
+  "planted-data": "agent_control_proof.py",
+  "builder-fees": "builder_fee_proof.py"
 }

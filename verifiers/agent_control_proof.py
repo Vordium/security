@@ -705,6 +705,7 @@ class Proof:
         r2 = self.one_order(f"2 allowed: buy {size_ok} {A['symbol']} limit at {Decimal(p_rest) / E8} (rests away from the price)",
                             s.order(A["pairId"], 0, size_ok, p_rest, leverage=self.a.leverage), "accepted")
         self.step("2_allowed_order", r2)
+        self.agent_order_ids = [(r2.get("result") or {}).get("order_id")]   # every order this agent placed, for step 6
         pb = self.px(B, "0.96")
         r3 = self.one_order(f"3 not allowed: buy {self.size_for(B, '11', pb)} {B['symbol']} limit",
                             s.order(B["pairId"], 0, self.size_for(B, "11", pb), pb, leverage=self.a.leverage), "refused")
@@ -757,6 +758,7 @@ class Proof:
             if i == a.revoke_after:
                 threads.append(threading.Thread(target=send_revoke))
         head0 = net.head()
+        book_before = net.orders(s.owner)
         for t in threads:
             t.start()
             time.sleep(gap)
@@ -782,17 +784,31 @@ class Proof:
             if isinstance(r.get(k), int):
                 rev_height = {"field": k, "height": r[k]}
                 break
+        # the chain's own record of the revoke (where the network records one): height, time, cause, orders it cancelled
+        revoke_record = {k: r.get(k) for k in ("revoked_height", "revoked_at_ms", "revoke_cause", "revoke_orders_cancelled")}
         owner_events = [e for e in net.account_events(s.owner, 100) if "revok" in json.dumps(e).lower()]
         agent_events = [e for e in net.agent_events(s.agent, 100) if "revok" in json.dumps(e).lower()]
-        resting_ids = [x["result"].get("order_id") for x in resting] + [f["result"].get("order_id") for f in acc]
+        revoked_records = [e for e in owner_events if e.get("kind") == "agent_revoked"
+                           and str(e.get("agent", "")).lower() == s.agent.lower()]
+        resting_ids = (list(getattr(self, "agent_order_ids", [])) + [x["result"].get("order_id") for x in resting]
+                       + [f["result"].get("order_id") for f in acc])
         br = self.bracket(holder.get("reads") or [])
         watch = self.watch_orders(resting_ids, a.watch_s, "6")
         book_orders = net.orders(s.owner)
-        still = [o for o in book_orders if str(o.get("id", o.get("order_id"))) in {str(i) for i in resting_ids if i is not None}]
+        want = {str(i) for i in resting_ids if i is not None}
+        still = [o for o in book_orders if str(o.get("id", o.get("order_id"))) in want]
+        # which of the agent's orders the chain closed with the basis "agent revoked" (its own records, before any cleanup)
+        closing = [e for e in net.account_events(s.owner, 200) if str(e.get("order_id")) in want and e.get("kind") != "order_placed"]
+        by_chain = sorted({str(e.get("order_id")) for e in closing if "agent revoked" in json.dumps(e).lower()})
+        on_book_before = sorted(str(o.get("id", o.get("order_id"))) for o in book_before if str(o.get("id", o.get("order_id"))) in want)
         out.update(head_before_send=head0, revoke_submit=rv, revoke_applied=back["applied"],
                    revoke_seen_by_height=back["height"], revocation_height=rev_height, revocation=br,
                    status_reads=holder.get("reads"), resting_watch=watch,
                    revoke_events={"owner": owner_events[:5], "agent": agent_events[:5]}, agent_record_after=rec_after,
+                   revoke_record=revoke_record, agent_revoked_records=revoked_records[:5],
+                   book_before={"agent_orders_on_book": on_book_before, "owner_open_orders": book_before},
+                   cancelled_by_chain={"count": len(by_chain), "order_ids": by_chain,
+                                       "records": [{k: e.get(k) for k in ("kind", "status", "status_basis", "order_id", "height", "at_ms")} for e in closing]},
                    inflight=fates,
                    last_accepted=(acc[-1] if acc else None), first_refused=(ref[0] if ref else None),
                    resting_after={"ids_placed_by_agent": resting_ids, "still_on_book": still,
@@ -801,6 +817,8 @@ class Proof:
         self.step("6_revoke_in_flight", out)
         self.log(f"6: revoke applied={back['applied']} by height {back['height']}; revocation height {rev_height}; "
                  f"{len(acc)} in-flight accepted, {len(ref)} refused; {len(still)} agent orders still resting")
+        self.log(f"6: chain record {json.dumps(revoke_record)}; {len(on_book_before)} agent order(s) on the book before, "
+                 f"{len(by_chain)} closed by the chain as 'agent revoked': {', '.join(by_chain) or '-'}")
 
     # -- revoke: when it applied, and what the agent's resting orders do after it ------------------------------------
     def poll_status(self, until_s: float = 20.0, every: float = 0.1) -> List[Dict[str, Any]]:
@@ -828,7 +846,7 @@ class Proof:
         return {"last_read_active": last_on, "first_read_revoked": first_off,
                 "revoked_between_heights": [last_on and last_on["head_height"], first_off and first_off["head_height"]],
                 "reads": len(reads),
-                "note": "no public read names the height of the revoke itself; these two committed-state reads bound it"}
+                "note": "these two committed-state reads bound the revoke; where the network records one, revoke_record names its height"}
 
     def watch_orders(self, ids: List[Any], watch_s: int, tag: str) -> Dict[str, Any]:
         """The agent's resting orders after the revoke: every few seconds, which of them are still on the book (GET

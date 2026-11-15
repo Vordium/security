@@ -8,15 +8,15 @@ Testnet; local test for the AI server
 
 ## Code version
 
-The testnet network on the run date
+Testnet node release 5124130b5d8564ba
 
 ## Check it yourself
 
-On the testnet, run the agent-control proof script with a funded test account; its revoke step records each order's outcome, the heights between which the revoke applied, and the agent's orders still on the book after it.
+On the testnet, run the agent-control proof script with a funded test account; its revoke step records each order's outcome, the network's own record of the revoke, the agent's orders on the book before it and which of them the network cancelled.
 
 ## Last run (UTC date)
 
-13 Nov 2026 (orders in flight during a revoke, on the testnet)
+15 Nov 2026 (orders in flight during a revoke, on the testnet)
 
 ## Verifier
 
@@ -24,10 +24,10 @@ On the testnet, run the agent-control proof script with a funded test account; i
 
 ## Result
 
-An agent's orders were sent one after another while its owner revoked it. The orders that arrived before the revoke applied were accepted; every order after it was refused when received (code no_session), and an order signed by the revoked agent a minute later was refused the same way. Reading the agent back to back showed the revoke applied less than one second after it was sent. An order signed by a revoked or replaced session key was refused, and an order that reused an order number was refused.
+An agent had three orders resting on the book, and six more of its orders were sent one after another while its owner revoked it. The network recorded the revoke at height 271,292,580 (record kind `agent_revoked`, 5 orders cancelled). The last order accepted was recorded at height 271,292,565; the first order refused was refused when received (answered at height 271,292,631; code bad_signature, session_key_mismatch), and so was every order after it. In the same step as the revoke, the network cancelled all five of the agent's open orders: the three that were resting and the two in-flight orders accepted before it. Each one's record says "agent revoked" at the revoke's height, and none of the agent's orders was on the book afterwards. An order signed by a revoked or replaced session key was refused, and an order that reused an order number was refused.
 
 ## Limits
 
-Revoking an agent does not cancel the orders it already has on the book: in two runs they stayed on the book for 30 and 60 seconds, until the owner cancelled them. Cancel an agent's open orders when you revoke it. The network gives no public record of the height at which a revoke applied; the proof bounds it by reading the agent before and after. Expired sessions, expired agents and expired agent policies are not yet tested on a network. Not yet checked on mainnet.
+One in-flight order was taken in before the revoke applied and then left no order, fill or refusal record; it did not trade, but the network does not yet say what became of it. The order cancellation on revoke runs on the testnet; it is not yet on mainnet. Expired sessions, expired agents and expired agent policies are not yet tested on a network.
 
 Also on the docs: https://docs.vordium.com/security/ai-audit/#revoked-keys

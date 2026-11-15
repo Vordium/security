@@ -24,6 +24,6 @@ One stop signed by the account's wallet ended its trading key and its agent at o
 
 ## Limits
 
-The network's records show the stop's effect: no session, no live agent, and no order after the stop. The refusals of the next orders happen before an order is recorded, so they rest on the run's own log, not on the network's records. This stop does not cancel resting orders: they stay on the book until cancelled. Not yet available on mainnet, where the app ends each agent and the trading key one by one instead.
+The network's records show the stop's effect: no session, no live agent, and no order after the stop. The refusals of the next orders happen before an order is recorded, so they rest on the run's own log, not on the network's records. This run did not check resting orders. Not yet available on mainnet, where the app ends each agent and the trading key one by one instead.
 
 Also on the docs: https://docs.vordium.com/security/ai-audit/#stop-signers

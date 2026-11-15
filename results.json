@@ -1,6 +1,6 @@
 {
   "name": "Vordium AI Audit",
-  "date": "2026-11-13",
+  "date": "2026-11-15",
   "statuses": [
     "PROVED",
     "BUILT, NOT PROVEN",
@@ -41,11 +41,11 @@
       "group": "Agents and keys",
       "status": "BUILT, NOT PROVEN",
       "network": "testnet; local test for the AI server",
-      "code_version": "the testnet network on the run date",
-      "last_run": "13 Nov 2026 (orders in flight during a revoke, on the testnet)",
-      "result": "an agent's orders were sent one after another while its owner revoked it. The orders that arrived before the revoke applied were accepted; every order after it was refused when received (code no_session), and an order signed by the revoked agent a minute later was refused the same way. Reading the agent back to back showed the revoke applied less than one second after it was sent. An order signed by a revoked or replaced session key was refused, and an order that reused an order number was refused.",
-      "limits": "revoking an agent does not cancel the orders it already has on the book: in two runs they stayed on the book for 30 and 60 seconds, until the owner cancelled them. Cancel an agent's open orders when you revoke it. The network gives no public record of the height at which a revoke applied; the proof bounds it by reading the agent before and after. Expired sessions, expired agents and expired agent policies are not yet tested on a network. Not yet checked on mainnet.",
-      "check": "on the testnet, run the agent-control proof script with a funded test account; its revoke step records each order's outcome, the heights between which the revoke applied, and the agent's orders still on the book after it.",
+      "code_version": "testnet node release 5124130b5d8564ba",
+      "last_run": "15 Nov 2026 (orders in flight during a revoke, on the testnet)",
+      "result": "an agent had three orders resting on the book, and six more of its orders were sent one after another while its owner revoked it. The network recorded the revoke at height 271,292,580 (record kind `agent_revoked`, 5 orders cancelled). The last order accepted was recorded at height 271,292,565; the first order refused was refused when received (answered at height 271,292,631; code bad_signature, session_key_mismatch), and so was every order after it. In the same step as the revoke, the network cancelled all five of the agent's open orders: the three that were resting and the two in-flight orders accepted before it. Each one's record says \"agent revoked\" at the revoke's height, and none of the agent's orders was on the book afterwards. An order signed by a revoked or replaced session key was refused, and an order that reused an order number was refused.",
+      "limits": "one in-flight order was taken in before the revoke applied and then left no order, fill or refusal record; it did not trade, but the network does not yet say what became of it. The order cancellation on revoke runs on the testnet; it is not yet on mainnet. Expired sessions, expired agents and expired agent policies are not yet tested on a network.",
+      "check": "on the testnet, run the agent-control proof script with a funded test account; its revoke step records each order's outcome, the network's own record of the revoke, the agent's orders on the book before it and which of them the network cancelled.",
       "verifier": "`python3 verifiers/agent_control_proof.py`",
       "docs": "https://docs.vordium.com/security/ai-audit/#revoked-keys"
     },
@@ -58,7 +58,7 @@
       "code_version": "testnet node release 043e1fc813ec08b2",
       "last_run": "11 Nov 2026",
       "result": "one stop signed by the account's wallet ended its trading key and its agent at once: within about one second the network showed no session and no live agent, and the next order of the agent and of the old trading key were both refused. Sending the same signed stop again was refused. 15 of 15 checks passed.",
-      "limits": "the network's records show the stop's effect: no session, no live agent, and no order after the stop. The refusals of the next orders happen before an order is recorded, so they rest on the run's own log, not on the network's records. This stop does not cancel resting orders: they stay on the book until cancelled. Not yet available on mainnet, where the app ends each agent and the trading key one by one instead.",
+      "limits": "the network's records show the stop's effect: no session, no live agent, and no order after the stop. The refusals of the next orders happen before an order is recorded, so they rest on the run's own log, not on the network's records. This run did not check resting orders. Not yet available on mainnet, where the app ends each agent and the trading key one by one instead.",
       "check": "run by the team",
       "verifier": null,
       "docs": "https://docs.vordium.com/security/ai-audit/#stop-signers"
@@ -160,6 +160,20 @@
       "check": "run by the team",
       "verifier": null,
       "docs": "https://docs.vordium.com/security/ai-audit/#phishing"
+    },
+    {
+      "id": "builder-fees",
+      "title": "App fees on perpetual markets are charged only as approved and add up",
+      "group": "Trading",
+      "status": "PROVED",
+      "network": "testnet, perpetual markets",
+      "code_version": "the testnet network on the run date",
+      "last_run": "14 Nov 2026",
+      "result": "an app can add its own fee to a trader's orders only up to the rate the trader approved. The network accepted an order at exactly the approved rate and charged that rate, and refused an order one step above it, an order with a fee of zero and an order above the market's cap, each with its own code. An account may approve at most 10 apps; the next approval was refused, and an approval is a rate limit with no amount or budget. An order naming an app with no funds was refused (builder_too_small); the network's published minimum is 100 USDC. When the trader withdrew an approval, or lowered it below a resting order's fee, that order paid no app fee when it filled later; after the approval was withdrawn, new orders naming the app were refused (code builder_not_approved). On every fill the fee was the fill's value times the rate, rounded up to the next 0.000001 USDC, so a fee worth less than 0.000001 USDC is charged as 0.000001 USDC. The fees on all fills added up exactly to the app's total; after the app claimed them, its claimed amount and its balance rose by exactly the unclaimed amount, and its total stayed equal to claimed plus unclaimed.",
+      "limits": "not checked on spot markets; spot fills write no fill record, so there only the app's totals can show the fee. When one match closes a position and opens the other side, the network writes it as two fill records and shows the app fee for the whole match on one of them; the totals still add up. Not yet run on mainnet.",
+      "check": "on the testnet, with two funded test accounts, run the public builder-fee proof with the Vordium Python SDK: it approves an app, places orders that name it, fills them and claims the fees, and writes every answer of the network to a results file.",
+      "verifier": "`python3 verifiers/builder_fee_proof.py`",
+      "docs": "https://docs.vordium.com/security/ai-audit/#builder-fees"
     },
     {
       "id": "domains",

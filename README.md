@@ -18,7 +18,7 @@ Every item has exactly one status:
 Each item names the network it was tested on, the code version where one is recorded, the date of the last run (UTC),
 the result and its limits. "Local test" means the code was tested on its own, against a stand-in for the network.
 
-Today: 39 items — 19 proved, 18 built but not proven, 2 missing or failing.
+Today: 40 items — 20 proved, 18 built but not proven, 2 missing or failing.
 
 ## Items
 
@@ -26,7 +26,7 @@ Today: 39 items — 19 proved, 18 built but not proven, 2 missing or failing.
 | --- | --- | --- | --- |
 | [Agent limits are enforced by the network](proofs/agent-limits/README.md) | BUILT, NOT PROVEN | testnet | 13 Nov 2026 (public agent-control proof on the testnet, daily loss included); 5 Nov 2026 (1,000 orders compared with the pre-trade check) |
 | [Two agents cannot overspend one account](proofs/shared-collateral/README.md) | PROVED | testnet | 11 Nov 2026 |
-| [A revoked agent or session key cannot trade](proofs/revoked-keys/README.md) | BUILT, NOT PROVEN | testnet; local test for the AI server | 13 Nov 2026 (orders in flight during a revoke, on the testnet) |
+| [A revoked agent or session key cannot trade](proofs/revoked-keys/README.md) | BUILT, NOT PROVEN | testnet; local test for the AI server | 15 Nov 2026 (orders in flight during a revoke, on the testnet) |
 | [The network stop ends every signer at once](proofs/stop-signers/README.md) | PROVED | testnet | 11 Nov 2026 |
 | [One tap stops everything](proofs/stop-everything/README.md) | BUILT, NOT PROVEN | local test; testnet for the network stop | 11 Nov 2026 |
 | [Order numbers stay unique across devices](proofs/nonces/README.md) | BUILT, NOT PROVEN | local test; testnet for the network's refusal | 10 Nov 2026 (packages); 9 Nov 2026 (testnet) |
@@ -35,6 +35,7 @@ Today: 39 items — 19 proved, 18 built but not proven, 2 missing or failing.
 | [The hosted AI server withstands floods and crafted input](proofs/hosted-server/README.md) | BUILT, NOT PROVEN | testnet and mainnet (hosted server); local test | 13 Nov 2026 (testnet: tools listed, order request, text handling); 10 Nov 2026 (testnet); 9 Nov 2026 (mainnet) |
 | [Market data cannot steer your AI into an order you did not want](proofs/planted-data/README.md) | BUILT, NOT PROVEN | local test; testnet end-to-end run | 13 Nov 2026 (local AI server, testnet) |
 | [Signing in from a look-alike site is refused](proofs/phishing/README.md) | BUILT, NOT PROVEN | testnet; a test copy of the mainnet setup | 10 Nov 2026 |
+| [App fees on perpetual markets are charged only as approved and add up](proofs/builder-fees/README.md) | PROVED | testnet, perpetual markets | 14 Nov 2026 |
 | [Our domains cannot be quietly redirected](proofs/domains/README.md) | BUILT, NOT PROVEN | websites | checked every day |
 | [Changes reach the live sites only through the release process](proofs/releases/README.md) | BUILT, NOT PROVEN | release process | 10 Nov 2026 |
 | [Private data does not appear on public pages](proofs/private-data/README.md) | BUILT, NOT PROVEN | websites | checked every day |
@@ -98,7 +99,7 @@ https://github.com/Vordium/node, fingerprint `C5EB 4728 F660 369C E519  D834 B48
 
 ```bash
 sha256sum results.json
-# 96cf24c0d8f6988d9550c6b7c8bb5c5bebdc751e49e37f14c6cd9b1934274105  results.json
+# 92195dc1f162d95fdf6dc1f38fda3f4d53a284917e7fcb98ef0ac38caf01b4b6  results.json
 curl -sO https://raw.githubusercontent.com/Vordium/node/main/pub_key.asc
 gpg --import pub_key.asc
 gpg --verify results.json.asc results.json
@@ -110,4 +111,4 @@ gpg --verify results.json.asc results.json
 
 See [SECURITY.md](SECURITY.md).
 
-List date: 2026-11-13.
+List date: 2026-11-15.
