@@ -12,5 +12,6 @@
   "agent-limits": "agent_control_proof.py",
   "revoked-keys": "agent_control_proof.py",
   "planted-data": "agent_control_proof.py",
-  "builder-fees": "builder_fee_proof.py"
+  "builder-fees": "builder_fee_proof.py",
+  "money-replay": "money_replay.py"
 }

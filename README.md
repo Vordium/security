@@ -18,7 +18,7 @@ Every item has exactly one status:
 Each item names the network it was tested on, the code version where one is recorded, the date of the last run (UTC),
 the result and its limits. "Local test" means the code was tested on its own, against a stand-in for the network.
 
-Today: 40 items — 20 proved, 18 built but not proven, 2 missing or failing.
+Today: 41 items — 21 proved, 18 built but not proven, 2 missing or failing.
 
 ## Items
 
@@ -64,6 +64,7 @@ Today: 40 items — 20 proved, 18 built but not proven, 2 missing or failing.
 | [Liquidation in steps, then backstop, insurance fund and auto-deleverage](proofs/liquidation-model/README.md) | BUILT, NOT PROVEN | a local test network | 7 Nov 2026 |
 | [The read-only order check agrees with the network](proofs/order-check/README.md) | BUILT, NOT PROVEN | a local test network | 6 Nov 2026 |
 | [Finality as a public reader sees it](proofs/finality-public/README.md) | PROVED | mainnet and testnet | 11 Nov 2026 |
+| [Balances follow the public records on the testnet](proofs/money-replay/README.md) | PROVED | testnet | 15 Nov 2026 16:42–17:28 UTC (heights 272,120,839 to 272,572,743) |
 
 Each link opens `proofs/<item>/README.md`, with the full result and limits.
 
@@ -99,7 +100,7 @@ https://github.com/Vordium/node, fingerprint `C5EB 4728 F660 369C E519  D834 B48
 
 ```bash
 sha256sum results.json
-# 92195dc1f162d95fdf6dc1f38fda3f4d53a284917e7fcb98ef0ac38caf01b4b6  results.json
+# cdfcdbd8405e9b538979296e8f403038997137486e998675561915c5dd2f4e17  results.json
 curl -sO https://raw.githubusercontent.com/Vordium/node/main/pub_key.asc
 gpg --import pub_key.asc
 gpg --verify results.json.asc results.json
@@ -111,4 +112,4 @@ gpg --verify results.json.asc results.json
 
 See [SECURITY.md](SECURITY.md).
 
-List date: 2026-11-15.
+List date: 2026-11-16.

@@ -1,0 +1,88 @@
+{
+ "schema": "vordium.security-results/1",
+ "title": "Public money replay on the test network",
+ "claim": "For each account followed, the change of free balance + order margin + position margin between two balance reads placed at one height equals the sum of the account's public records in between (taker fills: realized PnL \u2212 fee + rebate; funding payments; book liquidations: their fee).",
+ "how_to_rerun": "python3 money_replay.py --minutes 30 0x580207d74663309986131131ca3c954f85b9225b 0x34887a0938a0908348879ead6f7809d7dab2ff0a 0xc0f691f41d367b3c2994b9ec8d121394a3659262 0x4952f6ebf45387cc109f7b5df5069dec1faf80ad 0x814646978e4654243d1278c51c61dbe5edf6fc5d 0x1f1e2ad48ec5f7aeab97adf3348254c45d932bfa",
+ "self_test": "python3 money_replay.py --self-test cases.json",
+ "files": {
+  "money_replay.py": "e2f76c5b1a17d8035aa39e3960c0fc9a3568aa831203b8e2107d0794d0e0245f",
+  "cases.json": "a2c6779315c45ae81cce041ad5950451c420d915557b67f462e69fafea6e97e0"
+ },
+ "network": "test network",
+ "reads": {
+  "chain": "https://testnet.vordex.xyz/chain",
+  "records": "https://testnet.vordex.xyz/chain-archive"
+ },
+ "window": {
+  "from_utc": "2026-11-15T16:42:47Z",
+  "to_utc": "2026-11-15T17:27:54Z",
+  "from_height": 272120839,
+  "to_height": 272572743
+ },
+ "accounts": {
+  "0x580207d74663309986131131ca3c954f85b9225b": {
+   "reads": 150,
+   "not_placed": 1,
+   "match": 38,
+   "different": 0,
+   "not_replayable": 9
+  },
+  "0x34887a0938a0908348879ead6f7809d7dab2ff0a": {
+   "reads": 150,
+   "not_placed": 2,
+   "match": 28,
+   "different": 0,
+   "not_replayable": 2
+  },
+  "0xc0f691f41d367b3c2994b9ec8d121394a3659262": {
+   "reads": 150,
+   "not_placed": 4,
+   "match": 38,
+   "different": 0,
+   "not_replayable": 5
+  },
+  "0x4952f6ebf45387cc109f7b5df5069dec1faf80ad": {
+   "reads": 150,
+   "not_placed": 0,
+   "match": 0,
+   "different": 0,
+   "not_replayable": 0
+  },
+  "0x814646978e4654243d1278c51c61dbe5edf6fc5d": {
+   "reads": 150,
+   "not_placed": 0,
+   "match": 0,
+   "different": 0,
+   "not_replayable": 0
+  },
+  "0x1f1e2ad48ec5f7aeab97adf3348254c45d932bfa": {
+   "reads": 150,
+   "not_placed": 0,
+   "match": 0,
+   "different": 0,
+   "not_replayable": 0
+  }
+ },
+ "summary": {
+  "steps": 120,
+  "match": 104,
+  "not_replayable": 16,
+  "different": 0,
+  "reads": 900,
+  "unanchored_reads": 7
+ },
+ "records_with_an_amount": {
+  "fill": 152,
+  "funding_payment": 85
+ },
+ "not_replayable_because": {
+  "maker leg: the record carries no fee and no realized PnL yet": 16
+ },
+ "differences": [],
+ "limits": [
+  "Maker legs record no fee and no realized PnL yet, so a step with a maker fill is not replayable (asked of the chain team).",
+  "Balances cannot be read at a past height yet, so the replay runs forward from the moment it starts; past windows (a partial liquidation, an oracle pause) are checked only once a past-height balance read exists.",
+  "Records that may move money and are not read yet (deposits, withdrawals, transfers, app fees, other liquidation kinds) make a step not replayable, never a match.",
+  "Trusts the endpoints it reads unless pointed at your own node."
+ ]
+}

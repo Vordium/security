@@ -1,0 +1,1842 @@
+{
+ "schema": "vordium.money-replay-cases/1",
+ "steps": [
+  {
+   "name": "real taker step matches to the micro-USDC",
+   "account": "0x580207d74663309986131131ca3c954f85b9225b",
+   "h0": 271288711,
+   "b0": {
+    "total": 378729396,
+    "reserved": 0,
+    "locked": 0,
+    "available": 378729396,
+    "consensus_balance": 378729396,
+    "reserved_orders": 80465766,
+    "in_positions": 1224271700,
+    "free_balance": 378729396
+   },
+   "records": [
+    {
+     "accounts": [
+      "0x580207d74663309986131131ca3c954f85b9225b"
+     ],
+     "agent": null,
+     "agents": [],
+     "at_ms": 1794756015898,
+     "client_nonce": 1794756015799,
+     "cursor": "271290561.0.0",
+     "expires_at_secs": 0,
+     "filled_18dec": "0",
+     "height": 271290561,
+     "kind": "order_placed",
+     "leverage_bps": 20000,
+     "order_id": 12965745,
+     "order_type": 1,
+     "owner": "0x580207d74663309986131131ca3c954f85b9225b",
+     "pair_id": 41,
+     "phase": "block",
+     "post_only": false,
+     "price_8dec": 36058000,
+     "reduce_only": false,
+     "remaining_18dec": "186600000000000000000",
+     "reserved_margin_6dec": "33642114",
+     "seq": 0,
+     "side": "buy",
+     "signed_with": "owner",
+     "size_18dec": "186600000000000000000",
+     "time_in_force": 2,
+     "twap_id": null
+    },
+    {
+     "accounts": [
+      "0x580207d74663309986131131ca3c954f85b9225b"
+     ],
+     "agents": [],
+     "at_ms": 1794756016003,
+     "cursor": "271290583.1.0",
+     "fee": {
+      "maker_fee_basis": "maker_fee_cbps is the rate for a maker without a market-maker tier; a tier's rate shows in the maker leg's fee_paid_6dec / rebate_6dec",
+      "maker_fee_bps": 1.5,
+      "maker_fee_cbps": 150,
+      "note": "fee_paid_6dec is what the fill recorded; a referral discount can make it lower than the list rate",
+      "pair_config_applied": false,
+      "source": "chain_setting",
+      "taker_fee_bps": 4.5,
+      "taker_fee_cbps": 450
+     },
+     "fill_id": 1096646,
+     "height": 271290583,
+     "is_close": true,
+     "kind": "fill",
+     "maker": {
+      "account": null,
+      "counterparty": "vlp_pool",
+      "fee_paid_6dec": "0",
+      "realized_pnl_6dec": null,
+      "rebate_6dec": "0",
+      "role": "maker"
+     },
+     "market": "perp",
+     "order_type": 1,
+     "pair_id": 41,
+     "phase": "batch",
+     "price_8dec": 35950000,
+     "seq": 0,
+     "size_18dec": "122315970000000000000",
+     "taker": {
+      "account": "0x580207d74663309986131131ca3c954f85b9225b",
+      "agent": null,
+      "fee_paid_6dec": "19787",
+      "order_attribution": "unique_size_decrease",
+      "order_id": 12965745,
+      "realized_pnl_6dec": "-415874",
+      "role": "taker",
+      "signed_with": "wallet"
+     },
+     "taker_side": "buy",
+     "timestamp_secs": 1794756016
+    },
+    {
+     "accounts": [
+      "0x580207d74663309986131131ca3c954f85b9225b"
+     ],
+     "agents": [],
+     "at_ms": 1794756016003,
+     "cursor": "271290583.1.1",
+     "fee": {
+      "maker_fee_basis": "maker_fee_cbps is the rate for a maker without a market-maker tier; a tier's rate shows in the maker leg's fee_paid_6dec / rebate_6dec",
+      "maker_fee_bps": 1.5,
+      "maker_fee_cbps": 150,
+      "note": "fee_paid_6dec is what the fill recorded; a referral discount can make it lower than the list rate",
+      "pair_config_applied": false,
+      "source": "chain_setting",
+      "taker_fee_bps": 4.5,
+      "taker_fee_cbps": 450
+     },
+     "fill_id": 1096647,
+     "height": 271290583,
+     "is_close": false,
+     "kind": "fill",
+     "maker": {
+      "account": null,
+      "counterparty": "vlp_pool",
+      "fee_paid_6dec": "0",
+      "realized_pnl_6dec": null,
+      "rebate_6dec": "0",
+      "role": "maker"
+     },
+     "market": "perp",
+     "order_type": 1,
+     "pair_id": 41,
+     "phase": "batch",
+     "price_8dec": 35950000,
+     "seq": 1,
+     "size_18dec": "64284030000000000000",
+     "taker": {
+      "account": "0x580207d74663309986131131ca3c954f85b9225b",
+      "agent": null,
+      "fee_paid_6dec": "10399",
+      "order_attribution": "unique_size_decrease",
+      "order_id": 12965745,
+      "realized_pnl_6dec": "0",
+      "role": "taker",
+      "signed_with": "wallet"
+     },
+     "taker_side": "buy",
+     "timestamp_secs": 1794756016
+    },
+    {
+     "accounts": [
+      "0x580207d74663309986131131ca3c954f85b9225b"
+     ],
+     "agent": null,
+     "agents": [],
+     "at_ms": 1794756016003,
+     "client_nonce": 1794756015799,
+     "cursor": "271290583.1.2",
+     "filled_18dec": "186600000000000000000",
+     "filled_in_step_18dec": "186600000000000000000",
+     "filled_total_18dec": "186600000000000000000",
+     "height": 271290583,
+     "kind": "order_closed",
+     "order_id": 12965745,
+     "original_size_18dec": "186600000000000000000",
+     "owner": "0x580207d74663309986131131ca3c954f85b9225b",
+     "pair_id": 41,
+     "partially_filled": false,
+     "phase": "batch",
+     "remaining_18dec": "0",
+     "seq": 2,
+     "side": "buy",
+     "size_at_close_18dec": "186600000000000000000",
+     "status": "filled",
+     "status_basis": "fills in this step consumed the remaining size"
+    }
+   ],
+   "h1": 271292071,
+   "b1": {
+    "total": 410249872,
+    "reserved": 0,
+    "locked": 0,
+    "available": 410249872,
+    "consensus_balance": 410249872,
+    "reserved_orders": 80465766,
+    "in_positions": 1192305164,
+    "free_balance": 410249872
+   },
+   "verdict": "match"
+  },
+  {
+   "name": "real maker step is not replayable",
+   "account": "0x580207d74663309986131131ca3c954f85b9225b",
+   "h0": 271295191,
+   "b0": {
+    "total": 379988872,
+    "reserved": 0,
+    "locked": 0,
+    "available": 379988872,
+    "consensus_balance": 379988872,
+    "reserved_orders": 110726766,
+    "in_positions": 1192305164,
+    "free_balance": 379988872
+   },
+   "records": [
+    {
+     "accounts": [
+      "0x580207d74663309986131131ca3c954f85b9225b",
+      "0xd60605cd9d618ce216a1b1ef2b9717869dd07d38"
+     ],
+     "agents": [],
+     "at_ms": 1794756053779,
+     "cursor": "271296615.1.0",
+     "fee": {
+      "maker_fee_basis": "maker_fee_cbps is the rate for a maker without a market-maker tier; a tier's rate shows in the maker leg's fee_paid_6dec / rebate_6dec",
+      "maker_fee_bps": 1.5,
+      "maker_fee_cbps": 150,
+      "note": "fee_paid_6dec is what the fill recorded; a referral discount can make it lower than the list rate",
+      "pair_config_applied": false,
+      "source": "chain_setting",
+      "taker_fee_bps": 4.5,
+      "taker_fee_cbps": 450
+     },
+     "fill_id": 1096658,
+     "height": 271296615,
+     "is_close": false,
+     "kind": "fill",
+     "maker": {
+      "account": "0x580207d74663309986131131ca3c954f85b9225b",
+      "agent": null,
+      "counterparty": "account",
+      "fee_paid_6dec": "0",
+      "order_attribution": "unique_size_decrease",
+      "order_id": 12965710,
+      "realized_pnl_6dec": null,
+      "realized_pnl_basis": "the engine records realised PnL for the taker leg only",
+      "rebate_6dec": "0",
+      "role": "maker",
+      "signed_with": "wallet"
+     },
+     "market": "perp",
+     "order_type": 0,
+     "pair_id": 43,
+     "phase": "batch",
+     "price_8dec": 20049000,
+     "seq": 0,
+     "size_18dec": "305200000000000000000",
+     "taker": {
+      "account": "0xd60605cd9d618ce216a1b1ef2b9717869dd07d38",
+      "agent": null,
+      "fee_paid_6dec": "27535",
+      "order_attribution": "unique_size_decrease",
+      "order_id": 12965765,
+      "realized_pnl_6dec": "0",
+      "role": "taker",
+      "signed_with": "wallet"
+     },
+     "taker_side": "buy",
+     "timestamp_secs": 1794756053
+    },
+    {
+     "accounts": [
+      "0x580207d74663309986131131ca3c954f85b9225b"
+     ],
+     "agent": null,
+     "agents": [],
+     "at_ms": 1794756053779,
+     "client_nonce": 1794755955718,
+     "cursor": "271296615.1.2",
+     "filled_18dec": "305200000000000000000",
+     "filled_in_step_18dec": "305200000000000000000",
+     "filled_total_18dec": "305200000000000000000",
+     "height": 271296615,
+     "kind": "order_closed",
+     "order_id": 12965710,
+     "original_size_18dec": "305200000000000000000",
+     "owner": "0x580207d74663309986131131ca3c954f85b9225b",
+     "pair_id": 43,
+     "partially_filled": false,
+     "phase": "batch",
+     "remaining_18dec": "0",
+     "seq": 2,
+     "side": "sell",
+     "size_at_close_18dec": "305200000000000000000",
+     "status": "filled",
+     "status_basis": "fills in this step consumed the remaining size"
+    }
+   ],
+   "h1": 271298535,
+   "b1": {
+    "total": 379993205,
+    "reserved": 0,
+    "locked": 0,
+    "available": 379993205,
+    "consensus_balance": 379993205,
+    "reserved_orders": 80131992,
+    "in_positions": 1222886449,
+    "free_balance": 379993205
+   },
+   "verdict": "not-replayable"
+  },
+  {
+   "name": "planted +1 on the chain's side is different",
+   "account": "0x580207d74663309986131131ca3c954f85b9225b",
+   "h0": 271288711,
+   "b0": {
+    "total": 378729396,
+    "reserved": 0,
+    "locked": 0,
+    "available": 378729396,
+    "consensus_balance": 378729396,
+    "reserved_orders": 80465766,
+    "in_positions": 1224271700,
+    "free_balance": 378729396
+   },
+   "records": [
+    {
+     "accounts": [
+      "0x580207d74663309986131131ca3c954f85b9225b"
+     ],
+     "agent": null,
+     "agents": [],
+     "at_ms": 1794756015898,
+     "client_nonce": 1794756015799,
+     "cursor": "271290561.0.0",
+     "expires_at_secs": 0,
+     "filled_18dec": "0",
+     "height": 271290561,
+     "kind": "order_placed",
+     "leverage_bps": 20000,
+     "order_id": 12965745,
+     "order_type": 1,
+     "owner": "0x580207d74663309986131131ca3c954f85b9225b",
+     "pair_id": 41,
+     "phase": "block",
+     "post_only": false,
+     "price_8dec": 36058000,
+     "reduce_only": false,
+     "remaining_18dec": "186600000000000000000",
+     "reserved_margin_6dec": "33642114",
+     "seq": 0,
+     "side": "buy",
+     "signed_with": "owner",
+     "size_18dec": "186600000000000000000",
+     "time_in_force": 2,
+     "twap_id": null
+    },
+    {
+     "accounts": [
+      "0x580207d74663309986131131ca3c954f85b9225b"
+     ],
+     "agents": [],
+     "at_ms": 1794756016003,
+     "cursor": "271290583.1.0",
+     "fee": {
+      "maker_fee_basis": "maker_fee_cbps is the rate for a maker without a market-maker tier; a tier's rate shows in the maker leg's fee_paid_6dec / rebate_6dec",
+      "maker_fee_bps": 1.5,
+      "maker_fee_cbps": 150,
+      "note": "fee_paid_6dec is what the fill recorded; a referral discount can make it lower than the list rate",
+      "pair_config_applied": false,
+      "source": "chain_setting",
+      "taker_fee_bps": 4.5,
+      "taker_fee_cbps": 450
+     },
+     "fill_id": 1096646,
+     "height": 271290583,
+     "is_close": true,
+     "kind": "fill",
+     "maker": {
+      "account": null,
+      "counterparty": "vlp_pool",
+      "fee_paid_6dec": "0",
+      "realized_pnl_6dec": null,
+      "rebate_6dec": "0",
+      "role": "maker"
+     },
+     "market": "perp",
+     "order_type": 1,
+     "pair_id": 41,
+     "phase": "batch",
+     "price_8dec": 35950000,
+     "seq": 0,
+     "size_18dec": "122315970000000000000",
+     "taker": {
+      "account": "0x580207d74663309986131131ca3c954f85b9225b",
+      "agent": null,
+      "fee_paid_6dec": "19787",
+      "order_attribution": "unique_size_decrease",
+      "order_id": 12965745,
+      "realized_pnl_6dec": "-415874",
+      "role": "taker",
+      "signed_with": "wallet"
+     },
+     "taker_side": "buy",
+     "timestamp_secs": 1794756016
+    },
+    {
+     "accounts": [
+      "0x580207d74663309986131131ca3c954f85b9225b"
+     ],
+     "agents": [],
+     "at_ms": 1794756016003,
+     "cursor": "271290583.1.1",
+     "fee": {
+      "maker_fee_basis": "maker_fee_cbps is the rate for a maker without a market-maker tier; a tier's rate shows in the maker leg's fee_paid_6dec / rebate_6dec",
+      "maker_fee_bps": 1.5,
+      "maker_fee_cbps": 150,
+      "note": "fee_paid_6dec is what the fill recorded; a referral discount can make it lower than the list rate",
+      "pair_config_applied": false,
+      "source": "chain_setting",
+      "taker_fee_bps": 4.5,
+      "taker_fee_cbps": 450
+     },
+     "fill_id": 1096647,
+     "height": 271290583,
+     "is_close": false,
+     "kind": "fill",
+     "maker": {
+      "account": null,
+      "counterparty": "vlp_pool",
+      "fee_paid_6dec": "0",
+      "realized_pnl_6dec": null,
+      "rebate_6dec": "0",
+      "role": "maker"
+     },
+     "market": "perp",
+     "order_type": 1,
+     "pair_id": 41,
+     "phase": "batch",
+     "price_8dec": 35950000,
+     "seq": 1,
+     "size_18dec": "64284030000000000000",
+     "taker": {
+      "account": "0x580207d74663309986131131ca3c954f85b9225b",
+      "agent": null,
+      "fee_paid_6dec": "10399",
+      "order_attribution": "unique_size_decrease",
+      "order_id": 12965745,
+      "realized_pnl_6dec": "0",
+      "role": "taker",
+      "signed_with": "wallet"
+     },
+     "taker_side": "buy",
+     "timestamp_secs": 1794756016
+    },
+    {
+     "accounts": [
+      "0x580207d74663309986131131ca3c954f85b9225b"
+     ],
+     "agent": null,
+     "agents": [],
+     "at_ms": 1794756016003,
+     "client_nonce": 1794756015799,
+     "cursor": "271290583.1.2",
+     "filled_18dec": "186600000000000000000",
+     "filled_in_step_18dec": "186600000000000000000",
+     "filled_total_18dec": "186600000000000000000",
+     "height": 271290583,
+     "kind": "order_closed",
+     "order_id": 12965745,
+     "original_size_18dec": "186600000000000000000",
+     "owner": "0x580207d74663309986131131ca3c954f85b9225b",
+     "pair_id": 41,
+     "partially_filled": false,
+     "phase": "batch",
+     "remaining_18dec": "0",
+     "seq": 2,
+     "side": "buy",
+     "size_at_close_18dec": "186600000000000000000",
+     "status": "filled",
+     "status_basis": "fills in this step consumed the remaining size"
+    }
+   ],
+   "h1": 271292071,
+   "b1": {
+    "total": 410249873,
+    "reserved": 0,
+    "locked": 0,
+    "available": 410249872,
+    "consensus_balance": 410249872,
+    "reserved_orders": 80465766,
+    "in_positions": 1192305164,
+    "free_balance": 410249872
+   },
+   "verdict": "different"
+  },
+  {
+   "name": "planted fee changed in a record is different",
+   "account": "0x580207d74663309986131131ca3c954f85b9225b",
+   "h0": 271288711,
+   "b0": {
+    "total": 378729396,
+    "reserved": 0,
+    "locked": 0,
+    "available": 378729396,
+    "consensus_balance": 378729396,
+    "reserved_orders": 80465766,
+    "in_positions": 1224271700,
+    "free_balance": 378729396
+   },
+   "records": [
+    {
+     "accounts": [
+      "0x580207d74663309986131131ca3c954f85b9225b"
+     ],
+     "agent": null,
+     "agents": [],
+     "at_ms": 1794756015898,
+     "client_nonce": 1794756015799,
+     "cursor": "271290561.0.0",
+     "expires_at_secs": 0,
+     "filled_18dec": "0",
+     "height": 271290561,
+     "kind": "order_placed",
+     "leverage_bps": 20000,
+     "order_id": 12965745,
+     "order_type": 1,
+     "owner": "0x580207d74663309986131131ca3c954f85b9225b",
+     "pair_id": 41,
+     "phase": "block",
+     "post_only": false,
+     "price_8dec": 36058000,
+     "reduce_only": false,
+     "remaining_18dec": "186600000000000000000",
+     "reserved_margin_6dec": "33642114",
+     "seq": 0,
+     "side": "buy",
+     "signed_with": "owner",
+     "size_18dec": "186600000000000000000",
+     "time_in_force": 2,
+     "twap_id": null
+    },
+    {
+     "accounts": [
+      "0x580207d74663309986131131ca3c954f85b9225b"
+     ],
+     "agents": [],
+     "at_ms": 1794756016003,
+     "cursor": "271290583.1.0",
+     "fee": {
+      "maker_fee_basis": "maker_fee_cbps is the rate for a maker without a market-maker tier; a tier's rate shows in the maker leg's fee_paid_6dec / rebate_6dec",
+      "maker_fee_bps": 1.5,
+      "maker_fee_cbps": 150,
+      "note": "fee_paid_6dec is what the fill recorded; a referral discount can make it lower than the list rate",
+      "pair_config_applied": false,
+      "source": "chain_setting",
+      "taker_fee_bps": 4.5,
+      "taker_fee_cbps": 450
+     },
+     "fill_id": 1096646,
+     "height": 271290583,
+     "is_close": true,
+     "kind": "fill",
+     "maker": {
+      "account": null,
+      "counterparty": "vlp_pool",
+      "fee_paid_6dec": "0",
+      "realized_pnl_6dec": null,
+      "rebate_6dec": "0",
+      "role": "maker"
+     },
+     "market": "perp",
+     "order_type": 1,
+     "pair_id": 41,
+     "phase": "batch",
+     "price_8dec": 35950000,
+     "seq": 0,
+     "size_18dec": "122315970000000000000",
+     "taker": {
+      "account": "0x580207d74663309986131131ca3c954f85b9225b",
+      "agent": null,
+      "fee_paid_6dec": "19786",
+      "order_attribution": "unique_size_decrease",
+      "order_id": 12965745,
+      "realized_pnl_6dec": "-415874",
+      "role": "taker",
+      "signed_with": "wallet"
+     },
+     "taker_side": "buy",
+     "timestamp_secs": 1794756016
+    },
+    {
+     "accounts": [
+      "0x580207d74663309986131131ca3c954f85b9225b"
+     ],
+     "agents": [],
+     "at_ms": 1794756016003,
+     "cursor": "271290583.1.1",
+     "fee": {
+      "maker_fee_basis": "maker_fee_cbps is the rate for a maker without a market-maker tier; a tier's rate shows in the maker leg's fee_paid_6dec / rebate_6dec",
+      "maker_fee_bps": 1.5,
+      "maker_fee_cbps": 150,
+      "note": "fee_paid_6dec is what the fill recorded; a referral discount can make it lower than the list rate",
+      "pair_config_applied": false,
+      "source": "chain_setting",
+      "taker_fee_bps": 4.5,
+      "taker_fee_cbps": 450
+     },
+     "fill_id": 1096647,
+     "height": 271290583,
+     "is_close": false,
+     "kind": "fill",
+     "maker": {
+      "account": null,
+      "counterparty": "vlp_pool",
+      "fee_paid_6dec": "0",
+      "realized_pnl_6dec": null,
+      "rebate_6dec": "0",
+      "role": "maker"
+     },
+     "market": "perp",
+     "order_type": 1,
+     "pair_id": 41,
+     "phase": "batch",
+     "price_8dec": 35950000,
+     "seq": 1,
+     "size_18dec": "64284030000000000000",
+     "taker": {
+      "account": "0x580207d74663309986131131ca3c954f85b9225b",
+      "agent": null,
+      "fee_paid_6dec": "10399",
+      "order_attribution": "unique_size_decrease",
+      "order_id": 12965745,
+      "realized_pnl_6dec": "0",
+      "role": "taker",
+      "signed_with": "wallet"
+     },
+     "taker_side": "buy",
+     "timestamp_secs": 1794756016
+    },
+    {
+     "accounts": [
+      "0x580207d74663309986131131ca3c954f85b9225b"
+     ],
+     "agent": null,
+     "agents": [],
+     "at_ms": 1794756016003,
+     "client_nonce": 1794756015799,
+     "cursor": "271290583.1.2",
+     "filled_18dec": "186600000000000000000",
+     "filled_in_step_18dec": "186600000000000000000",
+     "filled_total_18dec": "186600000000000000000",
+     "height": 271290583,
+     "kind": "order_closed",
+     "order_id": 12965745,
+     "original_size_18dec": "186600000000000000000",
+     "owner": "0x580207d74663309986131131ca3c954f85b9225b",
+     "pair_id": 41,
+     "partially_filled": false,
+     "phase": "batch",
+     "remaining_18dec": "0",
+     "seq": 2,
+     "side": "buy",
+     "size_at_close_18dec": "186600000000000000000",
+     "status": "filled",
+     "status_basis": "fills in this step consumed the remaining size"
+    }
+   ],
+   "h1": 271292071,
+   "b1": {
+    "total": 410249872,
+    "reserved": 0,
+    "locked": 0,
+    "available": 410249872,
+    "consensus_balance": 410249872,
+    "reserved_orders": 80465766,
+    "in_positions": 1192305164,
+    "free_balance": 410249872
+   },
+   "verdict": "different"
+  },
+  {
+   "name": "funding paid and received count",
+   "account": "0x580207d74663309986131131ca3c954f85b9225b",
+   "h0": 10,
+   "b0": {
+    "total": 1000,
+    "reserved_orders": 0,
+    "in_positions": 0
+   },
+   "records": [
+    {
+     "kind": "funding_payment",
+     "account": "0x580207d74663309986131131ca3c954f85b9225b",
+     "height": 11,
+     "cursor": "11.1.0",
+     "payment_6dec": "-227"
+    },
+    {
+     "kind": "funding_payment",
+     "account": "0x580207d74663309986131131ca3c954f85b9225b",
+     "height": 12,
+     "cursor": "12.1.0",
+     "payment_6dec": "50"
+    }
+   ],
+   "h1": 20,
+   "b1": {
+    "total": 823,
+    "reserved_orders": 0,
+    "in_positions": 0
+   },
+   "verdict": "match"
+  },
+  {
+   "name": "a funding payment the balance does not show is different",
+   "account": "0x580207d74663309986131131ca3c954f85b9225b",
+   "h0": 10,
+   "b0": {
+    "total": 1000,
+    "reserved_orders": 0,
+    "in_positions": 0
+   },
+   "records": [
+    {
+     "kind": "funding_payment",
+     "account": "0x580207d74663309986131131ca3c954f85b9225b",
+     "height": 11,
+     "cursor": "11.1.0",
+     "payment_6dec": "-227"
+    }
+   ],
+   "h1": 20,
+   "b1": {
+    "total": 1000,
+    "reserved_orders": 0,
+    "in_positions": 0
+   },
+   "verdict": "different"
+  },
+  {
+   "name": "real book liquidation: its PnL counted once (on its fill)",
+   "account": "0x11f91b9a99e1abeff13462c6ec7494b2bada8ab7",
+   "h0": 195929700,
+   "b0": {
+    "total": 50000000,
+    "reserved_orders": 0,
+    "in_positions": 30000000
+   },
+   "records": [
+    {
+     "accounts": [
+      "0x11f91b9a99e1abeff13462c6ec7494b2bada8ab7",
+      "0xb7aa7bc225987ce03bcc180bd30da2607697d181"
+     ],
+     "agents": [
+      "0x71334eff06f608d5f1d235de6a9de68dfb082870"
+     ],
+     "at_ms": 1794226572637,
+     "cursor": "195929703.1.0",
+     "fee": {
+      "maker_fee_basis": "maker_fee_cbps is the rate for a maker without a market-maker tier; a tier's rate shows in the maker leg's fee_paid_6dec / rebate_6dec",
+      "maker_fee_bps": 1.5,
+      "maker_fee_cbps": 150,
+      "note": "fee_paid_6dec is what the fill recorded; a referral discount can make it lower than the list rate",
+      "pair_config_applied": false,
+      "source": "chain_setting",
+      "taker_fee_bps": 4.5,
+      "taker_fee_cbps": 450
+     },
+     "fill_id": 857563,
+     "height": 195929703,
+     "is_close": true,
+     "kind": "fill",
+     "maker": {
+      "account": "0xb7aa7bc225987ce03bcc180bd30da2607697d181",
+      "agent": "0x71334eff06f608d5f1d235de6a9de68dfb082870",
+      "counterparty": "account",
+      "fee_paid_6dec": "0",
+      "order_attribution": "unique_size_decrease",
+      "order_id": 9432043,
+      "realized_pnl_6dec": null,
+      "realized_pnl_basis": "the engine records realised PnL for the taker leg only",
+      "rebate_6dec": "0",
+      "role": "maker",
+      "signed_with": "session_key"
+     },
+     "market": "perp",
+     "order_type": 9,
+     "pair_id": 1,
+     "phase": "batch",
+     "price_8dec": 187920000000,
+     "seq": 0,
+     "size_18dec": "37300000000000000",
+     "taker": {
+      "account": "0x11f91b9a99e1abeff13462c6ec7494b2bada8ab7",
+      "agent": null,
+      "fee_paid_6dec": "0",
+      "order_attribution": "unique_size_decrease",
+      "order_id": 9431926,
+      "realized_pnl_6dec": "-8843830",
+      "role": "taker",
+      "signed_with": "wallet"
+     },
+     "taker_side": "sell",
+     "timestamp_secs": 1794226572
+    },
+    {
+     "accounts": [
+      "0x11f91b9a99e1abeff13462c6ec7494b2bada8ab7"
+     ],
+     "agents": [],
+     "at_ms": 1794226572637,
+     "cause": "partial_fill",
+     "cursor": "195929703.1.1",
+     "filled_18dec": "2896700000000000000",
+     "filled_in_step_18dec": "37300000000000000",
+     "height": 195929703,
+     "kind": "order_updated",
+     "order_id": 9431926,
+     "owner": "0x11f91b9a99e1abeff13462c6ec7494b2bada8ab7",
+     "pair_id": 1,
+     "phase": "batch",
+     "price_after_8dec": 0,
+     "price_before_8dec": 0,
+     "remaining_18dec": "4042800000000000000",
+     "seq": 1,
+     "size_after_18dec": "4042800000000000000",
+     "size_before_18dec": "4080100000000000000"
+    },
+    {
+     "absorbed_by": 0,
+     "account": "0x11f91b9a99e1abeff13462c6ec7494b2bada8ab7",
+     "accounts": [
+      "0x11f91b9a99e1abeff13462c6ec7494b2bada8ab7"
+     ],
+     "agents": [],
+     "at_ms": 1794226572637,
+     "cursor": "195929703.1.3",
+     "entry_price_8dec": 211630000000,
+     "fee_6dec": "0",
+     "height": 195929703,
+     "kind": "liquidation",
+     "liquidation": "book",
+     "margin_mode": "cross",
+     "mark_price_8dec": 187920000000,
+     "pair_id": 1,
+     "partial": true,
+     "phase": "batch",
+     "position_id": 263051,
+     "realized_pnl_6dec": "-8843830",
+     "seq": 3,
+     "side": "long",
+     "size_18dec": "37300000000000000",
+     "size_before_18dec": "4080100000000000000",
+     "step_bps": 91,
+     "timestamp_secs": 1794226572,
+     "to_insurance_6dec": "0",
+     "to_pool_6dec": "0",
+     "to_treasury_6dec": "0"
+    }
+   ],
+   "h1": 195929703,
+   "b1": {
+    "total": 41156170,
+    "reserved_orders": 0,
+    "in_positions": 30000000
+   },
+   "verdict": "match"
+  },
+  {
+   "name": "a liquidation of another kind is not replayable",
+   "account": "0x11f91b9a99e1abeff13462c6ec7494b2bada8ab7",
+   "h0": 195929700,
+   "b0": {
+    "total": 1000,
+    "reserved_orders": 0,
+    "in_positions": 0
+   },
+   "records": [
+    {
+     "absorbed_by": 0,
+     "account": "0x11f91b9a99e1abeff13462c6ec7494b2bada8ab7",
+     "accounts": [
+      "0x11f91b9a99e1abeff13462c6ec7494b2bada8ab7"
+     ],
+     "agents": [],
+     "at_ms": 1794226572637,
+     "cursor": "195929703.1.9",
+     "entry_price_8dec": 211630000000,
+     "fee_6dec": "0",
+     "height": 195929703,
+     "kind": "liquidation",
+     "liquidation": "backstop",
+     "margin_mode": "cross",
+     "mark_price_8dec": 187920000000,
+     "pair_id": 1,
+     "partial": true,
+     "phase": "batch",
+     "position_id": 263051,
+     "realized_pnl_6dec": "-8843830",
+     "seq": 3,
+     "side": "long",
+     "size_18dec": "37300000000000000",
+     "size_before_18dec": "4080100000000000000",
+     "step_bps": 91,
+     "timestamp_secs": 1794226572,
+     "to_insurance_6dec": "0",
+     "to_pool_6dec": "0",
+     "to_treasury_6dec": "0"
+    }
+   ],
+   "h1": 195929703,
+   "b1": {
+    "total": 1000,
+    "reserved_orders": 0,
+    "in_positions": 0
+   },
+   "verdict": "not-replayable"
+  },
+  {
+   "name": "a maker leg where no money moved is still not replayable",
+   "account": "0x580207d74663309986131131ca3c954f85b9225b",
+   "h0": 271295191,
+   "b0": {
+    "total": 379988872,
+    "reserved": 0,
+    "locked": 0,
+    "available": 379988872,
+    "consensus_balance": 379988872,
+    "reserved_orders": 110726766,
+    "in_positions": 1192305164,
+    "free_balance": 379988872
+   },
+   "records": [
+    {
+     "accounts": [
+      "0x580207d74663309986131131ca3c954f85b9225b",
+      "0xd60605cd9d618ce216a1b1ef2b9717869dd07d38"
+     ],
+     "agents": [],
+     "at_ms": 1794756053779,
+     "cursor": "271296615.1.0",
+     "fee": {
+      "maker_fee_basis": "maker_fee_cbps is the rate for a maker without a market-maker tier; a tier's rate shows in the maker leg's fee_paid_6dec / rebate_6dec",
+      "maker_fee_bps": 1.5,
+      "maker_fee_cbps": 150,
+      "note": "fee_paid_6dec is what the fill recorded; a referral discount can make it lower than the list rate",
+      "pair_config_applied": false,
+      "source": "chain_setting",
+      "taker_fee_bps": 4.5,
+      "taker_fee_cbps": 450
+     },
+     "fill_id": 1096658,
+     "height": 271296615,
+     "is_close": false,
+     "kind": "fill",
+     "maker": {
+      "account": "0x580207d74663309986131131ca3c954f85b9225b",
+      "agent": null,
+      "counterparty": "account",
+      "fee_paid_6dec": "0",
+      "order_attribution": "unique_size_decrease",
+      "order_id": 12965710,
+      "realized_pnl_6dec": null,
+      "realized_pnl_basis": "the engine records realised PnL for the taker leg only",
+      "rebate_6dec": "0",
+      "role": "maker",
+      "signed_with": "wallet"
+     },
+     "market": "perp",
+     "order_type": 0,
+     "pair_id": 43,
+     "phase": "batch",
+     "price_8dec": 20049000,
+     "seq": 0,
+     "size_18dec": "305200000000000000000",
+     "taker": {
+      "account": "0xd60605cd9d618ce216a1b1ef2b9717869dd07d38",
+      "agent": null,
+      "fee_paid_6dec": "27535",
+      "order_attribution": "unique_size_decrease",
+      "order_id": 12965765,
+      "realized_pnl_6dec": "0",
+      "role": "taker",
+      "signed_with": "wallet"
+     },
+     "taker_side": "buy",
+     "timestamp_secs": 1794756053
+    }
+   ],
+   "h1": 271298535,
+   "b1": {
+    "total": 379988872,
+    "reserved": 0,
+    "locked": 0,
+    "available": 379988872,
+    "consensus_balance": 379988872,
+    "reserved_orders": 110726766,
+    "in_positions": 1192305164,
+    "free_balance": 379988872
+   },
+   "verdict": "not-replayable"
+  },
+  {
+   "name": "a taker fee above the listed rate is different even when the balance follows it",
+   "account": "0x580207d74663309986131131ca3c954f85b9225b",
+   "h0": 271288711,
+   "b0": {
+    "total": 378729396,
+    "reserved": 0,
+    "locked": 0,
+    "available": 378729396,
+    "consensus_balance": 378729396,
+    "reserved_orders": 80465766,
+    "in_positions": 1224271700,
+    "free_balance": 378729396
+   },
+   "records": [
+    {
+     "accounts": [
+      "0x580207d74663309986131131ca3c954f85b9225b"
+     ],
+     "agent": null,
+     "agents": [],
+     "at_ms": 1794756015898,
+     "client_nonce": 1794756015799,
+     "cursor": "271290561.0.0",
+     "expires_at_secs": 0,
+     "filled_18dec": "0",
+     "height": 271290561,
+     "kind": "order_placed",
+     "leverage_bps": 20000,
+     "order_id": 12965745,
+     "order_type": 1,
+     "owner": "0x580207d74663309986131131ca3c954f85b9225b",
+     "pair_id": 41,
+     "phase": "block",
+     "post_only": false,
+     "price_8dec": 36058000,
+     "reduce_only": false,
+     "remaining_18dec": "186600000000000000000",
+     "reserved_margin_6dec": "33642114",
+     "seq": 0,
+     "side": "buy",
+     "signed_with": "owner",
+     "size_18dec": "186600000000000000000",
+     "time_in_force": 2,
+     "twap_id": null
+    },
+    {
+     "accounts": [
+      "0x580207d74663309986131131ca3c954f85b9225b"
+     ],
+     "agents": [],
+     "at_ms": 1794756016003,
+     "cursor": "271290583.1.0",
+     "fee": {
+      "maker_fee_basis": "maker_fee_cbps is the rate for a maker without a market-maker tier; a tier's rate shows in the maker leg's fee_paid_6dec / rebate_6dec",
+      "maker_fee_bps": 1.5,
+      "maker_fee_cbps": 150,
+      "note": "fee_paid_6dec is what the fill recorded; a referral discount can make it lower than the list rate",
+      "pair_config_applied": false,
+      "source": "chain_setting",
+      "taker_fee_bps": 4.5,
+      "taker_fee_cbps": 450
+     },
+     "fill_id": 1096646,
+     "height": 271290583,
+     "is_close": true,
+     "kind": "fill",
+     "maker": {
+      "account": null,
+      "counterparty": "vlp_pool",
+      "fee_paid_6dec": "0",
+      "realized_pnl_6dec": null,
+      "rebate_6dec": "0",
+      "role": "maker"
+     },
+     "market": "perp",
+     "order_type": 1,
+     "pair_id": 41,
+     "phase": "batch",
+     "price_8dec": 35950000,
+     "seq": 0,
+     "size_18dec": "122315970000000000000",
+     "taker": {
+      "account": "0x580207d74663309986131131ca3c954f85b9225b",
+      "agent": null,
+      "fee_paid_6dec": "59361",
+      "order_attribution": "unique_size_decrease",
+      "order_id": 12965745,
+      "realized_pnl_6dec": "-415874",
+      "role": "taker",
+      "signed_with": "wallet"
+     },
+     "taker_side": "buy",
+     "timestamp_secs": 1794756016
+    },
+    {
+     "accounts": [
+      "0x580207d74663309986131131ca3c954f85b9225b"
+     ],
+     "agents": [],
+     "at_ms": 1794756016003,
+     "cursor": "271290583.1.1",
+     "fee": {
+      "maker_fee_basis": "maker_fee_cbps is the rate for a maker without a market-maker tier; a tier's rate shows in the maker leg's fee_paid_6dec / rebate_6dec",
+      "maker_fee_bps": 1.5,
+      "maker_fee_cbps": 150,
+      "note": "fee_paid_6dec is what the fill recorded; a referral discount can make it lower than the list rate",
+      "pair_config_applied": false,
+      "source": "chain_setting",
+      "taker_fee_bps": 4.5,
+      "taker_fee_cbps": 450
+     },
+     "fill_id": 1096647,
+     "height": 271290583,
+     "is_close": false,
+     "kind": "fill",
+     "maker": {
+      "account": null,
+      "counterparty": "vlp_pool",
+      "fee_paid_6dec": "0",
+      "realized_pnl_6dec": null,
+      "rebate_6dec": "0",
+      "role": "maker"
+     },
+     "market": "perp",
+     "order_type": 1,
+     "pair_id": 41,
+     "phase": "batch",
+     "price_8dec": 35950000,
+     "seq": 1,
+     "size_18dec": "64284030000000000000",
+     "taker": {
+      "account": "0x580207d74663309986131131ca3c954f85b9225b",
+      "agent": null,
+      "fee_paid_6dec": "10399",
+      "order_attribution": "unique_size_decrease",
+      "order_id": 12965745,
+      "realized_pnl_6dec": "0",
+      "role": "taker",
+      "signed_with": "wallet"
+     },
+     "taker_side": "buy",
+     "timestamp_secs": 1794756016
+    },
+    {
+     "accounts": [
+      "0x580207d74663309986131131ca3c954f85b9225b"
+     ],
+     "agent": null,
+     "agents": [],
+     "at_ms": 1794756016003,
+     "client_nonce": 1794756015799,
+     "cursor": "271290583.1.2",
+     "filled_18dec": "186600000000000000000",
+     "filled_in_step_18dec": "186600000000000000000",
+     "filled_total_18dec": "186600000000000000000",
+     "height": 271290583,
+     "kind": "order_closed",
+     "order_id": 12965745,
+     "original_size_18dec": "186600000000000000000",
+     "owner": "0x580207d74663309986131131ca3c954f85b9225b",
+     "pair_id": 41,
+     "partially_filled": false,
+     "phase": "batch",
+     "remaining_18dec": "0",
+     "seq": 2,
+     "side": "buy",
+     "size_at_close_18dec": "186600000000000000000",
+     "status": "filled",
+     "status_basis": "fills in this step consumed the remaining size"
+    }
+   ],
+   "h1": 271292071,
+   "b1": {
+    "total": 410210298,
+    "reserved": 0,
+    "locked": 0,
+    "available": 410249872,
+    "consensus_balance": 410249872,
+    "reserved_orders": 80465766,
+    "in_positions": 1192305164,
+    "free_balance": 410249872
+   },
+   "verdict": "different"
+  },
+  {
+   "name": "records outside (h0, h1] are left out",
+   "account": "0x580207d74663309986131131ca3c954f85b9225b",
+   "h0": 10,
+   "b0": {
+    "total": 1000,
+    "reserved_orders": 0,
+    "in_positions": 0
+   },
+   "records": [
+    {
+     "kind": "funding_payment",
+     "account": "0x580207d74663309986131131ca3c954f85b9225b",
+     "height": 10,
+     "cursor": "10.1.0",
+     "payment_6dec": "-5"
+    },
+    {
+     "kind": "funding_payment",
+     "account": "0x580207d74663309986131131ca3c954f85b9225b",
+     "height": 21,
+     "cursor": "21.1.0",
+     "payment_6dec": "-5"
+    }
+   ],
+   "h1": 20,
+   "b1": {
+    "total": 1000,
+    "reserved_orders": 0,
+    "in_positions": 0
+   },
+   "verdict": "match"
+  },
+  {
+   "name": "a record answered twice counts once",
+   "account": "0x580207d74663309986131131ca3c954f85b9225b",
+   "h0": 10,
+   "b0": {
+    "total": 1000,
+    "reserved_orders": 0,
+    "in_positions": 0
+   },
+   "records": [
+    {
+     "kind": "funding_payment",
+     "account": "0x580207d74663309986131131ca3c954f85b9225b",
+     "height": 11,
+     "cursor": "11.1.0",
+     "payment_6dec": "-5"
+    },
+    {
+     "kind": "funding_payment",
+     "account": "0x580207d74663309986131131ca3c954f85b9225b",
+     "height": 11,
+     "cursor": "11.1.0",
+     "payment_6dec": "-5"
+    }
+   ],
+   "h1": 20,
+   "b1": {
+    "total": 995,
+    "reserved_orders": 0,
+    "in_positions": 0
+   },
+   "verdict": "match"
+  },
+  {
+   "name": "another account's record changes nothing",
+   "account": "0x580207d74663309986131131ca3c954f85b9225b",
+   "h0": 10,
+   "b0": {
+    "total": 1000,
+    "reserved_orders": 0,
+    "in_positions": 0
+   },
+   "records": [
+    {
+     "kind": "funding_payment",
+     "account": "0x1111111111111111111111111111111111111111",
+     "height": 11,
+     "cursor": "11.1.0",
+     "payment_6dec": "-9"
+    }
+   ],
+   "h1": 20,
+   "b1": {
+    "total": 1000,
+    "reserved_orders": 0,
+    "in_positions": 0
+   },
+   "verdict": "match"
+  },
+  {
+   "name": "margin moving between free, orders and positions is not a change",
+   "account": "0x580207d74663309986131131ca3c954f85b9225b",
+   "h0": 10,
+   "b0": {
+    "total": 1000,
+    "reserved_orders": 0,
+    "in_positions": 0
+   },
+   "records": [],
+   "h1": 20,
+   "b1": {
+    "total": 400,
+    "reserved_orders": 100,
+    "in_positions": 500
+   },
+   "verdict": "match"
+  },
+  {
+   "name": "a deposit (a record this replay does not read) is not replayable, never different",
+   "account": "0x580207d74663309986131131ca3c954f85b9225b",
+   "h0": 10,
+   "b0": {
+    "total": 1000,
+    "reserved_orders": 0,
+    "in_positions": 0
+   },
+   "records": [
+    {
+     "kind": "deposit",
+     "account": "0x580207d74663309986131131ca3c954f85b9225b",
+     "accounts": [
+      "0x580207d74663309986131131ca3c954f85b9225b"
+     ],
+     "height": 11,
+     "cursor": "11.1.0",
+     "amount_6dec": "100000000"
+    }
+   ],
+   "h1": 20,
+   "b1": {
+    "total": 100001000,
+    "reserved_orders": 0,
+    "in_positions": 0
+   },
+   "verdict": "not-replayable"
+  },
+  {
+   "name": "a fill where this account pays an app fee is not replayable",
+   "account": "0x1f1e2ad48ec5f7aeab97adf3348254c45d932bfa",
+   "h0": 257505222,
+   "b0": {
+    "total": 1000,
+    "reserved_orders": 0,
+    "in_positions": 0
+   },
+   "records": [
+    {
+     "accounts": [
+      "0x1f1e2ad48ec5f7aeab97adf3348254c45d932bfa",
+      "0x9d336af193009c1ae0aa0a14d63449313e8feae8"
+     ],
+     "agents": [],
+     "at_ms": 1794674248871,
+     "builder": {
+      "maker_builder": null,
+      "maker_fee_6dec": "0",
+      "taker_builder": "0xbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+      "taker_fee_6dec": "777"
+     },
+     "cursor": "257505223.1.0",
+     "fee": {
+      "maker_fee_basis": "maker_fee_cbps is the rate for a maker without a market-maker tier; a tier's rate shows in the maker leg's fee_paid_6dec / rebate_6dec",
+      "maker_fee_bps": 1.5,
+      "maker_fee_cbps": 150,
+      "note": "fee_paid_6dec is what the fill recorded; a referral discount can make it lower than the list rate",
+      "pair_config_applied": false,
+      "source": "chain_setting",
+      "taker_fee_bps": 4.5,
+      "taker_fee_cbps": 450
+     },
+     "fill_id": 1070525,
+     "height": 257505223,
+     "is_close": true,
+     "kind": "fill",
+     "maker": {
+      "account": "0x9d336af193009c1ae0aa0a14d63449313e8feae8",
+      "agent": null,
+      "counterparty": "account",
+      "fee_paid_6dec": "0",
+      "order_attribution": "unique_size_decrease",
+      "order_id": 12904906,
+      "realized_pnl_6dec": null,
+      "realized_pnl_basis": "the engine records realised PnL for the taker leg only",
+      "rebate_6dec": "0",
+      "role": "maker",
+      "signed_with": "wallet"
+     },
+     "market": "perp",
+     "order_type": 0,
+     "pair_id": 1,
+     "phase": "batch",
+     "price_8dec": 182850000000,
+     "seq": 0,
+     "size_18dec": "5700000000000000",
+     "taker": {
+      "account": "0x1f1e2ad48ec5f7aeab97adf3348254c45d932bfa",
+      "agent": null,
+      "fee_paid_6dec": "4690",
+      "order_attribution": "unique_size_decrease",
+      "order_id": 12904917,
+      "realized_pnl_6dec": "-570",
+      "role": "taker",
+      "signed_with": "wallet"
+     },
+     "taker_side": "buy",
+     "timestamp_secs": 1794674248
+    }
+   ],
+   "h1": 257505223,
+   "b1": {
+    "total": 1000,
+    "reserved_orders": 0,
+    "in_positions": 0
+   },
+   "verdict": "not-replayable"
+  },
+  {
+   "name": "a fill where this account earns an app fee (real record) is not replayable",
+   "account": "0x1f1e2ad48ec5f7aeab97adf3348254c45d932bfa",
+   "h0": 257505222,
+   "b0": {
+    "total": 1000,
+    "reserved_orders": 0,
+    "in_positions": 0
+   },
+   "records": [
+    {
+     "accounts": [
+      "0x1f1e2ad48ec5f7aeab97adf3348254c45d932bfa",
+      "0x9d336af193009c1ae0aa0a14d63449313e8feae8"
+     ],
+     "agents": [],
+     "at_ms": 1794674248871,
+     "builder": {
+      "maker_builder": "0x1f1e2ad48ec5f7aeab97adf3348254c45d932bfa",
+      "maker_fee_6dec": "5212",
+      "taker_builder": null,
+      "taker_fee_6dec": "0"
+     },
+     "cursor": "257505223.1.0",
+     "fee": {
+      "maker_fee_basis": "maker_fee_cbps is the rate for a maker without a market-maker tier; a tier's rate shows in the maker leg's fee_paid_6dec / rebate_6dec",
+      "maker_fee_bps": 1.5,
+      "maker_fee_cbps": 150,
+      "note": "fee_paid_6dec is what the fill recorded; a referral discount can make it lower than the list rate",
+      "pair_config_applied": false,
+      "source": "chain_setting",
+      "taker_fee_bps": 4.5,
+      "taker_fee_cbps": 450
+     },
+     "fill_id": 1070525,
+     "height": 257505223,
+     "is_close": true,
+     "kind": "fill",
+     "maker": {
+      "account": "0x9d336af193009c1ae0aa0a14d63449313e8feae8",
+      "agent": null,
+      "counterparty": "account",
+      "fee_paid_6dec": "0",
+      "order_attribution": "unique_size_decrease",
+      "order_id": 12904906,
+      "realized_pnl_6dec": null,
+      "realized_pnl_basis": "the engine records realised PnL for the taker leg only",
+      "rebate_6dec": "0",
+      "role": "maker",
+      "signed_with": "wallet"
+     },
+     "market": "perp",
+     "order_type": 0,
+     "pair_id": 1,
+     "phase": "batch",
+     "price_8dec": 182850000000,
+     "seq": 0,
+     "size_18dec": "5700000000000000",
+     "taker": {
+      "account": "0x1f1e2ad48ec5f7aeab97adf3348254c45d932bfa",
+      "agent": null,
+      "fee_paid_6dec": "4690",
+      "order_attribution": "unique_size_decrease",
+      "order_id": 12904917,
+      "realized_pnl_6dec": "-570",
+      "role": "taker",
+      "signed_with": "wallet"
+     },
+     "taker_side": "buy",
+     "timestamp_secs": 1794674248
+    }
+   ],
+   "h1": 257505223,
+   "b1": {
+    "total": 1000,
+    "reserved_orders": 0,
+    "in_positions": 0
+   },
+   "verdict": "not-replayable"
+  },
+  {
+   "name": "an auto-deleverage record is not replayable",
+   "account": "0x580207d74663309986131131ca3c954f85b9225b",
+   "h0": 10,
+   "b0": {
+    "total": 1000,
+    "reserved_orders": 0,
+    "in_positions": 0
+   },
+   "records": [
+    {
+     "kind": "adl",
+     "account": "0x580207d74663309986131131ca3c954f85b9225b",
+     "accounts": [
+      "0x580207d74663309986131131ca3c954f85b9225b"
+     ],
+     "height": 11,
+     "cursor": "11.1.0"
+    }
+   ],
+   "h1": 20,
+   "b1": {
+    "total": 1000,
+    "reserved_orders": 0,
+    "in_positions": 0
+   },
+   "verdict": "not-replayable"
+  },
+  {
+   "name": "order records move no money",
+   "account": "0x580207d74663309986131131ca3c954f85b9225b",
+   "h0": 10,
+   "b0": {
+    "total": 1000,
+    "reserved_orders": 0,
+    "in_positions": 0
+   },
+   "records": [
+    {
+     "kind": "order_placed",
+     "owner": "0x580207d74663309986131131ca3c954f85b9225b",
+     "accounts": [
+      "0x580207d74663309986131131ca3c954f85b9225b"
+     ],
+     "height": 11,
+     "cursor": "11.0.0"
+    }
+   ],
+   "h1": 20,
+   "b1": {
+    "total": 400,
+    "reserved_orders": 600,
+    "in_positions": 0
+   },
+   "verdict": "match"
+  },
+  {
+   "name": "a record without a whole-number height refuses the step",
+   "account": "0x580207d74663309986131131ca3c954f85b9225b",
+   "h0": 10,
+   "b0": {
+    "total": 1000,
+    "reserved_orders": 0,
+    "in_positions": 0
+   },
+   "records": [
+    {
+     "kind": "funding_payment",
+     "account": "0x580207d74663309986131131ca3c954f85b9225b",
+     "accounts": [
+      "0x580207d74663309986131131ca3c954f85b9225b"
+     ],
+     "cursor": "11.1.0",
+     "payment_6dec": "-5",
+     "height": 11.5
+    }
+   ],
+   "h1": 20,
+   "b1": {
+    "total": 995,
+    "reserved_orders": 0,
+    "in_positions": 0
+   },
+   "verdict": "error"
+  },
+  {
+   "name": "a maker fill with no height refuses the step (never skipped)",
+   "account": "0x580207d74663309986131131ca3c954f85b9225b",
+   "h0": 271295191,
+   "b0": {
+    "total": 379988872,
+    "reserved": 0,
+    "locked": 0,
+    "available": 379988872,
+    "consensus_balance": 379988872,
+    "reserved_orders": 110726766,
+    "in_positions": 1192305164,
+    "free_balance": 379988872
+   },
+   "records": [
+    {
+     "accounts": [
+      "0x580207d74663309986131131ca3c954f85b9225b",
+      "0xd60605cd9d618ce216a1b1ef2b9717869dd07d38"
+     ],
+     "agents": [],
+     "at_ms": 1794756053779,
+     "cursor": "271296615.1.0",
+     "fee": {
+      "maker_fee_basis": "maker_fee_cbps is the rate for a maker without a market-maker tier; a tier's rate shows in the maker leg's fee_paid_6dec / rebate_6dec",
+      "maker_fee_bps": 1.5,
+      "maker_fee_cbps": 150,
+      "note": "fee_paid_6dec is what the fill recorded; a referral discount can make it lower than the list rate",
+      "pair_config_applied": false,
+      "source": "chain_setting",
+      "taker_fee_bps": 4.5,
+      "taker_fee_cbps": 450
+     },
+     "fill_id": 1096658,
+     "is_close": false,
+     "kind": "fill",
+     "maker": {
+      "account": "0x580207d74663309986131131ca3c954f85b9225b",
+      "agent": null,
+      "counterparty": "account",
+      "fee_paid_6dec": "0",
+      "order_attribution": "unique_size_decrease",
+      "order_id": 12965710,
+      "realized_pnl_6dec": null,
+      "realized_pnl_basis": "the engine records realised PnL for the taker leg only",
+      "rebate_6dec": "0",
+      "role": "maker",
+      "signed_with": "wallet"
+     },
+     "market": "perp",
+     "order_type": 0,
+     "pair_id": 43,
+     "phase": "batch",
+     "price_8dec": 20049000,
+     "seq": 0,
+     "size_18dec": "305200000000000000000",
+     "taker": {
+      "account": "0xd60605cd9d618ce216a1b1ef2b9717869dd07d38",
+      "agent": null,
+      "fee_paid_6dec": "27535",
+      "order_attribution": "unique_size_decrease",
+      "order_id": 12965765,
+      "realized_pnl_6dec": "0",
+      "role": "taker",
+      "signed_with": "wallet"
+     },
+     "taker_side": "buy",
+     "timestamp_secs": 1794756053
+    }
+   ],
+   "h1": 271298535,
+   "b1": {
+    "total": 379988872,
+    "reserved": 0,
+    "locked": 0,
+    "available": 379988872,
+    "consensus_balance": 379988872,
+    "reserved_orders": 110726766,
+    "in_positions": 1192305164,
+    "free_balance": 379988872
+   },
+   "verdict": "error"
+  },
+  {
+   "name": "a record with a null height refuses the step",
+   "account": "0x580207d74663309986131131ca3c954f85b9225b",
+   "h0": 271295191,
+   "b0": {
+    "total": 379988872,
+    "reserved": 0,
+    "locked": 0,
+    "available": 379988872,
+    "consensus_balance": 379988872,
+    "reserved_orders": 110726766,
+    "in_positions": 1192305164,
+    "free_balance": 379988872
+   },
+   "records": [
+    {
+     "accounts": [
+      "0x580207d74663309986131131ca3c954f85b9225b",
+      "0xd60605cd9d618ce216a1b1ef2b9717869dd07d38"
+     ],
+     "agents": [],
+     "at_ms": 1794756053779,
+     "cursor": "271296615.1.0",
+     "fee": {
+      "maker_fee_basis": "maker_fee_cbps is the rate for a maker without a market-maker tier; a tier's rate shows in the maker leg's fee_paid_6dec / rebate_6dec",
+      "maker_fee_bps": 1.5,
+      "maker_fee_cbps": 150,
+      "note": "fee_paid_6dec is what the fill recorded; a referral discount can make it lower than the list rate",
+      "pair_config_applied": false,
+      "source": "chain_setting",
+      "taker_fee_bps": 4.5,
+      "taker_fee_cbps": 450
+     },
+     "fill_id": 1096658,
+     "is_close": false,
+     "kind": "fill",
+     "maker": {
+      "account": "0x580207d74663309986131131ca3c954f85b9225b",
+      "agent": null,
+      "counterparty": "account",
+      "fee_paid_6dec": "0",
+      "order_attribution": "unique_size_decrease",
+      "order_id": 12965710,
+      "realized_pnl_6dec": null,
+      "realized_pnl_basis": "the engine records realised PnL for the taker leg only",
+      "rebate_6dec": "0",
+      "role": "maker",
+      "signed_with": "wallet"
+     },
+     "market": "perp",
+     "order_type": 0,
+     "pair_id": 43,
+     "phase": "batch",
+     "price_8dec": 20049000,
+     "seq": 0,
+     "size_18dec": "305200000000000000000",
+     "taker": {
+      "account": "0xd60605cd9d618ce216a1b1ef2b9717869dd07d38",
+      "agent": null,
+      "fee_paid_6dec": "27535",
+      "order_attribution": "unique_size_decrease",
+      "order_id": 12965765,
+      "realized_pnl_6dec": "0",
+      "role": "taker",
+      "signed_with": "wallet"
+     },
+     "taker_side": "buy",
+     "timestamp_secs": 1794756053,
+     "height": null
+    }
+   ],
+   "h1": 271298535,
+   "b1": {
+    "total": 379988872,
+    "reserved": 0,
+    "locked": 0,
+    "available": 379988872,
+    "consensus_balance": 379988872,
+    "reserved_orders": 110726766,
+    "in_positions": 1192305164,
+    "free_balance": 379988872
+   },
+   "verdict": "error"
+  }
+ ],
+ "anchors": [
+  {
+   "name": "anchored: records reach h2, none inside",
+   "h1": 100,
+   "h2": 105,
+   "inside": [],
+   "coverage": {
+    "archive": true,
+    "last_height": 105,
+    "gaps": []
+   },
+   "anchored": true
+  },
+  {
+   "name": "not anchored: records stop below h2",
+   "h1": 100,
+   "h2": 105,
+   "inside": [],
+   "coverage": {
+    "archive": true,
+    "last_height": 104,
+    "gaps": []
+   },
+   "anchored": false
+  },
+  {
+   "name": "not anchored: a record inside the bracket",
+   "h1": 100,
+   "h2": 105,
+   "inside": [
+    {
+     "cursor": "101.0.0"
+    }
+   ],
+   "coverage": {
+    "archive": true,
+    "last_height": 200,
+    "gaps": []
+   },
+   "anchored": false
+  },
+  {
+   "name": "not anchored: the head went back",
+   "h1": 105,
+   "h2": 100,
+   "inside": [],
+   "coverage": {
+    "archive": true,
+    "last_height": 200,
+    "gaps": []
+   },
+   "anchored": false
+  },
+  {
+   "name": "not anchored: a listed gap in the window",
+   "h1": 100,
+   "h2": 105,
+   "inside": [],
+   "coverage": {
+    "archive": true,
+    "last_height": 200,
+    "gaps": [
+     {
+      "after_height": 98,
+      "resumed_at": 103
+     }
+    ]
+   },
+   "anchored": false
+  },
+  {
+   "name": "anchored: a gap before the window",
+   "h1": 100,
+   "h2": 105,
+   "inside": [],
+   "coverage": {
+    "archive": true,
+    "last_height": 200,
+    "gaps": [
+     {
+      "after_height": 50,
+      "resumed_at": 60
+     }
+    ]
+   },
+   "anchored": true
+  },
+  {
+   "name": "not anchored: not answered from the archive",
+   "h1": 100,
+   "h2": 105,
+   "inside": [],
+   "coverage": {
+    "archive": false,
+    "last_height": 200,
+    "gaps": []
+   },
+   "anchored": false
+  },
+  {
+   "name": "not anchored: gaps not a list",
+   "h1": 100,
+   "h2": 105,
+   "inside": [],
+   "coverage": {
+    "archive": true,
+    "last_height": 200,
+    "gaps": {}
+   },
+   "anchored": false
+  }
+ ]
+}
