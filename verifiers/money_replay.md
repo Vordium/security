@@ -14,7 +14,7 @@ Defaults: chain `https://testnet.vordex.xyz/chain`, records `https://testnet.vor
 
 ## Run it
 
-    python3 verifiers/money_replay.py --minutes 30 ACCOUNT [ACCOUNT ...]
+    python3 verifiers/money_replay.py --minutes 45 ACCOUNT [ACCOUNT ...]
     python3 verifiers/money_replay.py --self-test verifiers/money-replay-cases.json
 
 `--step` sets the seconds between two balance reads of one account (default 15). It writes a trace (`--out`, default
@@ -35,12 +35,12 @@ Self-test: 0 every case gives its listed verdict · 1 a case does not.
   - `funding_payment`: `payment_6dec`
   - liquidation of kind `book`: `- fee_6dec`
 - A taker fee above the listed rate makes the step **different**.
-- A step with a maker leg, another liquidation kind, an app fee or any other record that may move money is **not
-  replayable**, never a match.
+- A step with a maker leg, another liquidation kind, an app fee or any other record that may move money and names the
+  account in any field is **not replayable**, never a match.
 
 ## The signed run
 
-`runs/money-replay/results.json` is the record of one run (6 accounts, 45 minutes, 900 reads, 120 counted steps:
-104 match, 16 not replayable, 0 different). It lists the sha256 of `money_replay.py` and of the shared cases
+`runs/money-replay/results.json` is the record of one run (6 accounts, 45 minutes, 504 reads, 97 counted steps:
+81 match, 16 not replayable, 0 different). It lists the sha256 of `money_replay.py` and of the shared cases
 (`money-replay-cases.json`; named `cases.json` in the record). `runs/money-replay/results.json.asc` is its signature
 with the release key.

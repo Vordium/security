@@ -1315,6 +1315,61 @@
    "verdict": "not-replayable"
   },
   {
+   "name": "a transfer naming the account only as its sender (from/to) is not replayable, never different",
+   "account": "0x580207d74663309986131131ca3c954f85b9225b",
+   "h0": 10,
+   "b0": {
+    "total": 5000000,
+    "reserved_orders": 0,
+    "in_positions": 0
+   },
+   "records": [
+    {
+     "kind": "transfer",
+     "from": "0x580207d74663309986131131ca3c954f85b9225b",
+     "to": "0x34887a0938a0908348879ead6f7809d7dab2ff0a",
+     "height": 12,
+     "cursor": "12.1.0",
+     "amount_6dec": "2000000"
+    }
+   ],
+   "h1": 20,
+   "b1": {
+    "total": 3000000,
+    "reserved_orders": 0,
+    "in_positions": 0
+   },
+   "verdict": "not-replayable"
+  },
+  {
+   "name": "a record naming the account only in a nested field is not replayable, never different",
+   "account": "0x580207d74663309986131131ca3c954f85b9225b",
+   "h0": 10,
+   "b0": {
+    "total": 5000000,
+    "reserved_orders": 0,
+    "in_positions": 0
+   },
+   "records": [
+    {
+     "kind": "payout",
+     "to": {
+      "account": "0x580207D74663309986131131CA3C954F85B9225B"
+     },
+     "height": 13,
+     "cursor": "13.1.0",
+     "amount_6dec": "1000000"
+    }
+   ],
+   "h1": 20,
+   "b1": {
+    "total": 6000000,
+    "reserved_orders": 0,
+    "in_positions": 0
+   },
+   "verdict": "not-replayable"
+  },
+  {
    "name": "a fill where this account pays an app fee is not replayable",
    "account": "0x1f1e2ad48ec5f7aeab97adf3348254c45d932bfa",
    "h0": 257505222,

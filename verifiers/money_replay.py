@@ -15,8 +15,9 @@ How a step is checked
         funding_payment:                 payment_6dec
         liquidation of kind "book":      - fee_6dec   (its realized PnL is already on the liquidation's own fill)
   * A taker fee above the listed rate (notional x taker_fee_cbps / 1e6, +1 for rounding) makes the step DIFFERENT.
-  * NOT REPLAYABLE (never a match): a step with a MAKER leg (maker legs record no fee and no realized PnL yet), or a
-    liquidation of another kind (not confirmed against a real record yet).
+  * NOT REPLAYABLE (never a match): a step with a MAKER leg (maker legs record no fee and no realized PnL yet), a
+    liquidation of another kind (not confirmed against a real record yet), or any other record that names the account in
+    any field (a deposit, a transfer's from/to, ...) and is not an order, stop or TWAP record.
 
 Reads (public, no key): <chain>/status, <chain>/balance/<account>, <records>/events/account/<account>.
 Usage:
@@ -79,7 +80,11 @@ NO_MONEY = ("order_", "stop_", "twap_")     # record kinds that move no money; e
 
 
 def names(e, acct):
-    return any(low(x) == acct for x in [e.get("account"), e.get("owner")] + list(e.get("accounts") or []))
+    """the account appears anywhere in the record (any field, nested too: from, to, owner, ...)"""
+    if isinstance(e, str): return low(e) == acct
+    if isinstance(e, dict): return any(names(v, acct) for v in e.values())
+    if isinstance(e, list): return any(names(v, acct) for v in e)
+    return False
 
 
 def _key(e):
