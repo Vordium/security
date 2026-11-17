@@ -1,0 +1,219 @@
+{
+ "area": "app signing screens",
+ "network": "Vordium test network",
+ "statuses": {
+  "covered": "a check sent or rendered it and the defence held",
+  "by-design": "the behaviour is intended"
+ },
+ "vectors": [
+  {
+   "id": "D-01",
+   "title": "Signing domain bound to this chain and this genesis",
+   "status": "covered"
+  },
+  {
+   "id": "D-02",
+   "title": "The wallet's chain id never enters a signed typed-data domain",
+   "status": "covered"
+  },
+  {
+   "id": "D-04",
+   "title": "Wrong network: nothing is signed with the wallet on another chain",
+   "status": "covered"
+  },
+  {
+   "id": "D-05",
+   "title": "Session key: the wallet signs exactly the browser's own new key",
+   "status": "covered"
+  },
+  {
+   "id": "D-06",
+   "title": "Session key granted to a phishing clone",
+   "status": "by-design",
+   "why": "A page cannot bind its own origin into an EIP-712 signature; the wallet shows the session domain, the chain id, the genesis salt and the key, and a session key cannot move funds."
+  },
+  {
+   "id": "D-07",
+   "title": "Withdrawal paid to an address the trader did not choose",
+   "status": "covered",
+   "checks": [
+    "u02-form-parity.mjs"
+   ]
+  },
+  {
+   "id": "D-08",
+   "title": "Withdrawal to the attacker collected by a phishing clone",
+   "status": "by-design",
+   "why": "Inherent to wallet-signed withdrawals: the network cannot see the page. The app's own withdrawal screen pays only the signer's own address."
+  },
+  {
+   "id": "D-09",
+   "title": "Typed withdrawal destination in the older transfer window",
+   "status": "by-design",
+   "why": "Not in this build: the older transfer window is loaded only when the new bridge is off."
+  },
+  {
+   "id": "D-10",
+   "title": "App-fee approval signs exactly the link's app, fee and this account",
+   "status": "covered",
+   "checks": [
+    "u02-form-parity.mjs"
+   ]
+  },
+  {
+   "id": "D-11",
+   "title": "Order with an app fee: confirm window = signed order",
+   "status": "covered",
+   "checks": [
+    "u02-form-parity.mjs"
+   ]
+  },
+  {
+   "id": "D-12",
+   "title": "Batch order and cancel-all: signed = sent",
+   "status": "covered",
+   "checks": [
+    "u02-form-parity.mjs"
+   ]
+  },
+  {
+   "id": "D-13",
+   "title": "TWAP place and cancel: signed = sent",
+   "status": "covered",
+   "checks": [
+    "u02-form-parity.mjs"
+   ]
+  },
+  {
+   "id": "D-15",
+   "title": "Hostile app link (fee above cap, zero, self, not an address, rule off, failed reads)",
+   "status": "covered"
+  },
+  {
+   "id": "D-16",
+   "title": "App fee shown before an order is signed",
+   "status": "covered"
+  },
+  {
+   "id": "D-17",
+   "title": "Stop orders carry no app fee",
+   "status": "covered"
+  },
+  {
+   "id": "D-20",
+   "title": "Relay sign-in text rebuilt and checked by the page",
+   "status": "covered",
+   "checks": [
+    "u04-siwe.mjs"
+   ]
+  },
+  {
+   "id": "D-21",
+   "title": "Relay sign-in from a look-alike site",
+   "status": "covered",
+   "checks": [
+    "r01-relay-signin.mjs"
+   ]
+  },
+  {
+   "id": "D-22",
+   "title": "Clickjacking: the app framed by another site",
+   "status": "covered",
+   "checks": [
+    "l01-frame-and-headers.mjs"
+   ]
+  },
+  {
+   "id": "D-24",
+   "title": "Transport and script policy",
+   "status": "covered",
+   "checks": [
+    "l01-frame-and-headers.mjs"
+   ]
+  },
+  {
+   "id": "D-25",
+   "title": "Hidden typed-data fields",
+   "status": "covered"
+  },
+  {
+   "id": "D-26",
+   "title": "Full clone on a look-alike origin",
+   "status": "by-design",
+   "why": "A clone controls its own code, so an origin check in the page would be removed; the defences that do not depend on the page are the wallet's view of the signing domain and the network's own rules."
+  },
+  {
+   "id": "D-27",
+   "title": "One-click trading (session key signs with no prompt)",
+   "status": "by-design",
+   "why": "One-click trading is opt-in, after a warning; orders with an app fee always open the confirm window."
+  },
+  {
+   "id": "D-28",
+   "title": "Refund to another address: clipboard swap or typo",
+   "status": "covered"
+  },
+  {
+   "id": "D-31",
+   "title": "Referral registration collected by a phishing clone",
+   "status": "by-design",
+   "why": "A personal_sign text cannot carry the page's origin; the referral text names the chain and its genesis."
+  },
+  {
+   "id": "D-33",
+   "title": "Community link signature without a genesis binding",
+   "status": "by-design",
+   "why": "The community link signature uses its own domain with the chain id; it links a social account and moves no money."
+  },
+  {
+   "id": "D-34",
+   "title": "Main network relaunched at a new genesis",
+   "status": "by-design",
+   "why": "Fails closed: a chain started from a new genesis refuses signatures made under the old salt."
+  },
+  {
+   "id": "D-36",
+   "title": "Main order paths: signed = sent = shown (plain limit, stop, close position, TP/SL)",
+   "status": "covered"
+  },
+  {
+   "id": "D-40",
+   "title": "Deposit approvals and the pinned vault",
+   "status": "covered",
+   "checks": [
+    "u07-deposit-pins.mjs"
+   ]
+  },
+  {
+   "id": "D-42",
+   "title": "What the wallet itself shows, and the WalletConnect sources in the page policy",
+   "status": "by-design",
+   "why": "The app shows every signed value itself before the wallet is asked; WalletConnect needs its relay hosts."
+  },
+  {
+   "id": "D-43",
+   "title": "Deposit transactions sent from the wallet (eth_sendTransaction, wallet_sendCalls)",
+   "status": "covered",
+   "checks": [
+    "u07-deposit-pins.mjs"
+   ]
+  }
+ ],
+ "not_listed": [
+  "D-03: under work",
+  "D-14: under work",
+  "D-18: under work",
+  "D-19: under work",
+  "D-23: under work",
+  "D-29: under work",
+  "D-30: under work",
+  "D-32: under work",
+  "D-35: under work",
+  "D-37: under work",
+  "D-38: under work",
+  "D-39: under work",
+  "D-41: under work",
+  "D-44: under work",
+  "D-45: under work"
+ ]
+}

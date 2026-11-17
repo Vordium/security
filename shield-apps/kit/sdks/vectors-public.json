@@ -1,0 +1,344 @@
+{
+ "area": "SDK signing",
+ "network": "Vordium test network",
+ "statuses": {
+  "covered": "a check sent it and the defence held",
+  "by-design": "the behaviour is intended"
+ },
+ "vectors": [
+  {
+   "id": "C-01",
+   "title": "Node reports another chain id",
+   "status": "covered",
+   "checks": [
+    "c01_identity_py",
+    "c02_identity_js"
+   ]
+  },
+  {
+   "id": "C-01b",
+   "title": "eth_chainId disagrees with /status and the spec",
+   "status": "covered",
+   "checks": [
+    "c01_identity_py",
+    "c02_identity_js"
+   ]
+  },
+  {
+   "id": "C-02",
+   "title": "Node reports another genesis with the same chain id (test AND main network)",
+   "status": "covered",
+   "checks": [
+    "c01_identity_py",
+    "c02_identity_js"
+   ]
+  },
+  {
+   "id": "C-03",
+   "title": "Main network / test network confusion",
+   "status": "covered",
+   "checks": [
+    "c01_identity_py",
+    "c02_identity_js"
+   ]
+  },
+  {
+   "id": "C-04",
+   "title": "Consistent spoof of the main-network identity on an unnamed endpoint",
+   "status": "covered",
+   "checks": [
+    "c01_identity_py",
+    "c02_identity_js"
+   ]
+  },
+  {
+   "id": "C-05",
+   "title": "Malformed identity values",
+   "status": "covered",
+   "checks": [
+    "c01_identity_py",
+    "c02_identity_js"
+   ]
+  },
+  {
+   "id": "C-06",
+   "title": "Environment pins that disagree",
+   "status": "covered",
+   "checks": [
+    "c01_identity_py"
+   ]
+  },
+  {
+   "id": "C-07",
+   "title": "Node switches chain after the client checked it",
+   "status": "covered",
+   "checks": [
+    "c01_identity_py",
+    "c02_identity_js"
+   ]
+  },
+  {
+   "id": "C-10",
+   "title": "Two threads or processes take the same client nonce",
+   "status": "covered",
+   "checks": [
+    "c05_nonces_py",
+    "c06_nonces_js"
+   ]
+  },
+  {
+   "id": "C-11",
+   "title": "Nonce reuse after a crash",
+   "status": "covered",
+   "checks": [
+    "c05_nonces_py",
+    "c06_nonces_js"
+   ]
+  },
+  {
+   "id": "C-12",
+   "title": "Clock set back",
+   "status": "covered",
+   "checks": [
+    "c05_nonces_py",
+    "c06_nonces_js"
+   ]
+  },
+  {
+   "id": "C-13",
+   "title": "Nonce state files open to others",
+   "status": "covered",
+   "checks": [
+    "c05_nonces_py",
+    "c06_nonces_js"
+   ]
+  },
+  {
+   "id": "C-13b",
+   "title": "Same account on two machines",
+   "status": "by-design"
+  },
+  {
+   "id": "C-13c",
+   "title": "Browser or unwritable state folder",
+   "status": "by-design"
+  },
+  {
+   "id": "C-14",
+   "title": "Retry after a lost answer signs a second body",
+   "status": "covered",
+   "checks": [
+    "c07_resend_py",
+    "c08_resend_js"
+   ]
+  },
+  {
+   "id": "C-15",
+   "title": "Busy gateway answers",
+   "status": "covered",
+   "checks": [
+    "c07_resend_py",
+    "c08_resend_js"
+   ]
+  },
+  {
+   "id": "C-16",
+   "title": "Resend of a write the chain does not deduplicate",
+   "status": "covered",
+   "checks": [
+    "c07_resend_py",
+    "c08_resend_js"
+   ]
+  },
+  {
+   "id": "C-17",
+   "title": "A new intent reuses old signed bytes",
+   "status": "covered",
+   "checks": [
+    "c07_resend_py",
+    "c08_resend_js"
+   ]
+  },
+  {
+   "id": "C-17c",
+   "title": "The HTTP layer retries a POST on its own",
+   "status": "covered",
+   "checks": [
+    "c07_resend_py"
+   ]
+  },
+  {
+   "id": "C-18",
+   "title": "SDK signs differently from the official vectors",
+   "status": "covered",
+   "checks": [
+    "c09_vectors_py",
+    "c10_vectors_js"
+   ]
+  },
+  {
+   "id": "C-19",
+   "title": "SDK type strings differ from the network spec's",
+   "status": "covered",
+   "checks": [
+    "c09_vectors_py",
+    "c10_vectors_js"
+   ]
+  },
+  {
+   "id": "C-20",
+   "title": "Python and JS SDKs disagree on an operation",
+   "status": "covered",
+   "checks": [
+    "c09_vectors_py",
+    "c10_vectors_js"
+   ]
+  },
+  {
+   "id": "C-21",
+   "title": "Withdrawal intent encoding",
+   "status": "covered",
+   "checks": [
+    "c09_vectors_py"
+   ]
+  },
+  {
+   "id": "C-22",
+   "title": "Key file loose, overwritten or through a symlink",
+   "status": "covered",
+   "checks": [
+    "c11_keys_py"
+   ]
+  },
+  {
+   "id": "C-23",
+   "title": "Readable key file used",
+   "status": "covered",
+   "checks": [
+    "c11_keys_py"
+   ]
+  },
+  {
+   "id": "C-24",
+   "title": "Key printed, logged or put in an error",
+   "status": "covered",
+   "checks": [
+    "c11_keys_py",
+    "c12_keys_js"
+   ]
+  },
+  {
+   "id": "C-25",
+   "title": "Key-file read errors echo content",
+   "status": "covered",
+   "checks": [
+    "c11_keys_py"
+   ]
+  },
+  {
+   "id": "C-25b",
+   "title": "Key kept as a plain attribute",
+   "status": "by-design"
+  },
+  {
+   "id": "C-25c",
+   "title": "Key-file check then open",
+   "status": "by-design"
+  },
+  {
+   "id": "C-26",
+   "title": "Rounding makes an order worse",
+   "status": "covered",
+   "checks": [
+    "c13_rounding_py",
+    "c14_rounding_js"
+   ]
+  },
+  {
+   "id": "C-27j",
+   "title": "Hostile numeric input (JS)",
+   "status": "covered",
+   "checks": [
+    "c14_rounding_js"
+   ]
+  },
+  {
+   "id": "C-28",
+   "title": "Hostile market rules make a worse order",
+   "status": "covered",
+   "checks": [
+    "c13_rounding_py",
+    "c14_rounding_js"
+   ]
+  },
+  {
+   "id": "C-29",
+   "title": "Posted body differs from the signed values",
+   "status": "covered",
+   "checks": [
+    "c13_rounding_py"
+   ]
+  },
+  {
+   "id": "C-30",
+   "title": "The chain rejects the SDK's signatures",
+   "status": "covered",
+   "checks": [
+    "c15_live_testnet_py",
+    "c16_live_testnet_js"
+   ]
+  },
+  {
+   "id": "C-32",
+   "title": "Injected text in node answers",
+   "status": "by-design"
+  },
+  {
+   "id": "C-33",
+   "title": "Huge responses",
+   "status": "by-design"
+  },
+  {
+   "id": "C-34",
+   "title": "Market order without a price limit",
+   "status": "by-design"
+  },
+  {
+   "id": "C-35",
+   "title": "Two operations share a field list",
+   "status": "covered",
+   "checks": [
+    "c09_vectors_py",
+    "c10_vectors_js"
+   ]
+  },
+  {
+   "id": "C-37j",
+   "title": "Wrong-checksum address (JS)",
+   "status": "covered"
+  },
+  {
+   "id": "C-38j",
+   "title": "Whole numbers past their field (JS)",
+   "status": "covered"
+  },
+  {
+   "id": "C-39a",
+   "title": "Trimmed spec loosens TWAP checks",
+   "status": "covered"
+  }
+ ],
+ "not_listed": [
+  "C-08: under work",
+  "C-09: under work",
+  "C-17b: under work",
+  "C-20b: under work",
+  "C-27: under work",
+  "C-31: under work",
+  "C-36: under work",
+  "C-37: under work",
+  "C-38: under work",
+  "C-39b: under work",
+  "C-40: under work"
+ ]
+}

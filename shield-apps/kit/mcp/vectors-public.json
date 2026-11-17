@@ -1,0 +1,352 @@
+{
+ "area": "MCP server",
+ "network": "Vordium test network",
+ "statuses": {
+  "covered": "a check sent it and the defence held",
+  "covered (reading)": "the rule is read from the published spec or the package source",
+  "covered (earlier proof)": "proved by an earlier published proof; not re-run here",
+  "by-design": "the behaviour is intended"
+ },
+ "vectors": [
+  {
+   "id": "B-INJ-01",
+   "title": "Instruction in market names and symbols",
+   "status": "covered",
+   "checks": [
+    "b01_injection_tool_outputs.py"
+   ]
+  },
+  {
+   "id": "B-INJ-02",
+   "title": "Instruction in agent names and mandates",
+   "status": "covered",
+   "checks": [
+    "b01_injection_tool_outputs.py",
+    "b14_hosted_live_agent_name.py"
+   ]
+  },
+  {
+   "id": "B-INJ-03",
+   "title": "Instruction in leaderboard names",
+   "status": "covered",
+   "checks": [
+    "b01_injection_tool_outputs.py"
+   ]
+  },
+  {
+   "id": "B-INJ-04",
+   "title": "Instruction in season names",
+   "status": "covered (reading)",
+   "basis": [
+    "vordium_mcp/text.py:16"
+   ]
+  },
+  {
+   "id": "B-INJ-05",
+   "title": "Instruction in referral codes and tiers",
+   "status": "covered",
+   "checks": [
+    "b01_injection_tool_outputs.py"
+   ]
+  },
+  {
+   "id": "B-INJ-06",
+   "title": "Instruction in refusal meanings and error bodies",
+   "status": "covered (reading)",
+   "basis": [
+    "vordium_mcp/text.py:18",
+    "vordium_mcp/chain.py:244"
+   ]
+  },
+  {
+   "id": "B-INJ-07",
+   "title": "Instruction in an order's source text",
+   "status": "covered",
+   "checks": [
+    "b01_injection_tool_outputs.py"
+   ]
+  },
+  {
+   "id": "B-INJ-08",
+   "title": "Instruction in explorer rows",
+   "status": "covered (reading)",
+   "basis": [
+    "vordium_mcp/text.py:115"
+   ]
+  },
+  {
+   "id": "B-INJ-09",
+   "title": "Instruction in news",
+   "status": "by-design"
+  },
+  {
+   "id": "B-INJ-11",
+   "title": "Instruction through prompt arguments",
+   "status": "covered",
+   "checks": [
+    "b03_resource_uri_tricks.py"
+   ]
+  },
+  {
+   "id": "B-INJ-13",
+   "title": "The model is told network text is data",
+   "status": "covered",
+   "checks": [
+    "b06_hosted_read_only.py"
+   ]
+  },
+  {
+   "id": "B-AUTO-01",
+   "title": "Automatic orders outside the agent's limits",
+   "status": "covered",
+   "checks": [
+    "b12_auto_mode_limits.py"
+   ]
+  },
+  {
+   "id": "B-AUTO-02",
+   "title": "Automatic orders inside the limits signed without asking",
+   "status": "by-design",
+   "checks": [
+    "b12_auto_mode_limits.py"
+   ]
+  },
+  {
+   "id": "B-ASK-01",
+   "title": "Order from an app that cannot ask",
+   "status": "covered"
+  },
+  {
+   "id": "B-ASK-02",
+   "title": "Declined, cancelled or false confirmation",
+   "status": "covered"
+  },
+  {
+   "id": "B-ASK-03",
+   "title": "Signed differs from shown",
+   "status": "covered"
+  },
+  {
+   "id": "B-ASK-04",
+   "title": "A hijacked AI app answers the confirmation itself",
+   "status": "by-design"
+  },
+  {
+   "id": "B-ASK-05",
+   "title": "Cancels and stop_all without confirmation",
+   "status": "by-design",
+   "basis": [
+    "vordium_mcp/tools.py:553"
+   ]
+  },
+  {
+   "id": "B-ASK-06",
+   "title": "Signing after stop_all",
+   "status": "covered (reading)",
+   "basis": [
+    "vordium_mcp/tools.py:626"
+   ]
+  },
+  {
+   "id": "B-STOP-02",
+   "title": "stop_all scope and lock tampering",
+   "status": "by-design",
+   "basis": [
+    "vordium_mcp/tools.py:581"
+   ]
+  },
+  {
+   "id": "B-LIM-01",
+   "title": "Burst past the per-connection rate",
+   "status": "covered",
+   "checks": [
+    "b08_http_server_limits.py"
+   ]
+  },
+  {
+   "id": "B-LIM-02",
+   "title": "Forged session id",
+   "status": "covered",
+   "checks": [
+    "b08_http_server_limits.py"
+   ]
+  },
+  {
+   "id": "B-LIM-03",
+   "title": "JSON-RPC batch",
+   "status": "covered",
+   "checks": [
+    "b08_http_server_limits.py"
+   ]
+  },
+  {
+   "id": "B-LIM-04",
+   "title": "Oversized body",
+   "status": "covered",
+   "checks": [
+    "b08_http_server_limits.py"
+   ]
+  },
+  {
+   "id": "B-LIM-05",
+   "title": "One argument that freezes the server",
+   "status": "covered",
+   "checks": [
+    "b09_redos_and_size.py"
+   ]
+  },
+  {
+   "id": "B-LIM-07",
+   "title": "Client identity behind the proxy (rotating CF-Connecting-IP / X-Forwarded-For)",
+   "status": "covered (reading)"
+  },
+  {
+   "id": "B-RO-01",
+   "title": "Write tool on the hosted server",
+   "status": "covered",
+   "checks": [
+    "b06_hosted_read_only.py"
+   ]
+  },
+  {
+   "id": "B-RO-02",
+   "title": "Unlock writes by declaring capabilities",
+   "status": "covered",
+   "checks": [
+    "b06_hosted_read_only.py"
+   ]
+  },
+  {
+   "id": "B-RO-03",
+   "title": "HTTP server with a key or trading on",
+   "status": "covered",
+   "checks": [
+    "b11_key_storage.py"
+   ]
+  },
+  {
+   "id": "B-SCH-01",
+   "title": "Tool descriptions changed by network data",
+   "status": "covered",
+   "checks": [
+    "b07_tool_schema_pin.py"
+   ]
+  },
+  {
+   "id": "B-SCH-02",
+   "title": "Hosted tools differ from the package",
+   "status": "covered",
+   "checks": [
+    "b07_tool_schema_pin.py"
+   ]
+  },
+  {
+   "id": "B-URI-01",
+   "title": "Resource URI tricks",
+   "status": "covered",
+   "checks": [
+    "b03_resource_uri_tricks.py"
+   ]
+  },
+  {
+   "id": "B-SSRF-01",
+   "title": "Host or path injection through arguments",
+   "status": "covered",
+   "checks": [
+    "b04_url_argument_injection.py"
+   ]
+  },
+  {
+   "id": "B-SSRF-03",
+   "title": "Hosted server reaching another network or host",
+   "status": "covered",
+   "checks": [
+    "b04_url_argument_injection.py"
+   ]
+  },
+  {
+   "id": "B-PIN-01",
+   "title": "A hostile node reporting another chain",
+   "status": "covered (reading)",
+   "basis": [
+    "vordium_mcp/tools.py:653"
+   ]
+  },
+  {
+   "id": "B-PIN-02",
+   "title": "Network identity: shipped constants, never agreement among answers",
+   "status": "covered (reading)",
+   "checks": [
+    "b22_network_pins.py"
+   ],
+   "basis": [
+    "vordium_mcp/networks.py:39"
+   ]
+  },
+  {
+   "id": "B-KEY-01",
+   "title": "Key file others can read (also via symlink); passphrase file",
+   "status": "covered",
+   "checks": [
+    "b11_key_storage.py"
+   ]
+  },
+  {
+   "id": "B-KEY-02",
+   "title": "Plaintext keychain backend",
+   "status": "covered",
+   "checks": [
+    "b11_key_storage.py"
+   ]
+  },
+  {
+   "id": "B-KEY-03",
+   "title": "Key material through tool arguments",
+   "status": "covered",
+   "checks": [
+    "b10_key_material_in_arguments.py"
+   ]
+  },
+  {
+   "id": "B-KEY-04",
+   "title": "New key loose or overwritten",
+   "status": "covered",
+   "checks": [
+    "b11_key_storage.py"
+   ]
+  },
+  {
+   "id": "B-KEY-05",
+   "title": "Owner key configured as agent key",
+   "status": "covered (reading)",
+   "basis": [
+    "vordium_mcp/tools.py:520"
+   ]
+  },
+  {
+   "id": "B-CACHE-01",
+   "title": "Shared answers on the hosted server",
+   "status": "by-design",
+   "basis": [
+    "vordium_mcp/server.py:567"
+   ]
+  },
+  {
+   "id": "B-CORS-01",
+   "title": "Browser origins (DNS rebinding) on a local HTTP server",
+   "status": "covered",
+   "checks": [
+    "b08_http_server_limits.py"
+   ]
+  }
+ ],
+ "not_listed": [
+  "B-INJ-10: under work",
+  "B-INJ-12: under work",
+  "B-STOP-01: under work",
+  "B-LIM-06: under work",
+  "B-SSRF-02: under work",
+  "B-SDK-01: under work",
+  "B-SDK-02: under work"
+ ]
+}

@@ -1,0 +1,408 @@
+{
+ "area": "agent controls",
+ "network": "Vordium test network",
+ "statuses": {
+  "covered": "a check sent it and the defence held",
+  "covered (reading)": "the rule is read from the published spec or the package source",
+  "covered (earlier proof)": "proved by an earlier published proof; not re-run here",
+  "by-design": "the behaviour is intended"
+ },
+ "vectors": [
+  {
+   "id": "A-POL-01",
+   "title": "Order on a market the policy does not allow",
+   "status": "covered",
+   "checks": [
+    "a01_market_not_allowed.py"
+   ]
+  },
+  {
+   "id": "A-POL-02",
+   "title": "Order above the largest order",
+   "status": "covered",
+   "checks": [
+    "a02_above_max_order.py"
+   ]
+  },
+  {
+   "id": "A-POL-03",
+   "title": "Leverage above the policy",
+   "status": "covered",
+   "checks": [
+    "a03_leverage_above_policy.py"
+   ]
+  },
+  {
+   "id": "A-POL-04",
+   "title": "Total exposure above the cap",
+   "status": "covered",
+   "checks": [
+    "a04_exposure_above_cap.py"
+   ]
+  },
+  {
+   "id": "A-POL-05",
+   "title": "Trading with the policy disabled",
+   "status": "covered",
+   "checks": [
+    "a05_policy_disabled.py"
+   ]
+  },
+  {
+   "id": "A-POL-06",
+   "title": "Trading outside active hours",
+   "status": "covered",
+   "checks": [
+    "a06_outside_active_hours.py"
+   ]
+  },
+  {
+   "id": "A-POL-07",
+   "title": "Active hours that wrap past midnight",
+   "status": "covered",
+   "checks": [
+    "a47_active_hours_wrap.py"
+   ]
+  },
+  {
+   "id": "A-POL-08",
+   "title": "Placing with no place capability",
+   "status": "covered",
+   "checks": [
+    "a07_capability_not_granted.py"
+   ]
+  },
+  {
+   "id": "A-POL-09",
+   "title": "Opening under a reduce-only policy",
+   "status": "covered",
+   "checks": [
+    "a08_reduce_only_mode.py"
+   ]
+  },
+  {
+   "id": "A-POL-11",
+   "title": "Pricing outside the oracle band",
+   "status": "covered",
+   "checks": [
+    "a09_price_band.py"
+   ]
+  },
+  {
+   "id": "A-POL-12",
+   "title": "Daily loss past the limit",
+   "status": "covered (earlier proof)",
+   "basis": [
+    "agent-control proof step 5 (daily-loss lock), not re-run"
+   ]
+  },
+  {
+   "id": "A-SELF-01",
+   "title": "Agent loosens its own policy",
+   "status": "covered",
+   "checks": [
+    "a10_agent_loosens_own_policy.py"
+   ]
+  },
+  {
+   "id": "A-SELF-02",
+   "title": "Agent nonce poisoning against the owner's revoke",
+   "status": "covered",
+   "checks": [
+    "a11_agent_nonce_poison.py"
+   ]
+  },
+  {
+   "id": "A-SELF-03",
+   "title": "Agent widens its own market limits",
+   "status": "covered",
+   "checks": [
+    "a12_agent_sets_market_limit.py"
+   ]
+  },
+  {
+   "id": "A-SELF-04",
+   "title": "Agent registers more agents",
+   "status": "covered",
+   "checks": [
+    "a13_agent_registers_agent.py"
+   ]
+  },
+  {
+   "id": "A-SELF-05",
+   "title": "Agent revokes or disables a sibling",
+   "status": "covered",
+   "checks": [
+    "a14_agent_acts_on_sibling.py"
+   ]
+  },
+  {
+   "id": "A-SELF-06",
+   "title": "Agent renames itself",
+   "status": "covered",
+   "checks": [
+    "a15_agent_renames_itself.py"
+   ]
+  },
+  {
+   "id": "A-SELF-07",
+   "title": "Agent clears its own reduce-only lock",
+   "status": "covered",
+   "checks": [
+    "a16_agent_clears_lock.py"
+   ]
+  },
+  {
+   "id": "A-OWN-01",
+   "title": "Agent creates an app session for its owner",
+   "status": "covered",
+   "checks": [
+    "a17_agent_creates_session.py"
+   ]
+  },
+  {
+   "id": "A-OWN-02",
+   "title": "Agent ends the owner's app session",
+   "status": "covered",
+   "checks": [
+    "a18_agent_revokes_session.py"
+   ]
+  },
+  {
+   "id": "A-OWN-03",
+   "title": "Agent stops all the owner's signers",
+   "status": "covered",
+   "checks": [
+    "a19_agent_stop_all_signers.py"
+   ]
+  },
+  {
+   "id": "A-OWN-04",
+   "title": "Agent arms or clears the dead-man switch",
+   "status": "covered",
+   "checks": [
+    "a20_agent_schedule_cancel.py"
+   ]
+  },
+  {
+   "id": "A-OWN-05",
+   "title": "Agent changes the margin mode",
+   "status": "covered",
+   "checks": [
+    "a21_agent_margin_mode.py"
+   ]
+  },
+  {
+   "id": "A-OWN-06",
+   "title": "Agent sets market maker protection",
+   "status": "covered",
+   "checks": [
+    "a22_agent_sets_mmp.py"
+   ]
+  },
+  {
+   "id": "A-OWN-07",
+   "title": "Agent approves a builder fee to itself",
+   "status": "covered",
+   "checks": [
+    "a23_agent_approves_builder.py"
+   ]
+  },
+  {
+   "id": "A-MON-01",
+   "title": "Agent withdraws through the bridge",
+   "status": "covered",
+   "checks": [
+    "a24_agent_bridge_withdraw.py"
+   ]
+  },
+  {
+   "id": "A-MON-02",
+   "title": "Agent pool and staking money ops",
+   "status": "covered",
+   "checks": [
+    "a25_agent_money_ops.py"
+   ]
+  },
+  {
+   "id": "A-MON-03",
+   "title": "Agent registers its owner under a referrer",
+   "status": "covered",
+   "checks": [
+    "a26_agent_registers_referral.py"
+   ]
+  },
+  {
+   "id": "A-MON-06",
+   "title": "Builder fee inside an agent's order",
+   "status": "covered",
+   "checks": [
+    "a43_builder_fee_in_agent_order.py"
+   ]
+  },
+  {
+   "id": "A-SIG-01",
+   "title": "Agent signs for another account",
+   "status": "covered",
+   "checks": [
+    "a27_agent_signs_for_other_owner.py"
+   ]
+  },
+  {
+   "id": "A-SIG-02",
+   "title": "Replay across networks",
+   "status": "covered",
+   "checks": [
+    "a34_cross_network_agent_order.py"
+   ]
+  },
+  {
+   "id": "A-SIG-03",
+   "title": "Replay of a signed agent order",
+   "status": "covered",
+   "checks": [
+    "a32_agent_order_replay.py"
+   ]
+  },
+  {
+   "id": "A-SIG-04",
+   "title": "Far-future client nonce",
+   "status": "covered",
+   "checks": [
+    "a33_far_future_nonce.py"
+   ]
+  },
+  {
+   "id": "A-SCOPE-01",
+   "title": "Agent cancels the owner's order",
+   "status": "covered",
+   "checks": [
+    "a28_agent_cancels_owner_order.py"
+   ]
+  },
+  {
+   "id": "A-SCOPE-02",
+   "title": "Agent cancel-all reaches the owner's orders",
+   "status": "covered",
+   "checks": [
+    "a29_agent_cancel_all_scope.py"
+   ]
+  },
+  {
+   "id": "A-SCOPE-03",
+   "title": "Agent modifies the owner's order",
+   "status": "covered",
+   "checks": [
+    "a30_agent_modifies_owner_order.py"
+   ]
+  },
+  {
+   "id": "A-SCOPE-05",
+   "title": "Agent cancels the app session's order",
+   "status": "covered",
+   "checks": [
+    "a45_agent_cancels_session_order.py"
+   ]
+  },
+  {
+   "id": "A-SCOPE-06",
+   "title": "Two agents' exposure together",
+   "status": "by-design",
+   "basis": [
+    "policy max_total_exposure is per agent (SDK policy.py); account margin bounds the total"
+   ]
+  },
+  {
+   "id": "A-MOD-01",
+   "title": "Agent modifies its own order past its limits",
+   "status": "covered",
+   "checks": [
+    "a40_agent_modifies_own_order_past_limits.py"
+   ]
+  },
+  {
+   "id": "A-BATCH-01",
+   "title": "Forbidden orders inside a signed batch",
+   "status": "covered",
+   "checks": [
+    "a31_batch_hides_agent_order.py"
+   ]
+  },
+  {
+   "id": "A-TWAP-01",
+   "title": "Agent TWAP outside its policy / after revoke",
+   "status": "covered",
+   "checks": [
+    "a35_twap_by_agent.py"
+   ]
+  },
+  {
+   "id": "A-TWAP-03",
+   "title": "Agent TWAP at the owner's stop-all",
+   "status": "covered"
+  },
+  {
+   "id": "A-TWAP-05",
+   "title": "TWAP slicing around the limits",
+   "status": "covered",
+   "checks": [
+    "a41_twap_slicing_around_limits.py"
+   ]
+  },
+  {
+   "id": "A-STOP-01",
+   "title": "The owner's StopAllSigners ends every agent and the session",
+   "status": "covered (earlier proof)",
+   "basis": [
+    "revoke / expiry / stop-all lifecycle proof (scenarios S1-S5)"
+   ]
+  },
+  {
+   "id": "A-STOPORD-01",
+   "title": "Agent stop orders outside its limits",
+   "status": "covered",
+   "checks": [
+    "a42_agent_stop_orders.py"
+   ]
+  },
+  {
+   "id": "A-STOPORD-02",
+   "title": "Agent stop judged again when it fires",
+   "status": "covered (reading)",
+   "basis": [
+    "network spec orders.stops.agents: \"an agent's stop is checked against the agent's policy when placed and again when it fires\""
+   ]
+  },
+  {
+   "id": "A-DMS-01",
+   "title": "The dead-man switch fires",
+   "status": "covered",
+   "checks": [
+    "a48_dead_man_switch_fires.py"
+   ]
+  },
+  {
+   "id": "A-DMS-02",
+   "title": "A hijacked session key arms the dead-man switch",
+   "status": "by-design",
+   "checks": [
+    "a48_dead_man_switch_fires.py"
+   ]
+  }
+ ],
+ "not_listed": [
+  "A-POL-10: under work",
+  "A-POL-13: under work",
+  "A-POL-14: under work",
+  "A-OWN-08: under work",
+  "A-MON-04: under work",
+  "A-MON-05: under work",
+  "A-SIG-05: under work",
+  "A-SIG-06: under work",
+  "A-SIG-07: under work",
+  "A-SCOPE-04: under work",
+  "A-SCOPE-07: under work",
+  "A-TWAP-02: under work",
+  "A-TWAP-04: under work"
+ ]
+}

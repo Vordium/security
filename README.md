@@ -116,6 +116,27 @@ sha256sum -c SHA256SUMS
 gpg --verify results.json.asc results.json
 ```
 
+## SHIELD: agent controls, AI server, SDKs and app signing
+
+`shield-apps/` holds four reports and the kit that produced them:
+
+- agent controls;
+- the AI server;
+- the SDKs;
+- the app's signing screens.
+
+Each report names the exact published version it checked, its checks with their results, and its open items. Its last
+line is the command that re-runs it.
+
+`shield-apps/results.json` pins every report and kit file by sha256, and is signed with the same release key
+(`shield-apps/results.json.asc`):
+
+```bash
+cd shield-apps
+sha256sum -c SHA256SUMS
+gpg --verify results.json.asc results.json
+```
+
 ## Check the signature
 
 `results.json` holds every item in one file. It is signed with the Vordium release key, the same key that signs the

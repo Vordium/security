@@ -1,0 +1,9 @@
+{
+  "name": "vordium-sdk-rerun-kit",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "@vordium/sdk": "latest",
+    "ethers": "^6"
+  }
+}

@@ -1,0 +1,414 @@
+{
+ "about": "Test-network signing vectors for every operation the SDKs sign. Built from the SDK type strings and checked against the network spec; the public test key is sha256 of the label (never funded).",
+ "network": {
+  "chainId": 101102,
+  "genesisSha256": "8b5d414c5cd5d18bc468b64f87ac8e2c2b5ff494c769d5e09dcf50ce75a59792"
+ },
+ "domains": {
+  "VordCore": {
+   "name": "VordCore",
+   "version": "1",
+   "chainId": 101102,
+   "verifyingContract": "0x0000000000000000000000000000000000001002",
+   "salt": "0x383b7e0272e99177f0217d0e73ed1c47f1519fe390a994a03774e0ab9aaab1e4",
+   "separator": "0x9f769846fed7e1af2c35b499ada9facb6fe3485e160b8c3adfc60dac07acbe4b"
+  },
+  "VordexSession": {
+   "name": "VordexSession",
+   "version": "1",
+   "chainId": 101102,
+   "verifyingContract": "0x0000000000000000000000000000000000001002",
+   "salt": "0x084caba80321d5dd4cbfdc3292c9e9429f401e5fe8207e635252b6db1b26151a",
+   "separator": "0x15c1c1c529defc3b0389b1e35696c79664d8eba423f68bf7906535c68cd62f92"
+  }
+ },
+ "testKey": {
+  "label": "vordium-rerun-kit:public-test-key:signer",
+  "rule": "private key = sha256(label)",
+  "address": "0xf1d8f4F018c8CDeAb04ca3f4D3Cf6F6B045D6125"
+ },
+ "vectors": [
+  {
+   "op": "PlaceOrder",
+   "domainClass": "VordCore",
+   "typeString": "PlaceOrder(address owner,uint32 pairId,uint8 side,uint128 size,uint64 price,uint32 leverageBps,uint8 orderType,bool reduceOnly,bool postOnly,uint64 triggerPrice8dec,uint8 triggerDir,uint64 clientNonce)",
+   "typeHash": "0x34bda79def27043b8ed2a794f26a1a02ff45718f54dbaad90a42453941c97b7f",
+   "message": {
+    "owner": "0x2551f5c609e466bE6C27289440B08BE0a5a7f96F",
+    "pairId": "1066770924",
+    "side": "103",
+    "size": "10200000000738",
+    "price": "11900000000861",
+    "leverageBps": "2133541848",
+    "orderType": "83",
+    "reduceOnly": true,
+    "postOnly": false,
+    "triggerPrice8dec": "20400000001476",
+    "triggerDir": "63",
+    "clientNonce": "23800000001722"
+   },
+   "digest": "0xcd010a9487bd7d5035f93d673964c4bc27a14111b5fcba60c52926c4dd49906c",
+   "signature": "0xfd2dcd2dfd7b1436510ce5f8948e5222676cd913a29862b33d999d2119afc2cd58dafe74a0f8f9fe554764e02a99912e36debf149679512b7adaf3c569f554951b"
+  },
+  {
+   "op": "CancelOrder",
+   "domainClass": "VordCore",
+   "typeString": "CancelOrder(address owner,uint64 orderId)",
+   "typeHash": "0xa22fd11a10a98f022cc7f674a8657d80f4c2ad17af3726f872ad996669bef8fa",
+   "message": {
+    "owner": "0x2551f5c609e466bE6C27289440B08BE0a5a7f96F",
+    "orderId": "6800000000492"
+   },
+   "digest": "0x839e628f3cc91467b995fe986fceb1f5a7d4f5e383f01b67d81260f81ddb9d2a",
+   "signature": "0x2f544a708a46a81f3f5da363a7ae48090d345cfc1cbe714fd05b2626960a8bce166714c3e63981a048f3426cc6461fb5b4687a1f8fd3544e8bdc34a6191374851c"
+  },
+  {
+   "op": "SetTpSl",
+   "domainClass": "VordCore",
+   "typeString": "SetTpSl(address owner,uint32 pairId,uint64 positionId,uint64 takeProfit8dec,uint64 stopLoss8dec)",
+   "typeHash": "0x381f44fc92ee60c2dfbdb0fe1c8d208aed0048001e6e0413e8492495d3d2700a",
+   "message": {
+    "owner": "0x2551f5c609e466bE6C27289440B08BE0a5a7f96F",
+    "pairId": "1066770924",
+    "positionId": "8500000000615",
+    "takeProfit8dec": "10200000000738",
+    "stopLoss8dec": "11900000000861"
+   },
+   "digest": "0x774afa63669b49c7cb6cb2b1f39a5e42c41d31204933ec68df17b7398687fb34",
+   "signature": "0x758e63341194788eda5c8eaf388e350fde7d7a7794990acf7a4592200afda0ee41db76db0f789c91df9ef40e0332604a57e5b296cdcb7dd7ddc64da3b16651e81c"
+  },
+  {
+   "op": "BatchOrders",
+   "domainClass": "VordCore",
+   "typeString": "BatchOrders(address owner,uint64 nonce,BatchAction[] actions)BatchAction(uint8 kind,uint32 pairId,uint8 side,uint128 size,uint64 price,uint32 leverageBps,uint8 orderType,bool reduceOnly,bool postOnly,uint64 clientNonce,uint64 orderId)",
+   "typeHash": "0x5f8253acf856b480cbcc6bd0d3c9a4c5baf08068ff34ed595af44b55f2d997ff",
+   "message": {
+    "owner": "0x2551f5c609e466bE6C27289440B08BE0a5a7f96F",
+    "nonce": "6800000000492",
+    "actions": [
+     {
+      "kind": "113",
+      "pairId": "1066770924",
+      "side": "103",
+      "size": "10200000000738",
+      "price": "11900000000861",
+      "leverageBps": "2133541848",
+      "orderType": "83",
+      "reduceOnly": true,
+      "postOnly": false,
+      "clientNonce": "20400000001476",
+      "orderId": "22100000001599"
+     },
+     {
+      "kind": "113",
+      "pairId": "1066770924",
+      "side": "103",
+      "size": "10200000000738",
+      "price": "11900000000861",
+      "leverageBps": "2133541848",
+      "orderType": "83",
+      "reduceOnly": true,
+      "postOnly": false,
+      "clientNonce": "20400000001476",
+      "orderId": "22100000001599"
+     }
+    ]
+   },
+   "digest": "0xc66836a9eeeb4b87f737a5f626f39dbf164170ce216c5860376d8b0f1061a9d9",
+   "signature": "0xf8f5e7311b7f06e46e262f6a6c4b594b3be620fef11b53825c4e5855494d2ad21881e025506b08a2b5518ef28f1639fc79335b8e32c4a06ba849fd602906131a1b"
+  },
+  {
+   "op": "CancelAllOrders",
+   "domainClass": "VordCore",
+   "typeString": "CancelAllOrders(address owner,uint32 pairId,uint64 nonce)",
+   "typeHash": "0x0f70b66f68bde7b4d50895a293ee54842b96e5eb7a6dbf1b09d76852313ea598",
+   "message": {
+    "owner": "0x2551f5c609e466bE6C27289440B08BE0a5a7f96F",
+    "pairId": "1066770924",
+    "nonce": "8500000000615"
+   },
+   "digest": "0xfe60bb34160b626f63af3ea49fed96f9ac7f8fb4b7a5481f1a2bb8d316aafd9a",
+   "signature": "0x7eab5d3d6cae5b957dca5fa104a469ff4dd1d0a932bd6ac49f94a42faee5baf476f3efb1ce8881040813f3a8eaf70de4d7f1a04cdbc94e8f9d56dedd722bc2a91b"
+  },
+  {
+   "op": "ModifyOrderV2",
+   "domainClass": "VordCore",
+   "typeString": "ModifyOrderV2(address owner,uint64 orderId,uint64 newPrice,uint128 newSize,uint64 clientNonce)",
+   "typeHash": "0x630e96d12ed107fb8d7c5ec0cf0933e3857d6e74a1e69bec8015ac940454d278",
+   "message": {
+    "owner": "0x2551f5c609e466bE6C27289440B08BE0a5a7f96F",
+    "orderId": "6800000000492",
+    "newPrice": "8500000000615",
+    "newSize": "10200000000738",
+    "clientNonce": "11900000000861"
+   },
+   "digest": "0x4b2646babd6ad76fbb576b6f8854634cb825b6b6743e90162009c3bc48781d48",
+   "signature": "0xb8bae3b317b5dbf98f578e0e458396ac4ee48b2b5f9429ce273a895c1ec321cb6377c50c96a6e8db4e4684b0132fcce86ccaa098a91ab09ad7ab9baa1033a0bc1c"
+  },
+  {
+   "op": "SetMmp",
+   "domainClass": "VordCore",
+   "typeString": "SetMmp(address owner,uint64 windowMs,uint32 maxFills,uint128 maxFilledNotional6dec,uint128 maxNetSize18dec,uint64 freezeMs,uint64 nonce)",
+   "typeHash": "0x958943ede95b286b55495bf6d0b53a5cc10fc46343c14fd7760468e0b40750b4",
+   "message": {
+    "owner": "0x2551f5c609e466bE6C27289440B08BE0a5a7f96F",
+    "windowMs": "6800000000492",
+    "maxFills": "259721831",
+    "maxFilledNotional6dec": "10200000000738",
+    "maxNetSize18dec": "11900000000861",
+    "freezeMs": "13600000000984",
+    "nonce": "15300000001107"
+   },
+   "digest": "0xd1c29f52744f51b01a02262adb87c9297124293bb009a566ebb2448789d0edfe",
+   "signature": "0xee6fcbf94619a438cfb9d30eebf7968b2b7488d329b657d1808d988422feed2d761b3b5cdcdffef21bb99709027f51026c66e599d0e7f823ab83dd5ddbe306721b"
+  },
+  {
+   "op": "ScheduleCancel",
+   "domainClass": "VordCore",
+   "typeString": "ScheduleCancel(address owner,uint64 cancelAtMs,uint64 nonce)",
+   "typeHash": "0x61a492faa8124a492b90f62ff3aff1fc037e45fe380455034a53f7cc1026be42",
+   "message": {
+    "owner": "0x2551f5c609e466bE6C27289440B08BE0a5a7f96F",
+    "cancelAtMs": "6800000000492",
+    "nonce": "8500000000615"
+   },
+   "digest": "0x370b4183c0e99687a5191cb19e4f4db9da345a3233abdccd389d17c955f023bc",
+   "signature": "0x8bc72b56b0eae25da4d7bcbf4fd3086a2e56b5d5a09eb82a4b88026934c1589a767fcc86477a4a42eeb1e85320072e5361aa2654c073a4654aa46635103bad441c"
+  },
+  {
+   "op": "PlaceOrderV3",
+   "domainClass": "VordCore",
+   "typeString": "PlaceOrderV3(address owner,uint32 pairId,uint8 side,uint128 size,uint64 price,uint32 leverageBps,uint8 orderType,bool reduceOnly,bool postOnly,uint64 triggerPrice8dec,uint8 triggerDir,uint8 timeInForce,uint64 expiresAt,uint64 clientNonce,uint64 validUntil,uint64 worstPrice8dec,string source,address builder,uint32 builderFeeCbps)",
+   "typeHash": "0xe328eb68341f2a35a289620b7147dc72672f356f6dff3b10098ae02f19a6c5d5",
+   "message": {
+    "owner": "0x2551f5c609e466bE6C27289440B08BE0a5a7f96F",
+    "pairId": "1066770924",
+    "side": "103",
+    "size": "10200000000738",
+    "price": "11900000000861",
+    "leverageBps": "2133541848",
+    "orderType": "83",
+    "reduceOnly": true,
+    "postOnly": false,
+    "triggerPrice8dec": "20400000001476",
+    "triggerDir": "63",
+    "timeInForce": "186",
+    "expiresAt": "25500000001845",
+    "clientNonce": "27200000001968",
+    "validUntil": "28900000002091",
+    "worstPrice8dec": "30600000002214",
+    "source": "vector source",
+    "builder": "0x87Ab00E1EcD8e31751BBCEd70912fE62A90d1BeD",
+    "builderFeeCbps": "231838231"
+   },
+   "digest": "0xd8d2e718ded8f6d8c54d589f02a60faa50f98b234fa568508b1cffd8c8d3e3d7",
+   "signature": "0x2a99db33ca067e6e5625d4a0ca2e4503c8e6e3def41a29eae22db5718ea4bf091f06f18284eda230ea2a9cf546e7f9c9cc400e58faaf881a88223a271b1c99411b"
+  },
+  {
+   "op": "ApproveBuilderFee",
+   "domainClass": "VordCore",
+   "typeString": "ApproveBuilderFee(address user,address builder,uint32 maxFeeCbps,uint64 nonce,uint64 validUntil)",
+   "typeHash": "0xe63fa83d341ba3dfe6b57bc221d00f03edce9f043613f5243078e294ff0c849a",
+   "message": {
+    "user": "0x3F92107747FcCCc58Db838122c14149B1C6E5A81",
+    "builder": "0xa0418F549722079Ac55BF9d111E5A13902CE7F8f",
+    "maxFeeCbps": "259721831",
+    "nonce": "10200000000738",
+    "validUntil": "11900000000861"
+   },
+   "digest": "0xba85558138d29654d2881cff2b14179e36532b917552d8cebbaf51ff978c8ab8",
+   "signature": "0xc03f4ae7a32b2a13983d0a10ad12fa63851bfc820906c73192a0e89ae5294e202f8f1536e1a42cf494925fb656d3a091f3f252573124eff8c5074afbc2a16ab61c"
+  },
+  {
+   "op": "ClaimBuilderFees",
+   "domainClass": "VordCore",
+   "typeString": "ClaimBuilderFees(address builder,uint64 nonce,uint64 validUntil)",
+   "typeHash": "0xd5774785d91fe35740b030286fca8338c06609f3ba19595ee63a21d6e020500f",
+   "message": {
+    "builder": "0x6Be4736D3eeD8df9e376CCC161fC32c8dCdaCf1c",
+    "nonce": "6800000000492",
+    "validUntil": "8500000000615"
+   },
+   "digest": "0x9b805762831be417b49001a54e9094524cc5c47dc32c374a42d3325e5799ccaa",
+   "signature": "0x0189e4db3b3175d21f1dfb21adb130b990c224105cf0aa2f7d7de722a7e6899249e98620f4f0f14219cef2afddc505cfa77f5bd92cfd2bf907020d602c942ce11c"
+  },
+  {
+   "op": "PlaceTwap",
+   "domainClass": "VordCore",
+   "typeString": "PlaceTwap(address owner,uint32 pairId,uint8 side,uint128 totalSize18dec,uint32 numSlices,uint64 durationMs,uint32 leverageBps,uint32 slippageBps,bool randomize,uint64 triggerPrice8dec,uint8 triggerDir,uint64 minPrice8dec,uint64 maxPrice8dec,uint64 clientNonce)",
+   "typeHash": "0x023f35004dbcad4b4b38c8c27d4ac2fbd9d173e1805c8671a2b13963a9e146be",
+   "message": {
+    "owner": "0x2551f5c609e466bE6C27289440B08BE0a5a7f96F",
+    "pairId": "1066770924",
+    "side": "103",
+    "totalSize18dec": "10200000000738",
+    "numSlices": "2940590941",
+    "durationMs": "13600000000984",
+    "leverageBps": "1326492755",
+    "slippageBps": "519443662",
+    "randomize": false,
+    "triggerPrice8dec": "20400000001476",
+    "triggerDir": "63",
+    "minPrice8dec": "23800000001722",
+    "maxPrice8dec": "25500000001845",
+    "clientNonce": "27200000001968"
+   },
+   "digest": "0x4cca25ede4eb0f09d33aef10d476c7a960a39e676bad9666ae7be1e4e68bd8da",
+   "signature": "0x648dd439bca55b7e672a3025943642a4a55cd924b540b374c85e13925d0d18bc0ef9df7cd73fd48eba6290af6dfbf43843ff199f04bd77a51746e2247011486d1b"
+  },
+  {
+   "op": "CancelTwap",
+   "domainClass": "VordCore",
+   "typeString": "CancelTwap(address owner,uint64 twapId,uint64 clientNonce)",
+   "typeHash": "0xab292058990c40988859e09e5c071abab7675501be671e0b3a40f85d58dbabee",
+   "message": {
+    "owner": "0x2551f5c609e466bE6C27289440B08BE0a5a7f96F",
+    "twapId": "6800000000492",
+    "clientNonce": "8500000000615"
+   },
+   "digest": "0x9ac1a52dd72214f149701cbc4a9b0f6af2d0051c3f4d98eb1402f4f0a426afa2",
+   "signature": "0x2b98a12f642d87ff514e03bea375dd04c93fb488bd1320f32b686c8e55842efa7c380e4f27ee678a2b050095e45c57510ada2446aa5a0691dff21e1f27fbac3c1c"
+  },
+  {
+   "op": "SetMarginMode",
+   "domainClass": "VordCore",
+   "typeString": "SetMarginMode(address owner,uint32 pairId,uint8 mode,uint64 nonce)",
+   "typeHash": "0xe21cb7097749ae53e743c95bbe6143cd2dc1917e7504598a32a6f5062f7ebc3d",
+   "message": {
+    "owner": "0x2551f5c609e466bE6C27289440B08BE0a5a7f96F",
+    "pairId": "1066770924",
+    "mode": "103",
+    "nonce": "10200000000738"
+   },
+   "digest": "0x6f7a7021ddff3a3a4e0beeda1b07983a6644ba58198e4b5c5fcf21b793373979",
+   "signature": "0x642873cc0497fa7bd983232f5a2e55096e415534436a0c48099500f53a5785d95c296bd38e2425d5a9492bb02e59e3577e70390f649948fa48cdda891a8e6efa1c"
+  },
+  {
+   "op": "RegisterAgentV2",
+   "domainClass": "VordCore",
+   "typeString": "RegisterAgentV2(address owner,address agent,string name,string mandate,uint64 expiresMs,uint64 nonce)",
+   "typeHash": "0xb5b489380f6c8779be7ec482317a372b0dc6f4922de83fde46445c6c88b9df06",
+   "message": {
+    "owner": "0x2551f5c609e466bE6C27289440B08BE0a5a7f96F",
+    "agent": "0xCD5078Be17d044D575d02e11b9F77B2c9A3F0538",
+    "name": "vector name",
+    "mandate": "vector mandate",
+    "expiresMs": "11900000000861",
+    "nonce": "13600000000984"
+   },
+   "digest": "0x39ac26fba00fdb2d54695587679eb6e6e23686b567848824ae1d2986c77a194e",
+   "signature": "0x7916691fad8920f5d8235ee97c4461fe930e1b1ce73239ac9ff37a844b2f9dd632ce6f7100039d9cc13939e120ddff497f1625eee755f3730c9898001e73756d1c"
+  },
+  {
+   "op": "SetAgentName",
+   "domainClass": "VordCore",
+   "typeString": "SetAgentName(address owner,address agent,string name,uint64 nonce)",
+   "typeHash": "0x9c25acb2e2f15181e3a15b3e73bb9f2e30ec147f63b057ce2de6a4d3f1aa48da",
+   "message": {
+    "owner": "0x2551f5c609e466bE6C27289440B08BE0a5a7f96F",
+    "agent": "0xCD5078Be17d044D575d02e11b9F77B2c9A3F0538",
+    "name": "vector name",
+    "nonce": "10200000000738"
+   },
+   "digest": "0x70f6260b5298c3e2cd596092dc33fe464c6af4e29987e24e32b5df33024e7216",
+   "signature": "0x38f476b20849233d2e09409090320b3de4f266c518a275077c15ae1a66ab635a54bbd5d3f026c9110e9c3afb3931008f85785c651965fcfa0113203cca0511871b"
+  },
+  {
+   "op": "SetAgentPolicyV1",
+   "domainClass": "VordCore",
+   "typeString": "SetAgentPolicyV1(address owner,address agent,uint32 capsBitmask,uint8 sideMode,uint128 maxTotalExposure6dec,uint32 maxLeverageBps,uint128 dailyLossLimit6dec,uint128 dailyFeeCap6dec,uint32 opsPerWindow,uint32 opsWindowMs,uint32 activeFromMsOfDay,uint32 activeToMsOfDay,uint32 oracleBandBps,bool lockAutoClear,uint64 expiresMs,bool enabled,uint64 nonce)",
+   "typeHash": "0x3292e41e7bc2af4a6a4e9bca1741b8dc28965c821912b8d4a283bde0ec5aaea9",
+   "message": {
+    "owner": "0x2551f5c609e466bE6C27289440B08BE0a5a7f96F",
+    "agent": "0xCD5078Be17d044D575d02e11b9F77B2c9A3F0538",
+    "capsBitmask": "259721831",
+    "sideMode": "226",
+    "maxTotalExposure6dec": "11900000000861",
+    "maxLeverageBps": "2133541848",
+    "dailyLossLimit6dec": "15300000001107",
+    "dailyFeeCap6dec": "17000000001230",
+    "opsPerWindow": "4007361865",
+    "opsWindowMs": "3200312772",
+    "activeFromMsOfDay": "2393263679",
+    "activeToMsOfDay": "1586214586",
+    "oracleBandBps": "779165493",
+    "lockAutoClear": true,
+    "expiresMs": "28900000002091",
+    "enabled": true,
+    "nonce": "32300000002337"
+   },
+   "digest": "0xbdd2720e6193f3bb658e2b3991f737ad4367baad96b0a9f2bbf267745d2c6afe",
+   "signature": "0x0171dc428515a47d46ebff6e4ffd57d8bf4449ae909fbeedcc0a5311582cb5ac1590480477c4aaf835fe7c79f3b7f86ff86a9876e5327a3edf65e03d8c5cccb41c"
+  },
+  {
+   "op": "SetAgentMarketLimit",
+   "domainClass": "VordCore",
+   "typeString": "SetAgentMarketLimit(address owner,address agent,uint32 pair,bool allowed,uint128 maxOrder18dec,uint128 maxPosition18dec,uint32 maxLeverageBps,uint64 nonce)",
+   "typeHash": "0xa92024caa69fea81f74d011b60f08398301d0d1fbb70a3f8e2933bde18e82be7",
+   "message": {
+    "owner": "0x2551f5c609e466bE6C27289440B08BE0a5a7f96F",
+    "agent": "0xCD5078Be17d044D575d02e11b9F77B2c9A3F0538",
+    "pair": "259721831",
+    "allowed": true,
+    "maxOrder18dec": "11900000000861",
+    "maxPosition18dec": "13600000000984",
+    "maxLeverageBps": "1326492755",
+    "nonce": "17000000001230"
+   },
+   "digest": "0x7454f41519ab3ffb72e91bec263345d48815afcdb6b58d4a3f98ec708a9553fc",
+   "signature": "0x5b539093ac9ca77e5e01f8bfd23bd4574a8f0e49525dd12fc6d4be40590aa984345c89de8e0fd0c035b52ec1bbc2caf1a904d4443288bd4151358c9a47e594031c"
+  },
+  {
+   "op": "ClearAgentLock",
+   "domainClass": "VordCore",
+   "typeString": "ClearAgentLock(address owner,address agent,uint64 lockSinceMs,uint64 nonce)",
+   "typeHash": "0x9bda26585c945c0e798e7700a5e7bd6954c4487958d74173e255cc0122a7b8d5",
+   "message": {
+    "owner": "0x2551f5c609e466bE6C27289440B08BE0a5a7f96F",
+    "agent": "0xCD5078Be17d044D575d02e11b9F77B2c9A3F0538",
+    "lockSinceMs": "8500000000615",
+    "nonce": "10200000000738"
+   },
+   "digest": "0xe175c553294d8bcacba857c0151c9912957e373cf113713331bef8d4aa3c9d18",
+   "signature": "0x71b72869763d5e4b4cea08fb88f9eb44a6d949009731dda8d7ae2a45aacb9d9a61f7adc3bfdfe3d334da5099f38feeb4f1bd99b7511b963a82fc73012f0387551b"
+  },
+  {
+   "op": "RevokeAgent",
+   "domainClass": "VordCore",
+   "typeString": "RevokeAgent(address owner,address agent,uint64 nonce)",
+   "typeHash": "0x4154922dd73edc41f86303d2b9cea214a3f615b97f96b4c900bb2466093c9d6b",
+   "message": {
+    "owner": "0x2551f5c609e466bE6C27289440B08BE0a5a7f96F",
+    "agent": "0xCD5078Be17d044D575d02e11b9F77B2c9A3F0538",
+    "nonce": "8500000000615"
+   },
+   "digest": "0x414f60a5001df8efd514c6c29c645225a566f9e51a20fd06013b1ddb9c98fbc2",
+   "signature": "0x05b59a8e1487479b9eb15cb85c7c44178ef3b2158aaa8dcb07f87269f641e42462e1c138d349aba38124526bbba48fc2d7f24b0a088a806f70aeaabac4ad99781b"
+  },
+  {
+   "op": "SessionCreate",
+   "domainClass": "VordexSession",
+   "typeString": "SessionCreate(address sessionKey,uint256 expiresAt,uint256 nonce)",
+   "typeHash": "0x4f147fd852167f1ece1462e25e5f0251b9d47ba79ebc8c2b89d6fddc923b37d7",
+   "message": {
+    "sessionKey": "0x2E3b0691cCdb38Fc20FCE2C8fDf8e80d013F8ac3",
+    "expiresAt": "6800000000492",
+    "nonce": "8500000000615"
+   },
+   "digest": "0x97d743e33bf9b114f8bcaa70825210d3b5384c73e3fffdecbeafd4144b479423",
+   "signature": "0x2058922856fc1199f0a0e9cadb69498ea9b6a80ebb04e30eb25c02cf5cd5cc3d2b47586ebdf5124f362a7c81ed3f248776c2f458061410c441c1a597baae60b11c"
+  },
+  {
+   "op": "SessionRevoke",
+   "domainClass": "VordexSession",
+   "typeString": "SessionRevoke(address owner,uint256 nonce)",
+   "typeHash": "0xd15fd12a9dda115348c4ad76b2306caf8ff0b2f74a685c41f783208b55705ccd",
+   "message": {
+    "owner": "0x2551f5c609e466bE6C27289440B08BE0a5a7f96F",
+    "nonce": "6800000000492"
+   },
+   "digest": "0xb3c9e251fad1684204f3eaf0c34bd8ff8829ab21ef450a2c53dc8526cf9773d4",
+   "signature": "0xedf67e934fc6ebe3d8254a4b2a91e9fda51c6a3d900edeeb541683dd7f72350d7d36320d6eecbfa48db8ad74ffc1509a35cf0fcfdeb5d6e1bfd4a821d99a443a1b"
+  }
+ ]
+}

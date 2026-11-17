@@ -1,0 +1,1 @@
+{ "name": "app-signing-checks", "private": true, "type": "module", "dependencies": { "ethers": "6.17.0", "playwright-core": "1.63.0" } }
