@@ -92,6 +92,30 @@ python3 verifiers/verify_state_checkpoint.py   # a public state checkpoint: file
 Each script prints one line per check and exits 0 when every check passes. Items marked "run by the team" were run by the
 Vordium team and need private test accounts; their result and limits are recorded in `proofs/`.
 
+## SHIELD: accounting, reserves, explorer and finalized history
+
+`shield/` holds four reports and the kit that produced them:
+
+- accounting replay;
+- reserves;
+- explorer truth;
+- one finalized history.
+
+Each report states its scope, its checks with their results on each network, and its open items. Its last line is the
+command that re-runs it.
+
+The kit reads public addresses only and needs Python 3 and nothing else. `shield/kit/README.md` explains each script
+and its result words (`PASS`, `FAIL`, `INCOMPLETE`).
+
+`shield/results.json` pins every report and kit file by sha256, and is signed with the same release key
+(`shield/results.json.asc`):
+
+```bash
+cd shield
+sha256sum -c SHA256SUMS
+gpg --verify results.json.asc results.json
+```
+
 ## Check the signature
 
 `results.json` holds every item in one file. It is signed with the Vordium release key, the same key that signs the

@@ -1,0 +1,80 @@
+{
+ "schema": "vordium.security-results/1",
+ "title": "SHIELD: accounting, reserves, explorer truth, finalized history \u2014 public re-run kit results",
+ "claim": "Each check listed in the four reports was run from public reads only with the kit whose files are pinned below; each result is as printed; each check's rule is shown to catch a planted fault.",
+ "run_date": "2026-11-17",
+ "files": {
+  "SHIELD-A-accounting.md": "caa0f98b4619abfcf5eee647ef617750d514b48820833f741face1cce7ba3dc1",
+  "SHIELD-B-reserves.md": "0b866248f68b80f1ba3c3304d3367993a630b1b956141ff79dfbe51403ed3a49",
+  "SHIELD-C-explorer.md": "5f5fab65d147104ae8385f11e03c8dfa548aced3734cf8d25ca0161984133875",
+  "SHIELD-D-chain.md": "b7ba2f9269092181adc3dba935a729da192aaf054bf1ed70ca865b25848a5d52",
+  "kit/README.md": "a3ed1ea9f202df2ed288a9d2c3c8e0456b79ed515a214997381948beb6d13739",
+  "kit/crosscheck_explorer.py": "276d8e1edcbc45b7eab523a51447dce93c7eb8993f93a64f936cd09bd56cf1ad",
+  "kit/replay_balances.py": "a512b6a52395822bbd158a00ccb4d843b355b76b48f582084b1df2312b52df39",
+  "kit/tests/test_history.py": "92295ecc6dafc156db44fb97c2d31a05ab29dc57a9f19caec0a15318e7d611a7",
+  "kit/tests/test_replay.py": "f5fd461aea648e70b38a6b0cb4ec9252d8aeebccbf7c49ec1f1778ddbfc5442b",
+  "kit/tests/test_reserves.py": "aa24e2a0c3afd58b328e0e3282cfa280eaa52883e86a79db054ba0709602b47f",
+  "kit/verify_history.py": "8c2560a1ac0a538f24b1115c1920aa5629f160e5162452bf370cb07bfb826045",
+  "kit/verify_reserves.py": "b759b151aeed824eea6b17f6c3ae93fb8e0a21f121bd3018a12e58b16974c0ab",
+  "kit/vordium_check/common.py": "a1c3fff4d2b869823f2e5ec9201c91fedbc397ddd1bf788e3ff7e44107a76ed6"
+ },
+ "results": {
+  "A_replay_testnet": {
+   "from_height": 292555217,
+   "to_height": 292844118,
+   "records": 20406,
+   "balance_changes": 4031,
+   "judged": 4031,
+   "problems": 0,
+   "excluded": 0,
+   "result": "PASS"
+  },
+  "B_reserves_testnet": {
+   "vault_usdc_6dec_on_arbitrum": "1964500560926",
+   "answer_6dec": "1964500560926",
+   "ratio": "5.517180",
+   "result": "PASS"
+  },
+  "B_reserves_mainnet": {
+   "owed": "0",
+   "result": "PASS"
+  },
+  "C_explorer_mainnet": {
+   "agree": 74,
+   "differ": 4,
+   "unread": 0,
+   "result": "FAIL",
+   "open_items": 2
+  },
+  "C_explorer_testnet": {
+   "agree": 121,
+   "differ": 0,
+   "unread": 12,
+   "result": "INCOMPLETE"
+  },
+  "D_history_testnet": {
+   "batches": 30,
+   "result": "PASS",
+   "finality_s": {
+    "p50": 1.52,
+    "p95": 6.81,
+    "p99": 7.1
+   }
+  },
+  "D_history_mainnet": {
+   "batches": 20,
+   "result": "PASS",
+   "finality_s": {
+    "p50": 2.76,
+    "p95": 3.48,
+    "p99": 3.5
+   }
+  },
+  "rule_tests": {
+   "replay": "25 cases, 17/17 planted faults caught",
+   "reserves": "14 cases, 9/9",
+   "history": "17 cases, 11/11"
+  }
+ },
+ "signed": false
+}
