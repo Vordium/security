@@ -119,14 +119,13 @@ gpg --verify results.json.asc results.json
 ## Check the signature
 
 `results.json` holds every item in one file. It is signed with the Vordium release key, the same key that signs the
-network's releases. The signature is `results.json.asc`; the public key is `pub_key.asc` in
-https://github.com/Vordium/node, fingerprint `C5EB 4728 F660 369C E519  D834 B48F B4B7 1EFD 48AE`.
+network's releases. The signature is `results.json.asc`; the public key is `release-key.asc` in this repository (the same key as
+`pub_key.asc` in https://github.com/Vordium/node), fingerprint `C5EB 4728 F660 369C E519  D834 B48F B4B7 1EFD 48AE`.
 
 ```bash
 sha256sum results.json
 # fae80df07da389541bc17233199fbf6fe7c18e2bb226299fc2e7fbc4e9066c3f  results.json
-curl -sO https://raw.githubusercontent.com/Vordium/node/main/pub_key.asc
-gpg --import pub_key.asc
+gpg --import release-key.asc
 gpg --verify results.json.asc results.json
 ```
 
