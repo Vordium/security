@@ -554,6 +554,20 @@
       "docs": null
     },
     {
+      "id": "bridge-outage",
+      "title": "A data-provider outage holds bridge deposits and payouts, then settles each exactly once",
+      "group": "The network",
+      "status": "BUILT, NOT PROVEN",
+      "network": "testnet",
+      "code_version": "the testnet network on the run date",
+      "last_run": "18 Nov 2026 (one then both data endpoints unreachable, 18 minutes each)",
+      "result": "With one, then both, of the two separately keyed data endpoints unreachable on all 7 test validators, no validator made an agreed reading, deposits stayed pending (not credited, not refused) and withdrawals stayed pending with no payout signed. After the restore, a quorum of the first 5 validators back credited each of the 2 deposits once and signed each of the 2 payouts once, about 5 minutes after the restore began. Public records show one credit record per deposit, one withdrawal record per withdrawal and one 4 test USDC transfer per payout; the account and the vault totals moved by exactly the amounts sent, to the micro-USDC.",
+      "limits": "The outage was a refused connection; a provider answering with wrong data was not run. Each stage lasted 18 minutes; an outage longer than a withdrawal's deadline ends in a refund instead of a payout, and that path was not run. One run on the testnet; not run on mainnet.",
+      "check": "anyone, from the public records named in proofs/bridge-outage/README.md",
+      "verifier": null,
+      "docs": null
+    },
+    {
       "id": "finality-public",
       "title": "Finality as a public reader sees it",
       "group": "Chain data you can check yourself",

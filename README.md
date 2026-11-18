@@ -18,7 +18,7 @@ Every item has exactly one status:
 Each item names the network it was tested on, the code version where one is recorded, the date of the last run (UTC),
 the result and its limits. "Local test" means the code was tested on its own, against a stand-in for the network.
 
-Today: 42 items — 22 proved, 18 built but not proven, 2 missing or failing.
+Today: 43 items — 22 proved, 19 built but not proven, 2 missing or failing.
 
 ## Items
 
@@ -63,6 +63,7 @@ Today: 42 items — 22 proved, 18 built but not proven, 2 missing or failing.
 | [Your trading key and your agents trade side by side](proofs/parallel-signers/README.md) | BUILT, NOT PROVEN | build | 11 Nov 2026 |
 | [Liquidation in steps, then backstop, insurance fund and auto-deleverage](proofs/liquidation-model/README.md) | BUILT, NOT PROVEN | a local test network | 7 Nov 2026 |
 | [The read-only order check agrees with the network](proofs/order-check/README.md) | BUILT, NOT PROVEN | a local test network | 6 Nov 2026 |
+| [A data-provider outage holds bridge deposits and payouts, then settles each exactly once](proofs/bridge-outage/README.md) | BUILT, NOT PROVEN | testnet | 18 Nov 2026 (one then both data endpoints unreachable, 18 minutes each) |
 | [Finality as a public reader sees it](proofs/finality-public/README.md) | PROVED | mainnet and testnet | 11 Nov 2026 |
 | [Balances follow the public records on the testnet](proofs/money-replay/README.md) | PROVED | testnet | 16 Nov 2026 14:37–15:22 UTC (heights 285,325,095 to 285,723,367) |
 | [Each balance record adds up from the money records it names, on the testnet](proofs/balance-replay/README.md) | PROVED | testnet | 18 Nov 2026 (heights 300,000,000 to 300,176,327) |
@@ -146,7 +147,7 @@ network's releases. The signature is `results.json.asc`; the public key is `rele
 
 ```bash
 sha256sum results.json
-# 08249acb4e35d2678d6ebd311af1d91b0f713a7e255c1088e78ef4753ce81de5  results.json
+# 8ab4ce3373f6fa722f4f11cfb92ac02f1008328bc140b1db971b21289d5c9ebd  results.json
 gpg --import release-key.asc
 gpg --verify results.json.asc results.json
 ```
