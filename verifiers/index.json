@@ -13,5 +13,6 @@
   "revoked-keys": "agent_control_proof.py",
   "planted-data": "agent_control_proof.py",
   "builder-fees": "builder_fee_proof.py",
-  "money-replay": "money_replay.py"
+  "money-replay": "money_replay.py",
+  "balance-replay": "balance_replay.py"
 }

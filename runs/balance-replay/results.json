@@ -1,0 +1,98 @@
+{
+ "schema": "vordium.security-results/1",
+ "title": "Balance records replay on the test network",
+ "claim": "For each account followed, every balance record's collateral after equals its collateral before plus the sum of this account's legs in the money records it names, and each step starts where the account's previous step ended.",
+ "how_to_rerun": "python3 balance_replay.py --from-height 300000000 --to-height 300176327 0x580207d74663309986131131ca3c954f85b9225b 0x34887a0938a0908348879ead6f7809d7dab2ff0a 0xc0f691f41d367b3c2994b9ec8d121394a3659262 0x4952f6ebf45387cc109f7b5df5069dec1faf80ad 0x814646978e4654243d1278c51c61dbe5edf6fc5d 0x1f1e2ad48ec5f7aeab97adf3348254c45d932bfa 0x1b05af777b3c7b543ef2b71adf68fdf9ecbcff45 0x9d336af193009c1ae0aa0a14d63449313e8feae8",
+ "self_test": {
+  "command": "python3 balance_replay.py --self-test balance-replay-cases.json",
+  "result": "PASS"
+ },
+ "files": {
+  "balance_replay.py": "2b3efd1c6dd33fca6b842ebd5bea34a0d6623b407f5388f85c75a7b5eaad1d46",
+  "balance-replay-cases.json": "c78feb2a8f63dcf77ab3dd34b135da5b991e21d248515ec838168809a5c1d431",
+  "balance_replay.md": "558cd7f5d03b039c1cd56e07e69e8154d3407ab32a8a10b14fb6011f39079524"
+ },
+ "network": "testnet",
+ "records": "https://testnet.vordex.xyz/chain-archive",
+ "records_schema_revision": 4,
+ "window": {
+  "from_height": 300000000,
+  "to_height": 300176327,
+  "run_from_utc": "2026-11-18T05:00:17Z",
+  "run_to_utc": "2026-11-18T05:00:19Z"
+ },
+ "accounts": {
+  "0x580207d74663309986131131ca3c954f85b9225b": {
+   "match": 10,
+   "different": 0,
+   "unexplained": 0,
+   "not checked": 0,
+   "unexplained_outside_system": 0
+  },
+  "0x34887a0938a0908348879ead6f7809d7dab2ff0a": {
+   "match": 14,
+   "different": 0,
+   "unexplained": 0,
+   "not checked": 0,
+   "unexplained_outside_system": 0
+  },
+  "0xc0f691f41d367b3c2994b9ec8d121394a3659262": {
+   "match": 17,
+   "different": 0,
+   "unexplained": 0,
+   "not checked": 0,
+   "unexplained_outside_system": 0
+  },
+  "0x4952f6ebf45387cc109f7b5df5069dec1faf80ad": {
+   "match": 0,
+   "different": 0,
+   "unexplained": 0,
+   "not checked": 0,
+   "unexplained_outside_system": 0
+  },
+  "0x814646978e4654243d1278c51c61dbe5edf6fc5d": {
+   "match": 0,
+   "different": 0,
+   "unexplained": 0,
+   "not checked": 0,
+   "unexplained_outside_system": 0
+  },
+  "0x1f1e2ad48ec5f7aeab97adf3348254c45d932bfa": {
+   "match": 0,
+   "different": 0,
+   "unexplained": 0,
+   "not checked": 0,
+   "unexplained_outside_system": 0
+  },
+  "0x1b05af777b3c7b543ef2b71adf68fdf9ecbcff45": {
+   "match": 0,
+   "different": 0,
+   "unexplained": 0,
+   "not checked": 0,
+   "unexplained_outside_system": 0
+  },
+  "0x9d336af193009c1ae0aa0a14d63449313e8feae8": {
+   "match": 0,
+   "different": 0,
+   "unexplained": 0,
+   "not checked": 0,
+   "unexplained_outside_system": 0
+  }
+ },
+ "summary": {
+  "match": 41,
+  "different": 0,
+  "unexplained": 0,
+  "not checked": 0,
+  "unexplained_outside_system": 0
+ },
+ "steps": 41,
+ "steps_chained_to_previous": 38,
+ "order_records_counted_as_zero": 32,
+ "limits": [
+  "8 accounts over one window of heights; accounts with no balance record in the window show no steps.",
+  "An order record (order_closed, order_updated) a step names counts as zero only when it carries no legs and no micro-USDC amount; an amount under a key not ending in _6dec is not looked for.",
+  "Gap records, resets and legs that could not be measured are shown as not checked, never as a match.",
+  "Trusts the endpoints it reads unless pointed at your own node."
+ ]
+}

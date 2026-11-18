@@ -18,7 +18,7 @@ Every item has exactly one status:
 Each item names the network it was tested on, the code version where one is recorded, the date of the last run (UTC),
 the result and its limits. "Local test" means the code was tested on its own, against a stand-in for the network.
 
-Today: 41 items — 21 proved, 18 built but not proven, 2 missing or failing.
+Today: 42 items — 22 proved, 18 built but not proven, 2 missing or failing.
 
 ## Items
 
@@ -65,6 +65,7 @@ Today: 41 items — 21 proved, 18 built but not proven, 2 missing or failing.
 | [The read-only order check agrees with the network](proofs/order-check/README.md) | BUILT, NOT PROVEN | a local test network | 6 Nov 2026 |
 | [Finality as a public reader sees it](proofs/finality-public/README.md) | PROVED | mainnet and testnet | 11 Nov 2026 |
 | [Balances follow the public records on the testnet](proofs/money-replay/README.md) | PROVED | testnet | 16 Nov 2026 14:37–15:22 UTC (heights 285,325,095 to 285,723,367) |
+| [Each balance record adds up from the money records it names, on the testnet](proofs/balance-replay/README.md) | PROVED | testnet | 18 Nov 2026 (heights 300,000,000 to 300,176,327) |
 
 Each link opens `proofs/<item>/README.md`, with the full result and limits.
 
@@ -145,7 +146,7 @@ network's releases. The signature is `results.json.asc`; the public key is `rele
 
 ```bash
 sha256sum results.json
-# fae80df07da389541bc17233199fbf6fe7c18e2bb226299fc2e7fbc4e9066c3f  results.json
+# 08249acb4e35d2678d6ebd311af1d91b0f713a7e255c1088e78ef4753ce81de5  results.json
 gpg --import release-key.asc
 gpg --verify results.json.asc results.json
 ```
@@ -156,4 +157,4 @@ gpg --verify results.json.asc results.json
 
 See [SECURITY.md](SECURITY.md).
 
-List date: 2026-11-16.
+List date: 2026-11-18.

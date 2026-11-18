@@ -1,0 +1,5375 @@
+{
+ "note": "built from the network's schema-4 recorder fixtures (source dbc1d37b): real records, each money kind wrapped in a step; wrong cases are the real pair changed by one field",
+ "coverage": {
+  "archive": true,
+  "balance_chain_from": "102.0.0",
+  "balance_records_from": "102.0.0",
+  "dropped_views": 0,
+  "events_written": 7,
+  "first_height": 102,
+  "gaps": [],
+  "last_height": 105,
+  "limits": [
+   "fill legs name their order by the size the resting order lost in the same step (order_attribution)",
+   "realised PnL is recorded for the taker leg only",
+   "order_closed.status is inferred: filled / expired / cancelled, with status_basis",
+   "a snapshot restore or a dropped view is listed in gaps",
+   "balance_change is per account per view pair: the order of effects inside one block is not observable",
+   "a balance_change chain breaks at a balance_reset (process start) and at a gap record (dropped view or restore)",
+   "move_seq is this node's index of a money move within one run of notes (it restarts when the notes are cleared); it is not a chain sequence number and is not comparable across nodes",
+   "a fee_credit record has a leg only for an account whose balance moved: a fee account outside the balance map (the treasury) gets no leg"
+  ],
+  "money_record_kinds": [
+   {
+    "kind": "fill",
+    "legs": "taker and maker: what the match moved each account by"
+   },
+   {
+    "kind": "funding_payment",
+    "legs": "the funding the position paid or got, as applied"
+   },
+   {
+    "kind": "liquidation",
+    "legs": "the liquidated account's change in the liquidation step, what it returned to the account included (a book step's change is on its fill)"
+   },
+   {
+    "kind": "adl",
+    "legs": "the closed account's change, what it returned to the account included"
+   },
+   {
+    "kind": "deposit_credited",
+    "legs": "a deposit credited to its account (legacy op, current-bridge batch credit or bridge v4)"
+   },
+   {
+    "kind": "withdrawal_requested",
+    "legs": "a withdrawal taken from its account, gross (the withdrawal fee included)"
+   },
+   {
+    "kind": "withdrawal_refunded",
+    "legs": "a withdrawal returned to its account (held, expired, cancelled, a returned delayed exit, a reclaimed stuck one)"
+   },
+   {
+    "kind": "evm_usdc_moved",
+    "legs": "an EVM action that moved USDC between the EVM link and accounts"
+   },
+   {
+    "kind": "claim_paid",
+    "legs": "referral earnings or builder fees paid out to their account"
+   },
+   {
+    "kind": "staking_paid",
+    "legs": "a staker's USDC pay-out from the staking pot (the pot is a leg too)"
+   },
+   {
+    "kind": "treasury_moved",
+    "legs": "a treasury transfer to an account, or an account's return to the treasury"
+   },
+   {
+    "kind": "pool_deposit",
+    "legs": "a deposit into the liquidity pool"
+   },
+   {
+    "kind": "pool_withdraw",
+    "legs": "a withdrawal from the liquidity pool"
+   },
+   {
+    "kind": "fee_credit",
+    "legs": "a fee's credits to accounts: the referee discount and the protocol pots, a leg per receiving account"
+   },
+   {
+    "kind": "spot_fill",
+    "legs": "a spot fill: the USDC legs of taker and maker"
+   },
+   {
+    "kind": "trading_account_funded",
+    "legs": "a vault's idle cash moved into its trading account to place an order"
+   },
+   {
+    "kind": "vault_created",
+    "legs": "the creation fee taken from the leader"
+   },
+   {
+    "kind": "vault_deposit",
+    "legs": "the depositor's deposit (and the vault trading account where it moved)"
+   },
+   {
+    "kind": "vault_withdraw",
+    "legs": "the payout to the depositor and the leader's profit share"
+   },
+   {
+    "kind": "vault_close",
+    "legs": "every holder's payout"
+   }
+  ],
+  "pruned_below": null,
+  "queue_depth": 0,
+  "recording": true,
+  "records_schema_revision": 4,
+  "retention_blocks": null,
+  "schema": "vordium.trade-events/1",
+  "source": "node-local records derived from committed state after each block and each batch publish; not consensus state"
+ },
+ "cases": [
+  {
+   "name": "real: withdrawal_requested + its balance_change (fixture pair 102.0.1 / 102.0.2)",
+   "account": "0x4994ea57adee282ca28f276853b65b8473e20a0c",
+   "records": [
+    {
+     "account": "0x4994ea57adee282ca28f276853b65b8473e20a0c",
+     "accounts": [
+      "0x4994ea57adee282ca28f276853b65b8473e20a0c"
+     ],
+     "agents": [],
+     "at_ms": 1800000102000,
+     "cursor": "102.0.1",
+     "destination": "0x4994ea57adee282ca28f276853b65b8473e20a0c",
+     "gross_6dec": "7000000",
+     "height": 102,
+     "kind": "withdrawal_requested",
+     "legs": [
+      {
+       "account": "0x4994ea57adee282ca28f276853b65b8473e20a0c",
+       "account_delta_6dec": "-7000000",
+       "balance_after_6dec": "9993000000"
+      }
+     ],
+     "move_seq": 0,
+     "nonce": 1,
+     "phase": "block",
+     "route": "legacy",
+     "seq": 1
+    },
+    {
+     "account": "0x4994ea57adee282ca28f276853b65b8473e20a0c",
+     "accounts": [
+      "0x4994ea57adee282ca28f276853b65b8473e20a0c"
+     ],
+     "after": {
+      "collateral_6dec": "9993000000",
+      "in_positions_6dec": "0",
+      "reserved_orders_6dec": "0",
+      "spot_reserved_6dec": "0",
+      "usdc_6dec": "9993000000"
+     },
+     "agents": [],
+     "at_ms": 1800000102000,
+     "before": {
+      "collateral_6dec": "10000000000",
+      "in_positions_6dec": "0",
+      "reserved_orders_6dec": "0",
+      "spot_reserved_6dec": "0",
+      "usdc_6dec": "10000000000"
+     },
+     "cursor": "102.0.2",
+     "delta_6dec": "-7000000",
+     "explained": true,
+     "height": 102,
+     "kind": "balance_change",
+     "phase": "block",
+     "records": [
+      "102.0.1"
+     ],
+     "records_delta_6dec": "-7000000",
+     "seq": 2,
+     "since_cursor": null,
+     "since_height": 101,
+     "system": false,
+     "unexplained_6dec": "0"
+    }
+   ],
+   "expect": [
+    "match"
+   ]
+  },
+  {
+   "name": "real: balance_change_gap_dropped is never checked across",
+   "account": "0x31b2557da5abd9e88657566fa460e8afcd2b0c64",
+   "records": [
+    {
+     "account": "0x31b2557da5abd9e88657566fa460e8afcd2b0c64",
+     "accounts": [
+      "0x31b2557da5abd9e88657566fa460e8afcd2b0c64"
+     ],
+     "after": {
+      "collateral_6dec": "9999999997",
+      "in_positions_6dec": "0",
+      "reserved_orders_6dec": "0",
+      "spot_reserved_6dec": "0",
+      "usdc_6dec": "9999999997"
+     },
+     "agents": [],
+     "at_ms": 1800000104000,
+     "before": {
+      "collateral_6dec": "10000000000",
+      "in_positions_6dec": "0",
+      "reserved_orders_6dec": "0",
+      "spot_reserved_6dec": "0",
+      "usdc_6dec": "10000000000"
+     },
+     "cursor": "104.1.0",
+     "delta_6dec": "-3",
+     "explained": false,
+     "gap": true,
+     "gap_reason": "dropped",
+     "height": 104,
+     "kind": "balance_change",
+     "phase": "batch",
+     "records": [],
+     "records_delta_6dec": null,
+     "seq": 0,
+     "since_cursor": null,
+     "since_height": 103,
+     "system": false,
+     "unexplained_6dec": null
+    }
+   ],
+   "expect": [
+    "not checked"
+   ]
+  },
+  {
+   "name": "real: balance_change_gap_restore is never checked across",
+   "account": "0xb63df0ed601818ce3d134d97062b2867f2d7e65b",
+   "records": [
+    {
+     "account": "0xb63df0ed601818ce3d134d97062b2867f2d7e65b",
+     "accounts": [
+      "0xb63df0ed601818ce3d134d97062b2867f2d7e65b"
+     ],
+     "after": {
+      "collateral_6dec": "9999999996",
+      "in_positions_6dec": "0",
+      "reserved_orders_6dec": "0",
+      "spot_reserved_6dec": "0",
+      "usdc_6dec": "9999999996"
+     },
+     "agents": [],
+     "at_ms": 1800000105000,
+     "before": {
+      "collateral_6dec": "10000000000",
+      "in_positions_6dec": "0",
+      "reserved_orders_6dec": "0",
+      "spot_reserved_6dec": "0",
+      "usdc_6dec": "10000000000"
+     },
+     "cursor": "105.1.0",
+     "delta_6dec": "-4",
+     "explained": false,
+     "gap": true,
+     "gap_reason": "restore",
+     "height": 105,
+     "kind": "balance_change",
+     "phase": "batch",
+     "records": [],
+     "records_delta_6dec": null,
+     "seq": 0,
+     "since_cursor": null,
+     "since_height": 104,
+     "system": false,
+     "unexplained_6dec": null
+    }
+   ],
+   "expect": [
+    "not checked"
+   ]
+  },
+  {
+   "name": "real: balance_reset alone gives no step",
+   "account": "0x0",
+   "records": [
+    {
+     "accounts": [],
+     "agents": [],
+     "at_ms": 1800000102000,
+     "cursor": "102.0.0",
+     "height": 102,
+     "kind": "balance_reset",
+     "meaning": "balance_change records before this cursor are not chained to those after it",
+     "phase": "block",
+     "reason": "restart",
+     "seq": 0
+    }
+   ],
+   "expect": []
+  },
+  {
+   "name": "kind claim_paid: its leg (4000000) takes before to after",
+   "account": "0x7313e0dac93d80c67b0017d36176cedc692f8a8e",
+   "records": [
+    {
+     "account": "0x7313e0dac93d80c67b0017d36176cedc692f8a8e",
+     "accounts": [
+      "0x7313e0dac93d80c67b0017d36176cedc692f8a8e"
+     ],
+     "agents": [],
+     "at_ms": 1800000102000,
+     "claim": "referral",
+     "cursor": "102.0.2",
+     "height": 102,
+     "kind": "claim_paid",
+     "legs": [
+      {
+       "account": "0x7313e0dac93d80c67b0017d36176cedc692f8a8e",
+       "account_delta_6dec": "4000000",
+       "balance_after_6dec": "10004000000"
+      }
+     ],
+     "move_seq": 1,
+     "phase": "block",
+     "seq": 2
+    },
+    {
+     "kind": "balance_change",
+     "account": "0x7313e0dac93d80c67b0017d36176cedc692f8a8e",
+     "cursor": "102.0.9",
+     "height": 102,
+     "before": {
+      "collateral_6dec": "10000000000",
+      "usdc_6dec": "10000000000",
+      "reserved_orders_6dec": "0",
+      "in_positions_6dec": "0",
+      "spot_reserved_6dec": "0"
+     },
+     "after": {
+      "collateral_6dec": "10004000000",
+      "usdc_6dec": "10004000000",
+      "reserved_orders_6dec": "0",
+      "in_positions_6dec": "0",
+      "spot_reserved_6dec": "0"
+     },
+     "records": [
+      "102.0.2"
+     ],
+     "delta_6dec": "4000000",
+     "records_delta_6dec": "4000000",
+     "unexplained_6dec": "0",
+     "explained": true,
+     "system": false,
+     "since_cursor": null
+    }
+   ],
+   "expect": [
+    "match"
+   ]
+  },
+  {
+   "name": "kind deposit_credited: its leg (25000000) takes before to after",
+   "account": "0x31b2557da5abd9e88657566fa460e8afcd2b0c64",
+   "records": [
+    {
+     "account": "0x31b2557da5abd9e88657566fa460e8afcd2b0c64",
+     "accounts": [
+      "0x31b2557da5abd9e88657566fa460e8afcd2b0c64"
+     ],
+     "agents": [],
+     "amount_6dec": "25000000",
+     "at_ms": 1800000102000,
+     "bridge_vault_id": 1,
+     "cursor": "102.0.1",
+     "height": 102,
+     "kind": "deposit_credited",
+     "legs": [
+      {
+       "account": "0x31b2557da5abd9e88657566fa460e8afcd2b0c64",
+       "account_delta_6dec": "25000000",
+       "balance_after_6dec": "10025000000"
+      }
+     ],
+     "log_index": 3,
+     "move_seq": 0,
+     "phase": "block",
+     "route": "bridge_v4",
+     "seq": 1,
+     "tx_hash": "0x0707070707070707070707070707070707070707070707070707070707070707"
+    },
+    {
+     "kind": "balance_change",
+     "account": "0x31b2557da5abd9e88657566fa460e8afcd2b0c64",
+     "cursor": "102.0.9",
+     "height": 102,
+     "before": {
+      "collateral_6dec": "10000000000",
+      "usdc_6dec": "10000000000",
+      "reserved_orders_6dec": "0",
+      "in_positions_6dec": "0",
+      "spot_reserved_6dec": "0"
+     },
+     "after": {
+      "collateral_6dec": "10025000000",
+      "usdc_6dec": "10025000000",
+      "reserved_orders_6dec": "0",
+      "in_positions_6dec": "0",
+      "spot_reserved_6dec": "0"
+     },
+     "records": [
+      "102.0.1"
+     ],
+     "delta_6dec": "25000000",
+     "records_delta_6dec": "25000000",
+     "unexplained_6dec": "0",
+     "explained": true,
+     "system": false,
+     "since_cursor": null
+    }
+   ],
+   "expect": [
+    "match"
+   ]
+  },
+  {
+   "name": "kind evm_usdc_moved: its leg (3000000) takes before to after",
+   "account": "0x03f541a1b46942a084ca34417589795ee277f452",
+   "records": [
+    {
+     "account": "0x03f541a1b46942a084ca34417589795ee277f452",
+     "accounts": [
+      "0x03f541a1b46942a084ca34417589795ee277f452"
+     ],
+     "action_id": 4,
+     "agents": [],
+     "at_ms": 1800000102000,
+     "contract": "0x03f541a1b46942a084ca34417589795ee277f452",
+     "cursor": "102.0.1",
+     "height": 102,
+     "kind": "evm_usdc_moved",
+     "legs": [
+      {
+       "account": "0x03f541a1b46942a084ca34417589795ee277f452",
+       "account_delta_6dec": "3000000",
+       "balance_after_6dec": "10003000000"
+      }
+     ],
+     "move_seq": 0,
+     "phase": "block",
+     "seq": 1
+    },
+    {
+     "kind": "balance_change",
+     "account": "0x03f541a1b46942a084ca34417589795ee277f452",
+     "cursor": "102.0.9",
+     "height": 102,
+     "before": {
+      "collateral_6dec": "10000000000",
+      "usdc_6dec": "10000000000",
+      "reserved_orders_6dec": "0",
+      "in_positions_6dec": "0",
+      "spot_reserved_6dec": "0"
+     },
+     "after": {
+      "collateral_6dec": "10003000000",
+      "usdc_6dec": "10003000000",
+      "reserved_orders_6dec": "0",
+      "in_positions_6dec": "0",
+      "spot_reserved_6dec": "0"
+     },
+     "records": [
+      "102.0.1"
+     ],
+     "delta_6dec": "3000000",
+     "records_delta_6dec": "3000000",
+     "unexplained_6dec": "0",
+     "explained": true,
+     "system": false,
+     "since_cursor": null
+    }
+   ],
+   "expect": [
+    "match"
+   ]
+  },
+  {
+   "name": "kind fee_credit: its leg (2) takes before to after",
+   "account": "0x5341131cbd1fb25613edca6680e7d04cb6b9e72f",
+   "records": [
+    {
+     "account": "0x5341131cbd1fb25613edca6680e7d04cb6b9e72f",
+     "accounts": [
+      "0x000000000000000000000000000000000000100b",
+      "0x5341131cbd1fb25613edca6680e7d04cb6b9e72f"
+     ],
+     "agents": [],
+     "at_ms": 1800000103000,
+     "cursor": "103.0.0",
+     "fee_payer": "0x5341131cbd1fb25613edca6680e7d04cb6b9e72f",
+     "height": 103,
+     "kind": "fee_credit",
+     "legs": [
+      {
+       "account": "0x000000000000000000000000000000000000100b",
+       "account_delta_6dec": "5",
+       "balance_after_6dec": "5"
+      },
+      {
+       "account": "0x5341131cbd1fb25613edca6680e7d04cb6b9e72f",
+       "account_delta_6dec": "2",
+       "balance_after_6dec": "10003000002",
+       "role": "fee_payer"
+      }
+     ],
+     "move_seq": 0,
+     "phase": "block",
+     "seq": 0
+    },
+    {
+     "kind": "balance_change",
+     "account": "0x5341131cbd1fb25613edca6680e7d04cb6b9e72f",
+     "cursor": "103.0.9",
+     "height": 103,
+     "before": {
+      "collateral_6dec": "10003000000",
+      "usdc_6dec": "10003000000",
+      "reserved_orders_6dec": "0",
+      "in_positions_6dec": "0",
+      "spot_reserved_6dec": "0"
+     },
+     "after": {
+      "collateral_6dec": "10003000002",
+      "usdc_6dec": "10003000002",
+      "reserved_orders_6dec": "0",
+      "in_positions_6dec": "0",
+      "spot_reserved_6dec": "0"
+     },
+     "records": [
+      "103.0.0"
+     ],
+     "delta_6dec": "2",
+     "records_delta_6dec": "2",
+     "unexplained_6dec": "0",
+     "explained": true,
+     "system": false,
+     "since_cursor": null
+    }
+   ],
+   "expect": [
+    "match"
+   ]
+  },
+  {
+   "name": "kind fill: its leg (-90000) takes before to after",
+   "account": "0x5341131cbd1fb25613edca6680e7d04cb6b9e72f",
+   "records": [
+    {
+     "accounts": [
+      "0x5341131cbd1fb25613edca6680e7d04cb6b9e72f"
+     ],
+     "agents": [],
+     "at_ms": 1800000102000,
+     "cursor": "102.0.1",
+     "fee": {
+      "maker_fee_basis": "maker_fee_cbps is the rate for a maker without a market-maker tier; a tier's rate shows in the maker leg's fee_paid_6dec / rebate_6dec",
+      "maker_fee_bps": 0,
+      "maker_fee_cbps": 0,
+      "note": "fee_paid_6dec is what the fill recorded; a referral discount can make it lower than the list rate",
+      "pair_config_applied": false,
+      "source": "compiled_default",
+      "taker_fee_bps": 3,
+      "taker_fee_cbps": 300
+     },
+     "fill_id": 1,
+     "height": 102,
+     "is_close": false,
+     "kind": "fill",
+     "maker": {
+      "account": null,
+      "counterparty": "vlp_pool",
+      "fee_paid_6dec": "0",
+      "realized_pnl_6dec": null,
+      "rebate_6dec": "0",
+      "role": "maker"
+     },
+     "market": "perp",
+     "order_type": 1,
+     "pair_id": 1,
+     "phase": "block",
+     "price_8dec": 3000000000,
+     "seq": 1,
+     "size_18dec": "10000000000000000000",
+     "taker": {
+      "account": "0x5341131cbd1fb25613edca6680e7d04cb6b9e72f",
+      "account_delta_6dec": "-90000",
+      "agent": null,
+      "balance_after_6dec": "9999910000",
+      "fee_paid_6dec": "90000",
+      "order_attribution": "none: no resting order of this account lost this size in the step",
+      "order_id": null,
+      "realized_pnl_6dec": "0",
+      "role": "taker",
+      "signed_with": "wallet"
+     },
+     "taker_side": "buy",
+     "timestamp_secs": 1800000000
+    },
+    {
+     "kind": "balance_change",
+     "account": "0x5341131cbd1fb25613edca6680e7d04cb6b9e72f",
+     "cursor": "102.0.9",
+     "height": 102,
+     "before": {
+      "collateral_6dec": "10000000000",
+      "usdc_6dec": "10000000000",
+      "reserved_orders_6dec": "0",
+      "in_positions_6dec": "0",
+      "spot_reserved_6dec": "0"
+     },
+     "after": {
+      "collateral_6dec": "9999910000",
+      "usdc_6dec": "9999910000",
+      "reserved_orders_6dec": "0",
+      "in_positions_6dec": "0",
+      "spot_reserved_6dec": "0"
+     },
+     "records": [
+      "102.0.1"
+     ],
+     "delta_6dec": "-90000",
+     "records_delta_6dec": "-90000",
+     "unexplained_6dec": "0",
+     "explained": true,
+     "system": false,
+     "since_cursor": null
+    }
+   ],
+   "expect": [
+    "match"
+   ]
+  },
+  {
+   "name": "kind liquidation: its leg (-101000000) takes before to after",
+   "account": "0x5341131cbd1fb25613edca6680e7d04cb6b9e72f",
+   "records": [
+    {
+     "absorbed_by": 0,
+     "account": "0x5341131cbd1fb25613edca6680e7d04cb6b9e72f",
+     "account_delta_6dec": "-101000000",
+     "accounts": [
+      "0x5341131cbd1fb25613edca6680e7d04cb6b9e72f"
+     ],
+     "agents": [],
+     "at_ms": 1800000104000,
+     "balance_after_6dec": "9898910000",
+     "cursor": "104.0.0",
+     "entry_price_8dec": 3000000000,
+     "fee_6dec": "0",
+     "height": 104,
+     "kind": "liquidation",
+     "liquidation": "fee",
+     "margin_mode": "isolated",
+     "mark_price_8dec": 1500000000,
+     "pair_id": 1,
+     "partial": false,
+     "phase": "block",
+     "position_id": 1,
+     "realized_pnl_6dec": "-150000000",
+     "seq": 0,
+     "side": "long",
+     "size_18dec": "10000000000000000000",
+     "size_before_18dec": "10000000000000000000",
+     "step_bps": 10000,
+     "timestamp_secs": 1800000000,
+     "to_insurance_6dec": "0",
+     "to_pool_6dec": "0",
+     "to_treasury_6dec": "0"
+    },
+    {
+     "kind": "balance_change",
+     "account": "0x5341131cbd1fb25613edca6680e7d04cb6b9e72f",
+     "cursor": "104.0.9",
+     "height": 104,
+     "before": {
+      "collateral_6dec": "9999910000",
+      "usdc_6dec": "9999910000",
+      "reserved_orders_6dec": "0",
+      "in_positions_6dec": "0",
+      "spot_reserved_6dec": "0"
+     },
+     "after": {
+      "collateral_6dec": "9898910000",
+      "usdc_6dec": "9898910000",
+      "reserved_orders_6dec": "0",
+      "in_positions_6dec": "0",
+      "spot_reserved_6dec": "0"
+     },
+     "records": [
+      "104.0.0"
+     ],
+     "delta_6dec": "-101000000",
+     "records_delta_6dec": "-101000000",
+     "unexplained_6dec": "0",
+     "explained": true,
+     "system": false,
+     "since_cursor": null
+    }
+   ],
+   "expect": [
+    "match"
+   ]
+  },
+  {
+   "name": "kind pool_deposit: its leg (-40000000) takes before to after",
+   "account": "0xb63df0ed601818ce3d134d97062b2867f2d7e65b",
+   "records": [
+    {
+     "account": "0xb63df0ed601818ce3d134d97062b2867f2d7e65b",
+     "accounts": [
+      "0xb63df0ed601818ce3d134d97062b2867f2d7e65b"
+     ],
+     "agents": [],
+     "amount_6dec": "40000000",
+     "at_ms": 1800000102000,
+     "cursor": "102.0.1",
+     "height": 102,
+     "kind": "pool_deposit",
+     "legs": [
+      {
+       "account": "0xb63df0ed601818ce3d134d97062b2867f2d7e65b",
+       "account_delta_6dec": "-40000000",
+       "balance_after_6dec": "9960000000"
+      }
+     ],
+     "lock_days": 0,
+     "move_seq": 0,
+     "phase": "block",
+     "seq": 1
+    },
+    {
+     "kind": "balance_change",
+     "account": "0xb63df0ed601818ce3d134d97062b2867f2d7e65b",
+     "cursor": "102.0.9",
+     "height": 102,
+     "before": {
+      "collateral_6dec": "10000000000",
+      "usdc_6dec": "10000000000",
+      "reserved_orders_6dec": "0",
+      "in_positions_6dec": "0",
+      "spot_reserved_6dec": "0"
+     },
+     "after": {
+      "collateral_6dec": "9960000000",
+      "usdc_6dec": "9960000000",
+      "reserved_orders_6dec": "0",
+      "in_positions_6dec": "0",
+      "spot_reserved_6dec": "0"
+     },
+     "records": [
+      "102.0.1"
+     ],
+     "delta_6dec": "-40000000",
+     "records_delta_6dec": "-40000000",
+     "unexplained_6dec": "0",
+     "explained": true,
+     "system": false,
+     "since_cursor": null
+    }
+   ],
+   "expect": [
+    "match"
+   ]
+  },
+  {
+   "name": "kind pool_withdraw: its leg (40000000) takes before to after",
+   "account": "0xb63df0ed601818ce3d134d97062b2867f2d7e65b",
+   "records": [
+    {
+     "account": "0xb63df0ed601818ce3d134d97062b2867f2d7e65b",
+     "accounts": [
+      "0xb63df0ed601818ce3d134d97062b2867f2d7e65b"
+     ],
+     "agents": [],
+     "at_ms": 1800000103000,
+     "cursor": "103.0.0",
+     "height": 103,
+     "kind": "pool_withdraw",
+     "legs": [
+      {
+       "account": "0xb63df0ed601818ce3d134d97062b2867f2d7e65b",
+       "account_delta_6dec": "40000000",
+       "balance_after_6dec": "10000000000"
+      }
+     ],
+     "move_seq": 0,
+     "phase": "block",
+     "seq": 0,
+     "shares": "40000000"
+    },
+    {
+     "kind": "balance_change",
+     "account": "0xb63df0ed601818ce3d134d97062b2867f2d7e65b",
+     "cursor": "103.0.9",
+     "height": 103,
+     "before": {
+      "collateral_6dec": "9960000000",
+      "usdc_6dec": "9960000000",
+      "reserved_orders_6dec": "0",
+      "in_positions_6dec": "0",
+      "spot_reserved_6dec": "0"
+     },
+     "after": {
+      "collateral_6dec": "10000000000",
+      "usdc_6dec": "10000000000",
+      "reserved_orders_6dec": "0",
+      "in_positions_6dec": "0",
+      "spot_reserved_6dec": "0"
+     },
+     "records": [
+      "103.0.0"
+     ],
+     "delta_6dec": "40000000",
+     "records_delta_6dec": "40000000",
+     "unexplained_6dec": "0",
+     "explained": true,
+     "system": false,
+     "since_cursor": null
+    }
+   ],
+   "expect": [
+    "match"
+   ]
+  },
+  {
+   "name": "kind spot_fill: its leg (-1500000) takes before to after",
+   "account": "0x4994ea57adee282ca28f276853b65b8473e20a0c",
+   "records": [
+    {
+     "account": "0x4994ea57adee282ca28f276853b65b8473e20a0c",
+     "accounts": [
+      "0x31b2557da5abd9e88657566fa460e8afcd2b0c64",
+      "0x4994ea57adee282ca28f276853b65b8473e20a0c"
+     ],
+     "agents": [],
+     "at_ms": 1800000102000,
+     "cursor": "102.0.3",
+     "height": 102,
+     "kind": "spot_fill",
+     "legs": [
+      {
+       "account": "0x31b2557da5abd9e88657566fa460e8afcd2b0c64",
+       "account_delta_6dec": "1500000",
+       "balance_after_6dec": "10001500000",
+       "role": "maker"
+      },
+      {
+       "account": "0x4994ea57adee282ca28f276853b65b8473e20a0c",
+       "account_delta_6dec": "-1500000",
+       "balance_after_6dec": "9998500000",
+       "role": "taker"
+      }
+     ],
+     "maker_order_id": 901,
+     "move_seq": 0,
+     "pair_id": 100,
+     "phase": "block",
+     "price_8dec": "150000000",
+     "seq": 3,
+     "size_18dec": "1000000000000000000",
+     "taker_order_id": 900,
+     "taker_side": "buy"
+    },
+    {
+     "kind": "balance_change",
+     "account": "0x4994ea57adee282ca28f276853b65b8473e20a0c",
+     "cursor": "102.0.9",
+     "height": 102,
+     "before": {
+      "collateral_6dec": "10000000000",
+      "usdc_6dec": "10000000000",
+      "reserved_orders_6dec": "0",
+      "in_positions_6dec": "0",
+      "spot_reserved_6dec": "0"
+     },
+     "after": {
+      "collateral_6dec": "9998500000",
+      "usdc_6dec": "9998500000",
+      "reserved_orders_6dec": "0",
+      "in_positions_6dec": "0",
+      "spot_reserved_6dec": "0"
+     },
+     "records": [
+      "102.0.3"
+     ],
+     "delta_6dec": "-1500000",
+     "records_delta_6dec": "-1500000",
+     "unexplained_6dec": "0",
+     "explained": true,
+     "system": false,
+     "since_cursor": null
+    }
+   ],
+   "expect": [
+    "match"
+   ]
+  },
+  {
+   "name": "kind staking_paid: its leg (3000000) takes before to after",
+   "account": "0x5341131cbd1fb25613edca6680e7d04cb6b9e72f",
+   "records": [
+    {
+     "account": "0x5341131cbd1fb25613edca6680e7d04cb6b9e72f",
+     "accounts": [
+      "0x0000000000000000000000000000000000001009",
+      "0x5341131cbd1fb25613edca6680e7d04cb6b9e72f"
+     ],
+     "agents": [],
+     "amount_6dec": "3000000",
+     "at_ms": 1800000102000,
+     "cursor": "102.0.1",
+     "height": 102,
+     "kind": "staking_paid",
+     "legs": [
+      {
+       "account": "0x0000000000000000000000000000000000001009",
+       "account_delta_6dec": "-3000000",
+       "balance_after_6dec": "97000000"
+      },
+      {
+       "account": "0x5341131cbd1fb25613edca6680e7d04cb6b9e72f",
+       "account_delta_6dec": "3000000",
+       "balance_after_6dec": "10003000000"
+      }
+     ],
+     "move_seq": 0,
+     "phase": "block",
+     "seq": 1
+    },
+    {
+     "kind": "balance_change",
+     "account": "0x5341131cbd1fb25613edca6680e7d04cb6b9e72f",
+     "cursor": "102.0.9",
+     "height": 102,
+     "before": {
+      "collateral_6dec": "10000000000",
+      "usdc_6dec": "10000000000",
+      "reserved_orders_6dec": "0",
+      "in_positions_6dec": "0",
+      "spot_reserved_6dec": "0"
+     },
+     "after": {
+      "collateral_6dec": "10003000000",
+      "usdc_6dec": "10003000000",
+      "reserved_orders_6dec": "0",
+      "in_positions_6dec": "0",
+      "spot_reserved_6dec": "0"
+     },
+     "records": [
+      "102.0.1"
+     ],
+     "delta_6dec": "3000000",
+     "records_delta_6dec": "3000000",
+     "unexplained_6dec": "0",
+     "explained": true,
+     "system": false,
+     "since_cursor": null
+    }
+   ],
+   "expect": [
+    "match"
+   ]
+  },
+  {
+   "name": "kind trading_account_funded: its leg (2000000000) takes before to after",
+   "account": "0xe14f8a3ae3dd49379cf8d5f8cb6dea8e0ded64a9",
+   "records": [
+    {
+     "account": "0xe14f8a3ae3dd49379cf8d5f8cb6dea8e0ded64a9",
+     "accounts": [
+      "0xe14f8a3ae3dd49379cf8d5f8cb6dea8e0ded64a9"
+     ],
+     "agents": [],
+     "at_ms": 1800000102000,
+     "cursor": "102.0.2",
+     "height": 102,
+     "kind": "trading_account_funded",
+     "legs": [
+      {
+       "account": "0xe14f8a3ae3dd49379cf8d5f8cb6dea8e0ded64a9",
+       "account_delta_6dec": "2000000000",
+       "balance_after_6dec": "2000000000"
+      }
+     ],
+     "move_seq": 0,
+     "phase": "block",
+     "seq": 2,
+     "vault_id": 0,
+     "vaults": [
+      0
+     ]
+    },
+    {
+     "kind": "balance_change",
+     "account": "0xe14f8a3ae3dd49379cf8d5f8cb6dea8e0ded64a9",
+     "cursor": "102.0.9",
+     "height": 102,
+     "before": {
+      "collateral_6dec": "0",
+      "usdc_6dec": "0",
+      "reserved_orders_6dec": "0",
+      "in_positions_6dec": "0",
+      "spot_reserved_6dec": "0"
+     },
+     "after": {
+      "collateral_6dec": "2000000000",
+      "usdc_6dec": "2000000000",
+      "reserved_orders_6dec": "0",
+      "in_positions_6dec": "0",
+      "spot_reserved_6dec": "0"
+     },
+     "records": [
+      "102.0.2"
+     ],
+     "delta_6dec": "2000000000",
+     "records_delta_6dec": "2000000000",
+     "unexplained_6dec": "0",
+     "explained": true,
+     "system": false,
+     "since_cursor": null
+    }
+   ],
+   "expect": [
+    "match"
+   ]
+  },
+  {
+   "name": "kind treasury_moved: its leg (-6000000) takes before to after",
+   "account": "0x03f541a1b46942a084ca34417589795ee277f452",
+   "records": [
+    {
+     "account": "0x03f541a1b46942a084ca34417589795ee277f452",
+     "accounts": [
+      "0x03f541a1b46942a084ca34417589795ee277f452"
+     ],
+     "agents": [],
+     "amount_6dec": "6000000",
+     "at_ms": 1800000102000,
+     "cursor": "102.0.1",
+     "direction": "to_treasury",
+     "height": 102,
+     "kind": "treasury_moved",
+     "legs": [
+      {
+       "account": "0x03f541a1b46942a084ca34417589795ee277f452",
+       "account_delta_6dec": "-6000000",
+       "balance_after_6dec": "9994000000"
+      }
+     ],
+     "move_seq": 0,
+     "phase": "block",
+     "seq": 1
+    },
+    {
+     "kind": "balance_change",
+     "account": "0x03f541a1b46942a084ca34417589795ee277f452",
+     "cursor": "102.0.9",
+     "height": 102,
+     "before": {
+      "collateral_6dec": "10000000000",
+      "usdc_6dec": "10000000000",
+      "reserved_orders_6dec": "0",
+      "in_positions_6dec": "0",
+      "spot_reserved_6dec": "0"
+     },
+     "after": {
+      "collateral_6dec": "9994000000",
+      "usdc_6dec": "9994000000",
+      "reserved_orders_6dec": "0",
+      "in_positions_6dec": "0",
+      "spot_reserved_6dec": "0"
+     },
+     "records": [
+      "102.0.1"
+     ],
+     "delta_6dec": "-6000000",
+     "records_delta_6dec": "-6000000",
+     "unexplained_6dec": "0",
+     "explained": true,
+     "system": false,
+     "since_cursor": null
+    }
+   ],
+   "expect": [
+    "match"
+   ]
+  },
+  {
+   "name": "kind vault_close: its leg (500000000) takes before to after",
+   "account": "0x4994ea57adee282ca28f276853b65b8473e20a0c",
+   "records": [
+    {
+     "accounts": [
+      "0x4994ea57adee282ca28f276853b65b8473e20a0c"
+     ],
+     "agents": [],
+     "at_ms": 1800000106000,
+     "cursor": "106.0.0",
+     "event_height": 1001,
+     "height": 106,
+     "kind": "vault_close",
+     "leader": "0x4994ea57adee282ca28f276853b65b8473e20a0c",
+     "leader_fees_6dec": "0",
+     "legs": [
+      {
+       "account": "0x4994ea57adee282ca28f276853b65b8473e20a0c",
+       "account_delta_6dec": "500000000",
+       "balance_after_6dec": "9900000000"
+      }
+     ],
+     "payouts": [
+      {
+       "account": "0x4994ea57adee282ca28f276853b65b8473e20a0c",
+       "amount_paid_6dec": "500000000",
+       "profit_share_fee_6dec": "0",
+       "shares": "500000000"
+      }
+     ],
+     "phase": "block",
+     "seq": 0,
+     "vault_id": 0,
+     "vaults": [
+      0
+     ]
+    },
+    {
+     "kind": "balance_change",
+     "account": "0x4994ea57adee282ca28f276853b65b8473e20a0c",
+     "cursor": "106.0.9",
+     "height": 106,
+     "before": {
+      "collateral_6dec": "9400000000",
+      "usdc_6dec": "9400000000",
+      "reserved_orders_6dec": "0",
+      "in_positions_6dec": "0",
+      "spot_reserved_6dec": "0"
+     },
+     "after": {
+      "collateral_6dec": "9900000000",
+      "usdc_6dec": "9900000000",
+      "reserved_orders_6dec": "0",
+      "in_positions_6dec": "0",
+      "spot_reserved_6dec": "0"
+     },
+     "records": [
+      "106.0.0"
+     ],
+     "delta_6dec": "500000000",
+     "records_delta_6dec": "500000000",
+     "unexplained_6dec": "0",
+     "explained": true,
+     "system": false,
+     "since_cursor": null
+    }
+   ],
+   "expect": [
+    "match"
+   ]
+  },
+  {
+   "name": "kind vault_created: its leg (-100000000) takes before to after",
+   "account": "0x4994ea57adee282ca28f276853b65b8473e20a0c",
+   "records": [
+    {
+     "accounts": [
+      "0x4994ea57adee282ca28f276853b65b8473e20a0c"
+     ],
+     "agents": [],
+     "at_ms": 1800000102000,
+     "creation_fee_6dec": "100000000",
+     "cursor": "102.0.1",
+     "event_height": 1001,
+     "height": 102,
+     "kind": "vault_created",
+     "leader": "0x4994ea57adee282ca28f276853b65b8473e20a0c",
+     "leader_min_stake_bps": 500,
+     "legs": [
+      {
+       "account": "0x4994ea57adee282ca28f276853b65b8473e20a0c",
+       "account_delta_6dec": "-100000000",
+       "balance_after_6dec": "9900000000"
+      }
+     ],
+     "lock_period_secs": 86400,
+     "phase": "block",
+     "profit_share_bps": 1000,
+     "seq": 1,
+     "vault_id": 0,
+     "vaults": [
+      0
+     ]
+    },
+    {
+     "kind": "balance_change",
+     "account": "0x4994ea57adee282ca28f276853b65b8473e20a0c",
+     "cursor": "102.0.9",
+     "height": 102,
+     "before": {
+      "collateral_6dec": "10000000000",
+      "usdc_6dec": "10000000000",
+      "reserved_orders_6dec": "0",
+      "in_positions_6dec": "0",
+      "spot_reserved_6dec": "0"
+     },
+     "after": {
+      "collateral_6dec": "9900000000",
+      "usdc_6dec": "9900000000",
+      "reserved_orders_6dec": "0",
+      "in_positions_6dec": "0",
+      "spot_reserved_6dec": "0"
+     },
+     "records": [
+      "102.0.1"
+     ],
+     "delta_6dec": "-100000000",
+     "records_delta_6dec": "-100000000",
+     "unexplained_6dec": "0",
+     "explained": true,
+     "system": false,
+     "since_cursor": null
+    }
+   ],
+   "expect": [
+    "match"
+   ]
+  },
+  {
+   "name": "kind vault_deposit: its leg (-500000000) takes before to after",
+   "account": "0x4994ea57adee282ca28f276853b65b8473e20a0c",
+   "records": [
+    {
+     "account": "0x4994ea57adee282ca28f276853b65b8473e20a0c",
+     "accounts": [
+      "0x4994ea57adee282ca28f276853b65b8473e20a0c"
+     ],
+     "agents": [],
+     "amount_6dec": "500000000",
+     "at_ms": 1800000103000,
+     "cursor": "103.0.0",
+     "event_height": 1001,
+     "height": 103,
+     "kind": "vault_deposit",
+     "legs": [
+      {
+       "account": "0x4994ea57adee282ca28f276853b65b8473e20a0c",
+       "account_delta_6dec": "-500000000",
+       "balance_after_6dec": "9400000000"
+      }
+     ],
+     "nav_before_6dec": "0",
+     "phase": "block",
+     "price_per_share_x1e18": "1000000000000000000",
+     "seq": 0,
+     "shares_minted": "500000000",
+     "total_shares_before": "0",
+     "vault_id": 0,
+     "vaults": [
+      0
+     ]
+    },
+    {
+     "kind": "balance_change",
+     "account": "0x4994ea57adee282ca28f276853b65b8473e20a0c",
+     "cursor": "103.0.9",
+     "height": 103,
+     "before": {
+      "collateral_6dec": "9900000000",
+      "usdc_6dec": "9900000000",
+      "reserved_orders_6dec": "0",
+      "in_positions_6dec": "0",
+      "spot_reserved_6dec": "0"
+     },
+     "after": {
+      "collateral_6dec": "9400000000",
+      "usdc_6dec": "9400000000",
+      "reserved_orders_6dec": "0",
+      "in_positions_6dec": "0",
+      "spot_reserved_6dec": "0"
+     },
+     "records": [
+      "103.0.0"
+     ],
+     "delta_6dec": "-500000000",
+     "records_delta_6dec": "-500000000",
+     "unexplained_6dec": "0",
+     "explained": true,
+     "system": false,
+     "since_cursor": null
+    }
+   ],
+   "expect": [
+    "match"
+   ]
+  },
+  {
+   "name": "kind vault_withdraw: its leg (50000000) takes before to after",
+   "account": "0x31b2557da5abd9e88657566fa460e8afcd2b0c64",
+   "records": [
+    {
+     "account": "0x31b2557da5abd9e88657566fa460e8afcd2b0c64",
+     "accounts": [
+      "0x31b2557da5abd9e88657566fa460e8afcd2b0c64"
+     ],
+     "agents": [],
+     "amount_paid_6dec": "50000000",
+     "at_ms": 1800000105000,
+     "cursor": "105.0.0",
+     "event_height": 1001,
+     "gross_6dec": "50000000",
+     "height": 105,
+     "kind": "vault_withdraw",
+     "leader": "0x4994ea57adee282ca28f276853b65b8473e20a0c",
+     "legs": [
+      {
+       "account": "0x31b2557da5abd9e88657566fa460e8afcd2b0c64",
+       "account_delta_6dec": "50000000",
+       "balance_after_6dec": "10000000000"
+      }
+     ],
+     "orders_cancelled": 0,
+     "phase": "block",
+     "profit_share_fee_6dec": "0",
+     "seq": 0,
+     "shares_burned": "50000000",
+     "status": "paid",
+     "vault_id": 0,
+     "vaults": [
+      0
+     ]
+    },
+    {
+     "kind": "balance_change",
+     "account": "0x31b2557da5abd9e88657566fa460e8afcd2b0c64",
+     "cursor": "105.0.9",
+     "height": 105,
+     "before": {
+      "collateral_6dec": "9950000000",
+      "usdc_6dec": "9950000000",
+      "reserved_orders_6dec": "0",
+      "in_positions_6dec": "0",
+      "spot_reserved_6dec": "0"
+     },
+     "after": {
+      "collateral_6dec": "10000000000",
+      "usdc_6dec": "10000000000",
+      "reserved_orders_6dec": "0",
+      "in_positions_6dec": "0",
+      "spot_reserved_6dec": "0"
+     },
+     "records": [
+      "105.0.0"
+     ],
+     "delta_6dec": "50000000",
+     "records_delta_6dec": "50000000",
+     "unexplained_6dec": "0",
+     "explained": true,
+     "system": false,
+     "since_cursor": null
+    }
+   ],
+   "expect": [
+    "match"
+   ]
+  },
+  {
+   "name": "kind withdrawal_refunded: its leg (7000000) takes before to after",
+   "account": "0x4994ea57adee282ca28f276853b65b8473e20a0c",
+   "records": [
+    {
+     "account": "0x4994ea57adee282ca28f276853b65b8473e20a0c",
+     "accounts": [
+      "0x4994ea57adee282ca28f276853b65b8473e20a0c"
+     ],
+     "agents": [],
+     "at_ms": 1800000103000,
+     "cursor": "103.0.0",
+     "gross_6dec": "7000000",
+     "height": 103,
+     "kind": "withdrawal_refunded",
+     "legs": [
+      {
+       "account": "0x4994ea57adee282ca28f276853b65b8473e20a0c",
+       "account_delta_6dec": "7000000",
+       "balance_after_6dec": "10000000000"
+      }
+     ],
+     "move_seq": 0,
+     "nonce": 1,
+     "phase": "block",
+     "reason": "exit_returned",
+     "route": "legacy",
+     "seq": 0
+    },
+    {
+     "kind": "balance_change",
+     "account": "0x4994ea57adee282ca28f276853b65b8473e20a0c",
+     "cursor": "103.0.9",
+     "height": 103,
+     "before": {
+      "collateral_6dec": "9993000000",
+      "usdc_6dec": "9993000000",
+      "reserved_orders_6dec": "0",
+      "in_positions_6dec": "0",
+      "spot_reserved_6dec": "0"
+     },
+     "after": {
+      "collateral_6dec": "10000000000",
+      "usdc_6dec": "10000000000",
+      "reserved_orders_6dec": "0",
+      "in_positions_6dec": "0",
+      "spot_reserved_6dec": "0"
+     },
+     "records": [
+      "103.0.0"
+     ],
+     "delta_6dec": "7000000",
+     "records_delta_6dec": "7000000",
+     "unexplained_6dec": "0",
+     "explained": true,
+     "system": false,
+     "since_cursor": null
+    }
+   ],
+   "expect": [
+    "match"
+   ]
+  },
+  {
+   "name": "kind withdrawal_requested: its leg (-7000000) takes before to after",
+   "account": "0x4994ea57adee282ca28f276853b65b8473e20a0c",
+   "records": [
+    {
+     "account": "0x4994ea57adee282ca28f276853b65b8473e20a0c",
+     "accounts": [
+      "0x4994ea57adee282ca28f276853b65b8473e20a0c"
+     ],
+     "agents": [],
+     "at_ms": 1800000102000,
+     "cursor": "102.0.1",
+     "destination": "0x4994ea57adee282ca28f276853b65b8473e20a0c",
+     "gross_6dec": "7000000",
+     "height": 102,
+     "kind": "withdrawal_requested",
+     "legs": [
+      {
+       "account": "0x4994ea57adee282ca28f276853b65b8473e20a0c",
+       "account_delta_6dec": "-7000000",
+       "balance_after_6dec": "9993000000"
+      }
+     ],
+     "move_seq": 0,
+     "nonce": 1,
+     "phase": "block",
+     "route": "legacy",
+     "seq": 1
+    },
+    {
+     "kind": "balance_change",
+     "account": "0x4994ea57adee282ca28f276853b65b8473e20a0c",
+     "cursor": "102.0.9",
+     "height": 102,
+     "before": {
+      "collateral_6dec": "10000000000",
+      "usdc_6dec": "10000000000",
+      "reserved_orders_6dec": "0",
+      "in_positions_6dec": "0",
+      "spot_reserved_6dec": "0"
+     },
+     "after": {
+      "collateral_6dec": "9993000000",
+      "usdc_6dec": "9993000000",
+      "reserved_orders_6dec": "0",
+      "in_positions_6dec": "0",
+      "spot_reserved_6dec": "0"
+     },
+     "records": [
+      "102.0.1"
+     ],
+     "delta_6dec": "-7000000",
+     "records_delta_6dec": "-7000000",
+     "unexplained_6dec": "0",
+     "explained": true,
+     "system": false,
+     "since_cursor": null
+    }
+   ],
+   "expect": [
+    "match"
+   ]
+  },
+  {
+   "name": "after one micro-USDC off: different",
+   "account": "0x4994ea57adee282ca28f276853b65b8473e20a0c",
+   "records": [
+    {
+     "account": "0x4994ea57adee282ca28f276853b65b8473e20a0c",
+     "accounts": [
+      "0x4994ea57adee282ca28f276853b65b8473e20a0c"
+     ],
+     "agents": [],
+     "at_ms": 1800000102000,
+     "cursor": "102.0.1",
+     "destination": "0x4994ea57adee282ca28f276853b65b8473e20a0c",
+     "gross_6dec": "7000000",
+     "height": 102,
+     "kind": "withdrawal_requested",
+     "legs": [
+      {
+       "account": "0x4994ea57adee282ca28f276853b65b8473e20a0c",
+       "account_delta_6dec": "-7000000",
+       "balance_after_6dec": "9993000000"
+      }
+     ],
+     "move_seq": 0,
+     "nonce": 1,
+     "phase": "block",
+     "route": "legacy",
+     "seq": 1
+    },
+    {
+     "account": "0x4994ea57adee282ca28f276853b65b8473e20a0c",
+     "accounts": [
+      "0x4994ea57adee282ca28f276853b65b8473e20a0c"
+     ],
+     "after": {
+      "collateral_6dec": "9993000001",
+      "in_positions_6dec": "0",
+      "reserved_orders_6dec": "0",
+      "spot_reserved_6dec": "0",
+      "usdc_6dec": "9993000001"
+     },
+     "agents": [],
+     "at_ms": 1800000102000,
+     "before": {
+      "collateral_6dec": "10000000000",
+      "in_positions_6dec": "0",
+      "reserved_orders_6dec": "0",
+      "spot_reserved_6dec": "0",
+      "usdc_6dec": "10000000000"
+     },
+     "cursor": "102.0.2",
+     "delta_6dec": "-7000000",
+     "explained": true,
+     "height": 102,
+     "kind": "balance_change",
+     "phase": "block",
+     "records": [
+      "102.0.1"
+     ],
+     "records_delta_6dec": "-7000000",
+     "seq": 2,
+     "since_cursor": null,
+     "since_height": 101,
+     "system": false,
+     "unexplained_6dec": "0"
+    }
+   ],
+   "expect": [
+    "different"
+   ]
+  },
+  {
+   "name": "collateral_6dec not the sum of its parts: different",
+   "account": "0x4994ea57adee282ca28f276853b65b8473e20a0c",
+   "records": [
+    {
+     "account": "0x4994ea57adee282ca28f276853b65b8473e20a0c",
+     "accounts": [
+      "0x4994ea57adee282ca28f276853b65b8473e20a0c"
+     ],
+     "agents": [],
+     "at_ms": 1800000102000,
+     "cursor": "102.0.1",
+     "destination": "0x4994ea57adee282ca28f276853b65b8473e20a0c",
+     "gross_6dec": "7000000",
+     "height": 102,
+     "kind": "withdrawal_requested",
+     "legs": [
+      {
+       "account": "0x4994ea57adee282ca28f276853b65b8473e20a0c",
+       "account_delta_6dec": "-7000000",
+       "balance_after_6dec": "9993000000"
+      }
+     ],
+     "move_seq": 0,
+     "nonce": 1,
+     "phase": "block",
+     "route": "legacy",
+     "seq": 1
+    },
+    {
+     "account": "0x4994ea57adee282ca28f276853b65b8473e20a0c",
+     "accounts": [
+      "0x4994ea57adee282ca28f276853b65b8473e20a0c"
+     ],
+     "after": {
+      "collateral_6dec": "1",
+      "in_positions_6dec": "0",
+      "reserved_orders_6dec": "0",
+      "spot_reserved_6dec": "0",
+      "usdc_6dec": "9993000000"
+     },
+     "agents": [],
+     "at_ms": 1800000102000,
+     "before": {
+      "collateral_6dec": "10000000000",
+      "in_positions_6dec": "0",
+      "reserved_orders_6dec": "0",
+      "spot_reserved_6dec": "0",
+      "usdc_6dec": "10000000000"
+     },
+     "cursor": "102.0.2",
+     "delta_6dec": "-7000000",
+     "explained": true,
+     "height": 102,
+     "kind": "balance_change",
+     "phase": "block",
+     "records": [
+      "102.0.1"
+     ],
+     "records_delta_6dec": "-7000000",
+     "seq": 2,
+     "since_cursor": null,
+     "since_height": 101,
+     "system": false,
+     "unexplained_6dec": "0"
+    }
+   ],
+   "expect": [
+    "different"
+   ]
+  },
+  {
+   "name": "the network marks it unexplained: unexplained",
+   "account": "0x4994ea57adee282ca28f276853b65b8473e20a0c",
+   "records": [
+    {
+     "account": "0x4994ea57adee282ca28f276853b65b8473e20a0c",
+     "accounts": [
+      "0x4994ea57adee282ca28f276853b65b8473e20a0c"
+     ],
+     "agents": [],
+     "at_ms": 1800000102000,
+     "cursor": "102.0.1",
+     "destination": "0x4994ea57adee282ca28f276853b65b8473e20a0c",
+     "gross_6dec": "7000000",
+     "height": 102,
+     "kind": "withdrawal_requested",
+     "legs": [
+      {
+       "account": "0x4994ea57adee282ca28f276853b65b8473e20a0c",
+       "account_delta_6dec": "-7000000",
+       "balance_after_6dec": "9993000000"
+      }
+     ],
+     "move_seq": 0,
+     "nonce": 1,
+     "phase": "block",
+     "route": "legacy",
+     "seq": 1
+    },
+    {
+     "account": "0x4994ea57adee282ca28f276853b65b8473e20a0c",
+     "accounts": [
+      "0x4994ea57adee282ca28f276853b65b8473e20a0c"
+     ],
+     "after": {
+      "collateral_6dec": "9993000000",
+      "in_positions_6dec": "0",
+      "reserved_orders_6dec": "0",
+      "spot_reserved_6dec": "0",
+      "usdc_6dec": "9993000000"
+     },
+     "agents": [],
+     "at_ms": 1800000102000,
+     "before": {
+      "collateral_6dec": "10000000000",
+      "in_positions_6dec": "0",
+      "reserved_orders_6dec": "0",
+      "spot_reserved_6dec": "0",
+      "usdc_6dec": "10000000000"
+     },
+     "cursor": "102.0.2",
+     "delta_6dec": "-7000000",
+     "explained": false,
+     "height": 102,
+     "kind": "balance_change",
+     "phase": "block",
+     "records": [
+      "102.0.1"
+     ],
+     "records_delta_6dec": "-7000000",
+     "seq": 2,
+     "since_cursor": null,
+     "since_height": 101,
+     "system": false,
+     "unexplained_6dec": "5"
+    }
+   ],
+   "expect": [
+    "unexplained"
+   ]
+  },
+  {
+   "name": "a leg not measured: not checked",
+   "account": "0x4994ea57adee282ca28f276853b65b8473e20a0c",
+   "records": [
+    {
+     "account": "0x4994ea57adee282ca28f276853b65b8473e20a0c",
+     "accounts": [
+      "0x4994ea57adee282ca28f276853b65b8473e20a0c"
+     ],
+     "agents": [],
+     "at_ms": 1800000102000,
+     "cursor": "102.0.1",
+     "destination": "0x4994ea57adee282ca28f276853b65b8473e20a0c",
+     "gross_6dec": "7000000",
+     "height": 102,
+     "kind": "withdrawal_requested",
+     "legs": [
+      {
+       "account": "0x4994ea57adee282ca28f276853b65b8473e20a0c",
+       "account_delta_6dec": "-7000000",
+       "balance_after_6dec": "9993000000",
+       "notes_missing": true
+      }
+     ],
+     "move_seq": 0,
+     "nonce": 1,
+     "phase": "block",
+     "route": "legacy",
+     "seq": 1
+    },
+    {
+     "account": "0x4994ea57adee282ca28f276853b65b8473e20a0c",
+     "accounts": [
+      "0x4994ea57adee282ca28f276853b65b8473e20a0c"
+     ],
+     "after": {
+      "collateral_6dec": "9993000000",
+      "in_positions_6dec": "0",
+      "reserved_orders_6dec": "0",
+      "spot_reserved_6dec": "0",
+      "usdc_6dec": "9993000000"
+     },
+     "agents": [],
+     "at_ms": 1800000102000,
+     "before": {
+      "collateral_6dec": "10000000000",
+      "in_positions_6dec": "0",
+      "reserved_orders_6dec": "0",
+      "spot_reserved_6dec": "0",
+      "usdc_6dec": "10000000000"
+     },
+     "cursor": "102.0.2",
+     "delta_6dec": "-7000000",
+     "explained": true,
+     "height": 102,
+     "kind": "balance_change",
+     "phase": "block",
+     "records": [
+      "102.0.1"
+     ],
+     "records_delta_6dec": "-7000000",
+     "seq": 2,
+     "since_cursor": null,
+     "since_height": 101,
+     "system": false,
+     "unexplained_6dec": "0"
+    }
+   ],
+   "expect": [
+    "not checked"
+   ]
+  },
+  {
+   "name": "a named record not read: not checked",
+   "account": "0x4994ea57adee282ca28f276853b65b8473e20a0c",
+   "records": [
+    {
+     "account": "0x4994ea57adee282ca28f276853b65b8473e20a0c",
+     "accounts": [
+      "0x4994ea57adee282ca28f276853b65b8473e20a0c"
+     ],
+     "after": {
+      "collateral_6dec": "9993000000",
+      "in_positions_6dec": "0",
+      "reserved_orders_6dec": "0",
+      "spot_reserved_6dec": "0",
+      "usdc_6dec": "9993000000"
+     },
+     "agents": [],
+     "at_ms": 1800000102000,
+     "before": {
+      "collateral_6dec": "10000000000",
+      "in_positions_6dec": "0",
+      "reserved_orders_6dec": "0",
+      "spot_reserved_6dec": "0",
+      "usdc_6dec": "10000000000"
+     },
+     "cursor": "102.0.2",
+     "delta_6dec": "-7000000",
+     "explained": true,
+     "height": 102,
+     "kind": "balance_change",
+     "phase": "block",
+     "records": [
+      "102.0.1"
+     ],
+     "records_delta_6dec": "-7000000",
+     "seq": 2,
+     "since_cursor": null,
+     "since_height": 101,
+     "system": false,
+     "unexplained_6dec": "0"
+    }
+   ],
+   "expect": [
+    "not checked"
+   ]
+  },
+  {
+   "name": "the record's own records_delta disagrees: different",
+   "account": "0x4994ea57adee282ca28f276853b65b8473e20a0c",
+   "records": [
+    {
+     "account": "0x4994ea57adee282ca28f276853b65b8473e20a0c",
+     "accounts": [
+      "0x4994ea57adee282ca28f276853b65b8473e20a0c"
+     ],
+     "agents": [],
+     "at_ms": 1800000102000,
+     "cursor": "102.0.1",
+     "destination": "0x4994ea57adee282ca28f276853b65b8473e20a0c",
+     "gross_6dec": "7000000",
+     "height": 102,
+     "kind": "withdrawal_requested",
+     "legs": [
+      {
+       "account": "0x4994ea57adee282ca28f276853b65b8473e20a0c",
+       "account_delta_6dec": "-7000000",
+       "balance_after_6dec": "9993000000"
+      }
+     ],
+     "move_seq": 0,
+     "nonce": 1,
+     "phase": "block",
+     "route": "legacy",
+     "seq": 1
+    },
+    {
+     "account": "0x4994ea57adee282ca28f276853b65b8473e20a0c",
+     "accounts": [
+      "0x4994ea57adee282ca28f276853b65b8473e20a0c"
+     ],
+     "after": {
+      "collateral_6dec": "9993000000",
+      "in_positions_6dec": "0",
+      "reserved_orders_6dec": "0",
+      "spot_reserved_6dec": "0",
+      "usdc_6dec": "9993000000"
+     },
+     "agents": [],
+     "at_ms": 1800000102000,
+     "before": {
+      "collateral_6dec": "10000000000",
+      "in_positions_6dec": "0",
+      "reserved_orders_6dec": "0",
+      "spot_reserved_6dec": "0",
+      "usdc_6dec": "10000000000"
+     },
+     "cursor": "102.0.2",
+     "delta_6dec": "-7000000",
+     "explained": true,
+     "height": 102,
+     "kind": "balance_change",
+     "phase": "block",
+     "records": [
+      "102.0.1"
+     ],
+     "records_delta_6dec": "-6999999",
+     "seq": 2,
+     "since_cursor": null,
+     "since_height": 101,
+     "system": false,
+     "unexplained_6dec": "0"
+    }
+   ],
+   "expect": [
+    "different"
+   ]
+  },
+  {
+   "name": "a leg of another account does not count",
+   "account": "0x4994ea57adee282ca28f276853b65b8473e20a0c",
+   "records": [
+    {
+     "account": "0x4994ea57adee282ca28f276853b65b8473e20a0c",
+     "accounts": [
+      "0x4994ea57adee282ca28f276853b65b8473e20a0c"
+     ],
+     "agents": [],
+     "at_ms": 1800000102000,
+     "cursor": "102.0.1",
+     "destination": "0x4994ea57adee282ca28f276853b65b8473e20a0c",
+     "gross_6dec": "7000000",
+     "height": 102,
+     "kind": "withdrawal_requested",
+     "legs": [
+      {
+       "account": "0x4994ea57adee282ca28f276853b65b8473e20a0c",
+       "account_delta_6dec": "-7000000",
+       "balance_after_6dec": "9993000000"
+      },
+      {
+       "account": "0x00000000000000000000000000000000000000aa",
+       "account_delta_6dec": "-123"
+      }
+     ],
+     "move_seq": 0,
+     "nonce": 1,
+     "phase": "block",
+     "route": "legacy",
+     "seq": 1
+    },
+    {
+     "account": "0x4994ea57adee282ca28f276853b65b8473e20a0c",
+     "accounts": [
+      "0x4994ea57adee282ca28f276853b65b8473e20a0c"
+     ],
+     "after": {
+      "collateral_6dec": "9993000000",
+      "in_positions_6dec": "0",
+      "reserved_orders_6dec": "0",
+      "spot_reserved_6dec": "0",
+      "usdc_6dec": "9993000000"
+     },
+     "agents": [],
+     "at_ms": 1800000102000,
+     "before": {
+      "collateral_6dec": "10000000000",
+      "in_positions_6dec": "0",
+      "reserved_orders_6dec": "0",
+      "spot_reserved_6dec": "0",
+      "usdc_6dec": "10000000000"
+     },
+     "cursor": "102.0.2",
+     "delta_6dec": "-7000000",
+     "explained": true,
+     "height": 102,
+     "kind": "balance_change",
+     "phase": "block",
+     "records": [
+      "102.0.1"
+     ],
+     "records_delta_6dec": "-7000000",
+     "seq": 2,
+     "since_cursor": null,
+     "since_height": 101,
+     "system": false,
+     "unexplained_6dec": "0"
+    }
+   ],
+   "expect": [
+    "match"
+   ]
+  },
+  {
+   "name": "a record of a kind outside the money list does not count",
+   "account": "0x4994ea57adee282ca28f276853b65b8473e20a0c",
+   "records": [
+    {
+     "account": "0x4994ea57adee282ca28f276853b65b8473e20a0c",
+     "accounts": [
+      "0x4994ea57adee282ca28f276853b65b8473e20a0c"
+     ],
+     "agents": [],
+     "at_ms": 1800000102000,
+     "cursor": "102.0.1",
+     "destination": "0x4994ea57adee282ca28f276853b65b8473e20a0c",
+     "gross_6dec": "7000000",
+     "height": 102,
+     "kind": "order_placed",
+     "legs": [
+      {
+       "account": "0x4994ea57adee282ca28f276853b65b8473e20a0c",
+       "account_delta_6dec": "-7000000",
+       "balance_after_6dec": "9993000000"
+      }
+     ],
+     "move_seq": 0,
+     "nonce": 1,
+     "phase": "block",
+     "route": "legacy",
+     "seq": 1
+    },
+    {
+     "account": "0x4994ea57adee282ca28f276853b65b8473e20a0c",
+     "accounts": [
+      "0x4994ea57adee282ca28f276853b65b8473e20a0c"
+     ],
+     "after": {
+      "collateral_6dec": "9993000000",
+      "in_positions_6dec": "0",
+      "reserved_orders_6dec": "0",
+      "spot_reserved_6dec": "0",
+      "usdc_6dec": "9993000000"
+     },
+     "agents": [],
+     "at_ms": 1800000102000,
+     "before": {
+      "collateral_6dec": "10000000000",
+      "in_positions_6dec": "0",
+      "reserved_orders_6dec": "0",
+      "spot_reserved_6dec": "0",
+      "usdc_6dec": "10000000000"
+     },
+     "cursor": "102.0.2",
+     "delta_6dec": "-7000000",
+     "explained": true,
+     "height": 102,
+     "kind": "balance_change",
+     "phase": "block",
+     "records": [
+      "102.0.1"
+     ],
+     "records_delta_6dec": "-7000000",
+     "seq": 2,
+     "since_cursor": null,
+     "since_height": 101,
+     "system": false,
+     "unexplained_6dec": "0"
+    }
+   ],
+   "expect": [
+    "not checked"
+   ]
+  },
+  {
+   "name": "two chained steps that add up",
+   "account": "0x4994ea57adee282ca28f276853b65b8473e20a0c",
+   "records": [
+    {
+     "account": "0x4994ea57adee282ca28f276853b65b8473e20a0c",
+     "accounts": [
+      "0x4994ea57adee282ca28f276853b65b8473e20a0c"
+     ],
+     "agents": [],
+     "at_ms": 1800000102000,
+     "cursor": "102.0.1",
+     "destination": "0x4994ea57adee282ca28f276853b65b8473e20a0c",
+     "gross_6dec": "7000000",
+     "height": 102,
+     "kind": "withdrawal_requested",
+     "legs": [
+      {
+       "account": "0x4994ea57adee282ca28f276853b65b8473e20a0c",
+       "account_delta_6dec": "-7000000",
+       "balance_after_6dec": "9993000000"
+      }
+     ],
+     "move_seq": 0,
+     "nonce": 1,
+     "phase": "block",
+     "route": "legacy",
+     "seq": 1
+    },
+    {
+     "account": "0x4994ea57adee282ca28f276853b65b8473e20a0c",
+     "accounts": [
+      "0x4994ea57adee282ca28f276853b65b8473e20a0c"
+     ],
+     "after": {
+      "collateral_6dec": "9993000000",
+      "in_positions_6dec": "0",
+      "reserved_orders_6dec": "0",
+      "spot_reserved_6dec": "0",
+      "usdc_6dec": "9993000000"
+     },
+     "agents": [],
+     "at_ms": 1800000102000,
+     "before": {
+      "collateral_6dec": "10000000000",
+      "in_positions_6dec": "0",
+      "reserved_orders_6dec": "0",
+      "spot_reserved_6dec": "0",
+      "usdc_6dec": "10000000000"
+     },
+     "cursor": "102.0.2",
+     "delta_6dec": "-7000000",
+     "explained": true,
+     "height": 102,
+     "kind": "balance_change",
+     "phase": "block",
+     "records": [
+      "102.0.1"
+     ],
+     "records_delta_6dec": "-7000000",
+     "seq": 2,
+     "since_cursor": null,
+     "since_height": 101,
+     "system": false,
+     "unexplained_6dec": "0"
+    },
+    {
+     "account": "0x4994ea57adee282ca28f276853b65b8473e20a0c",
+     "accounts": [
+      "0x4994ea57adee282ca28f276853b65b8473e20a0c"
+     ],
+     "agents": [],
+     "at_ms": 1800000102000,
+     "cursor": "103.0.1",
+     "destination": "0x4994ea57adee282ca28f276853b65b8473e20a0c",
+     "gross_6dec": "7000000",
+     "height": 103,
+     "kind": "withdrawal_refunded",
+     "legs": [
+      {
+       "account": "0x4994ea57adee282ca28f276853b65b8473e20a0c",
+       "account_delta_6dec": "7000000",
+       "balance_after_6dec": "9993000000"
+      }
+     ],
+     "move_seq": 0,
+     "nonce": 1,
+     "phase": "block",
+     "route": "legacy",
+     "seq": 1
+    },
+    {
+     "account": "0x4994ea57adee282ca28f276853b65b8473e20a0c",
+     "accounts": [
+      "0x4994ea57adee282ca28f276853b65b8473e20a0c"
+     ],
+     "after": {
+      "collateral_6dec": "10000000000",
+      "in_positions_6dec": "0",
+      "reserved_orders_6dec": "0",
+      "spot_reserved_6dec": "0",
+      "usdc_6dec": "10000000000"
+     },
+     "agents": [],
+     "at_ms": 1800000102000,
+     "before": {
+      "collateral_6dec": "9993000000",
+      "in_positions_6dec": "0",
+      "reserved_orders_6dec": "0",
+      "spot_reserved_6dec": "0",
+      "usdc_6dec": "9993000000"
+     },
+     "cursor": "103.0.2",
+     "delta_6dec": "7000000",
+     "explained": true,
+     "height": 103,
+     "kind": "balance_change",
+     "phase": "block",
+     "records": [
+      "103.0.1"
+     ],
+     "records_delta_6dec": "7000000",
+     "seq": 2,
+     "since_cursor": "102.0.2",
+     "since_height": 101,
+     "system": false,
+     "unexplained_6dec": "0"
+    }
+   ],
+   "expect": [
+    "match",
+    "match"
+   ]
+  },
+  {
+   "name": "chain broken: a step that does not start where the previous ended",
+   "account": "0x4994ea57adee282ca28f276853b65b8473e20a0c",
+   "records": [
+    {
+     "account": "0x4994ea57adee282ca28f276853b65b8473e20a0c",
+     "accounts": [
+      "0x4994ea57adee282ca28f276853b65b8473e20a0c"
+     ],
+     "agents": [],
+     "at_ms": 1800000102000,
+     "cursor": "102.0.1",
+     "destination": "0x4994ea57adee282ca28f276853b65b8473e20a0c",
+     "gross_6dec": "7000000",
+     "height": 102,
+     "kind": "withdrawal_requested",
+     "legs": [
+      {
+       "account": "0x4994ea57adee282ca28f276853b65b8473e20a0c",
+       "account_delta_6dec": "-7000000",
+       "balance_after_6dec": "9993000000"
+      }
+     ],
+     "move_seq": 0,
+     "nonce": 1,
+     "phase": "block",
+     "route": "legacy",
+     "seq": 1
+    },
+    {
+     "account": "0x4994ea57adee282ca28f276853b65b8473e20a0c",
+     "accounts": [
+      "0x4994ea57adee282ca28f276853b65b8473e20a0c"
+     ],
+     "after": {
+      "collateral_6dec": "9993000000",
+      "in_positions_6dec": "0",
+      "reserved_orders_6dec": "0",
+      "spot_reserved_6dec": "0",
+      "usdc_6dec": "9993000000"
+     },
+     "agents": [],
+     "at_ms": 1800000102000,
+     "before": {
+      "collateral_6dec": "10000000000",
+      "in_positions_6dec": "0",
+      "reserved_orders_6dec": "0",
+      "spot_reserved_6dec": "0",
+      "usdc_6dec": "10000000000"
+     },
+     "cursor": "102.0.2",
+     "delta_6dec": "-7000000",
+     "explained": true,
+     "height": 102,
+     "kind": "balance_change",
+     "phase": "block",
+     "records": [
+      "102.0.1"
+     ],
+     "records_delta_6dec": "-7000000",
+     "seq": 2,
+     "since_cursor": null,
+     "since_height": 101,
+     "system": false,
+     "unexplained_6dec": "0"
+    },
+    {
+     "account": "0x4994ea57adee282ca28f276853b65b8473e20a0c",
+     "accounts": [
+      "0x4994ea57adee282ca28f276853b65b8473e20a0c"
+     ],
+     "agents": [],
+     "at_ms": 1800000102000,
+     "cursor": "103.0.1",
+     "destination": "0x4994ea57adee282ca28f276853b65b8473e20a0c",
+     "gross_6dec": "7000000",
+     "height": 103,
+     "kind": "withdrawal_refunded",
+     "legs": [
+      {
+       "account": "0x4994ea57adee282ca28f276853b65b8473e20a0c",
+       "account_delta_6dec": "7000000",
+       "balance_after_6dec": "9993000000"
+      }
+     ],
+     "move_seq": 0,
+     "nonce": 1,
+     "phase": "block",
+     "route": "legacy",
+     "seq": 1
+    },
+    {
+     "account": "0x4994ea57adee282ca28f276853b65b8473e20a0c",
+     "accounts": [
+      "0x4994ea57adee282ca28f276853b65b8473e20a0c"
+     ],
+     "after": {
+      "collateral_6dec": "10000000010",
+      "in_positions_6dec": "0",
+      "reserved_orders_6dec": "0",
+      "spot_reserved_6dec": "0",
+      "usdc_6dec": "10000000010"
+     },
+     "agents": [],
+     "at_ms": 1800000102000,
+     "before": {
+      "collateral_6dec": "9993000010",
+      "in_positions_6dec": "0",
+      "reserved_orders_6dec": "0",
+      "spot_reserved_6dec": "0",
+      "usdc_6dec": "9993000010"
+     },
+     "cursor": "103.0.2",
+     "delta_6dec": "7000000",
+     "explained": true,
+     "height": 103,
+     "kind": "balance_change",
+     "phase": "block",
+     "records": [
+      "103.0.1"
+     ],
+     "records_delta_6dec": "7000000",
+     "seq": 2,
+     "since_cursor": "102.0.2",
+     "since_height": 101,
+     "system": false,
+     "unexplained_6dec": "0"
+    }
+   ],
+   "expect": [
+    "match",
+    "different"
+   ]
+  },
+  {
+   "name": "a reset between two steps: the step after it is judged on its own, not against the step before",
+   "account": "0x4994ea57adee282ca28f276853b65b8473e20a0c",
+   "records": [
+    {
+     "account": "0x4994ea57adee282ca28f276853b65b8473e20a0c",
+     "accounts": [
+      "0x4994ea57adee282ca28f276853b65b8473e20a0c"
+     ],
+     "agents": [],
+     "at_ms": 1800000102000,
+     "cursor": "102.0.1",
+     "destination": "0x4994ea57adee282ca28f276853b65b8473e20a0c",
+     "gross_6dec": "7000000",
+     "height": 102,
+     "kind": "withdrawal_requested",
+     "legs": [
+      {
+       "account": "0x4994ea57adee282ca28f276853b65b8473e20a0c",
+       "account_delta_6dec": "-7000000",
+       "balance_after_6dec": "9993000000"
+      }
+     ],
+     "move_seq": 0,
+     "nonce": 1,
+     "phase": "block",
+     "route": "legacy",
+     "seq": 1
+    },
+    {
+     "account": "0x4994ea57adee282ca28f276853b65b8473e20a0c",
+     "accounts": [
+      "0x4994ea57adee282ca28f276853b65b8473e20a0c"
+     ],
+     "after": {
+      "collateral_6dec": "9993000000",
+      "in_positions_6dec": "0",
+      "reserved_orders_6dec": "0",
+      "spot_reserved_6dec": "0",
+      "usdc_6dec": "9993000000"
+     },
+     "agents": [],
+     "at_ms": 1800000102000,
+     "before": {
+      "collateral_6dec": "10000000000",
+      "in_positions_6dec": "0",
+      "reserved_orders_6dec": "0",
+      "spot_reserved_6dec": "0",
+      "usdc_6dec": "10000000000"
+     },
+     "cursor": "102.0.2",
+     "delta_6dec": "-7000000",
+     "explained": true,
+     "height": 102,
+     "kind": "balance_change",
+     "phase": "block",
+     "records": [
+      "102.0.1"
+     ],
+     "records_delta_6dec": "-7000000",
+     "seq": 2,
+     "since_cursor": null,
+     "since_height": 101,
+     "system": false,
+     "unexplained_6dec": "0"
+    },
+    {
+     "kind": "balance_reset",
+     "cursor": "102.5.0",
+     "height": 102
+    },
+    {
+     "account": "0x4994ea57adee282ca28f276853b65b8473e20a0c",
+     "accounts": [
+      "0x4994ea57adee282ca28f276853b65b8473e20a0c"
+     ],
+     "agents": [],
+     "at_ms": 1800000102000,
+     "cursor": "103.0.1",
+     "destination": "0x4994ea57adee282ca28f276853b65b8473e20a0c",
+     "gross_6dec": "7000000",
+     "height": 103,
+     "kind": "withdrawal_refunded",
+     "legs": [
+      {
+       "account": "0x4994ea57adee282ca28f276853b65b8473e20a0c",
+       "account_delta_6dec": "7000000",
+       "balance_after_6dec": "9993000000"
+      }
+     ],
+     "move_seq": 0,
+     "nonce": 1,
+     "phase": "block",
+     "route": "legacy",
+     "seq": 1
+    },
+    {
+     "account": "0x4994ea57adee282ca28f276853b65b8473e20a0c",
+     "accounts": [
+      "0x4994ea57adee282ca28f276853b65b8473e20a0c"
+     ],
+     "after": {
+      "collateral_6dec": "10000000010",
+      "in_positions_6dec": "0",
+      "reserved_orders_6dec": "0",
+      "spot_reserved_6dec": "0",
+      "usdc_6dec": "10000000010"
+     },
+     "agents": [],
+     "at_ms": 1800000102000,
+     "before": {
+      "collateral_6dec": "9993000010",
+      "in_positions_6dec": "0",
+      "reserved_orders_6dec": "0",
+      "spot_reserved_6dec": "0",
+      "usdc_6dec": "9993000010"
+     },
+     "cursor": "103.0.2",
+     "delta_6dec": "7000000",
+     "explained": true,
+     "height": 103,
+     "kind": "balance_change",
+     "phase": "block",
+     "records": [
+      "103.0.1"
+     ],
+     "records_delta_6dec": "7000000",
+     "seq": 2,
+     "since_cursor": "102.0.2",
+     "since_height": 101,
+     "system": false,
+     "unexplained_6dec": "0"
+    }
+   ],
+   "expect": [
+    "match",
+    "match"
+   ]
+  },
+  {
+   "name": "a new chain (no since_cursor) after a step: not checked, never a match",
+   "account": "0x4994ea57adee282ca28f276853b65b8473e20a0c",
+   "records": [
+    {
+     "account": "0x4994ea57adee282ca28f276853b65b8473e20a0c",
+     "accounts": [
+      "0x4994ea57adee282ca28f276853b65b8473e20a0c"
+     ],
+     "agents": [],
+     "at_ms": 1800000102000,
+     "cursor": "102.0.1",
+     "destination": "0x4994ea57adee282ca28f276853b65b8473e20a0c",
+     "gross_6dec": "7000000",
+     "height": 102,
+     "kind": "withdrawal_requested",
+     "legs": [
+      {
+       "account": "0x4994ea57adee282ca28f276853b65b8473e20a0c",
+       "account_delta_6dec": "-7000000",
+       "balance_after_6dec": "9993000000"
+      }
+     ],
+     "move_seq": 0,
+     "nonce": 1,
+     "phase": "block",
+     "route": "legacy",
+     "seq": 1
+    },
+    {
+     "account": "0x4994ea57adee282ca28f276853b65b8473e20a0c",
+     "accounts": [
+      "0x4994ea57adee282ca28f276853b65b8473e20a0c"
+     ],
+     "after": {
+      "collateral_6dec": "9993000000",
+      "in_positions_6dec": "0",
+      "reserved_orders_6dec": "0",
+      "spot_reserved_6dec": "0",
+      "usdc_6dec": "9993000000"
+     },
+     "agents": [],
+     "at_ms": 1800000102000,
+     "before": {
+      "collateral_6dec": "10000000000",
+      "in_positions_6dec": "0",
+      "reserved_orders_6dec": "0",
+      "spot_reserved_6dec": "0",
+      "usdc_6dec": "10000000000"
+     },
+     "cursor": "102.0.2",
+     "delta_6dec": "-7000000",
+     "explained": true,
+     "height": 102,
+     "kind": "balance_change",
+     "phase": "block",
+     "records": [
+      "102.0.1"
+     ],
+     "records_delta_6dec": "-7000000",
+     "seq": 2,
+     "since_cursor": null,
+     "since_height": 101,
+     "system": false,
+     "unexplained_6dec": "0"
+    },
+    {
+     "account": "0x4994ea57adee282ca28f276853b65b8473e20a0c",
+     "accounts": [
+      "0x4994ea57adee282ca28f276853b65b8473e20a0c"
+     ],
+     "agents": [],
+     "at_ms": 1800000102000,
+     "cursor": "103.0.1",
+     "destination": "0x4994ea57adee282ca28f276853b65b8473e20a0c",
+     "gross_6dec": "7000000",
+     "height": 103,
+     "kind": "withdrawal_refunded",
+     "legs": [
+      {
+       "account": "0x4994ea57adee282ca28f276853b65b8473e20a0c",
+       "account_delta_6dec": "7000000",
+       "balance_after_6dec": "9993000000"
+      }
+     ],
+     "move_seq": 0,
+     "nonce": 1,
+     "phase": "block",
+     "route": "legacy",
+     "seq": 1
+    },
+    {
+     "account": "0x4994ea57adee282ca28f276853b65b8473e20a0c",
+     "accounts": [
+      "0x4994ea57adee282ca28f276853b65b8473e20a0c"
+     ],
+     "after": {
+      "collateral_6dec": "10005000000",
+      "in_positions_6dec": "0",
+      "reserved_orders_6dec": "0",
+      "spot_reserved_6dec": "0",
+      "usdc_6dec": "10005000000"
+     },
+     "agents": [],
+     "at_ms": 1800000102000,
+     "before": {
+      "collateral_6dec": "9998000000",
+      "in_positions_6dec": "0",
+      "reserved_orders_6dec": "0",
+      "spot_reserved_6dec": "0",
+      "usdc_6dec": "9998000000"
+     },
+     "cursor": "103.0.2",
+     "delta_6dec": "7000000",
+     "explained": true,
+     "height": 103,
+     "kind": "balance_change",
+     "phase": "block",
+     "records": [
+      "103.0.1"
+     ],
+     "records_delta_6dec": "7000000",
+     "seq": 2,
+     "since_cursor": null,
+     "since_height": 101,
+     "system": false,
+     "unexplained_6dec": "0"
+    }
+   ],
+   "expect": [
+    "match",
+    "not checked"
+   ]
+  },
+  {
+   "name": "since_cursor names a step that is not the previous one: different",
+   "account": "0x4994ea57adee282ca28f276853b65b8473e20a0c",
+   "records": [
+    {
+     "account": "0x4994ea57adee282ca28f276853b65b8473e20a0c",
+     "accounts": [
+      "0x4994ea57adee282ca28f276853b65b8473e20a0c"
+     ],
+     "agents": [],
+     "at_ms": 1800000102000,
+     "cursor": "102.0.1",
+     "destination": "0x4994ea57adee282ca28f276853b65b8473e20a0c",
+     "gross_6dec": "7000000",
+     "height": 102,
+     "kind": "withdrawal_requested",
+     "legs": [
+      {
+       "account": "0x4994ea57adee282ca28f276853b65b8473e20a0c",
+       "account_delta_6dec": "-7000000",
+       "balance_after_6dec": "9993000000"
+      }
+     ],
+     "move_seq": 0,
+     "nonce": 1,
+     "phase": "block",
+     "route": "legacy",
+     "seq": 1
+    },
+    {
+     "account": "0x4994ea57adee282ca28f276853b65b8473e20a0c",
+     "accounts": [
+      "0x4994ea57adee282ca28f276853b65b8473e20a0c"
+     ],
+     "after": {
+      "collateral_6dec": "9993000000",
+      "in_positions_6dec": "0",
+      "reserved_orders_6dec": "0",
+      "spot_reserved_6dec": "0",
+      "usdc_6dec": "9993000000"
+     },
+     "agents": [],
+     "at_ms": 1800000102000,
+     "before": {
+      "collateral_6dec": "10000000000",
+      "in_positions_6dec": "0",
+      "reserved_orders_6dec": "0",
+      "spot_reserved_6dec": "0",
+      "usdc_6dec": "10000000000"
+     },
+     "cursor": "102.0.2",
+     "delta_6dec": "-7000000",
+     "explained": true,
+     "height": 102,
+     "kind": "balance_change",
+     "phase": "block",
+     "records": [
+      "102.0.1"
+     ],
+     "records_delta_6dec": "-7000000",
+     "seq": 2,
+     "since_cursor": null,
+     "since_height": 101,
+     "system": false,
+     "unexplained_6dec": "0"
+    },
+    {
+     "account": "0x4994ea57adee282ca28f276853b65b8473e20a0c",
+     "accounts": [
+      "0x4994ea57adee282ca28f276853b65b8473e20a0c"
+     ],
+     "agents": [],
+     "at_ms": 1800000102000,
+     "cursor": "103.0.1",
+     "destination": "0x4994ea57adee282ca28f276853b65b8473e20a0c",
+     "gross_6dec": "7000000",
+     "height": 103,
+     "kind": "withdrawal_refunded",
+     "legs": [
+      {
+       "account": "0x4994ea57adee282ca28f276853b65b8473e20a0c",
+       "account_delta_6dec": "7000000",
+       "balance_after_6dec": "9993000000"
+      }
+     ],
+     "move_seq": 0,
+     "nonce": 1,
+     "phase": "block",
+     "route": "legacy",
+     "seq": 1
+    },
+    {
+     "account": "0x4994ea57adee282ca28f276853b65b8473e20a0c",
+     "accounts": [
+      "0x4994ea57adee282ca28f276853b65b8473e20a0c"
+     ],
+     "after": {
+      "collateral_6dec": "10005000000",
+      "in_positions_6dec": "0",
+      "reserved_orders_6dec": "0",
+      "spot_reserved_6dec": "0",
+      "usdc_6dec": "10005000000"
+     },
+     "agents": [],
+     "at_ms": 1800000102000,
+     "before": {
+      "collateral_6dec": "9998000000",
+      "in_positions_6dec": "0",
+      "reserved_orders_6dec": "0",
+      "spot_reserved_6dec": "0",
+      "usdc_6dec": "9998000000"
+     },
+     "cursor": "103.0.2",
+     "delta_6dec": "7000000",
+     "explained": true,
+     "height": 103,
+     "kind": "balance_change",
+     "phase": "block",
+     "records": [
+      "103.0.1"
+     ],
+     "records_delta_6dec": "7000000",
+     "seq": 2,
+     "since_cursor": "102.7.7",
+     "since_height": 101,
+     "system": false,
+     "unexplained_6dec": "0"
+    }
+   ],
+   "expect": [
+    "match",
+    "different"
+   ]
+  },
+  {
+   "name": "two different records on one cursor it names: not checked",
+   "account": "0x4994ea57adee282ca28f276853b65b8473e20a0c",
+   "records": [
+    {
+     "account": "0x4994ea57adee282ca28f276853b65b8473e20a0c",
+     "accounts": [
+      "0x4994ea57adee282ca28f276853b65b8473e20a0c"
+     ],
+     "agents": [],
+     "at_ms": 1800000102000,
+     "cursor": "102.0.1",
+     "destination": "0x4994ea57adee282ca28f276853b65b8473e20a0c",
+     "gross_6dec": "7000000",
+     "height": 102,
+     "kind": "withdrawal_requested",
+     "legs": [
+      {
+       "account": "0x4994ea57adee282ca28f276853b65b8473e20a0c",
+       "account_delta_6dec": "-7000000",
+       "balance_after_6dec": "9993000000"
+      }
+     ],
+     "move_seq": 0,
+     "nonce": 1,
+     "phase": "block",
+     "route": "legacy",
+     "seq": 1
+    },
+    {
+     "account": "0x4994ea57adee282ca28f276853b65b8473e20a0c",
+     "accounts": [
+      "0x4994ea57adee282ca28f276853b65b8473e20a0c"
+     ],
+     "after": {
+      "collateral_6dec": "9993000000",
+      "in_positions_6dec": "0",
+      "reserved_orders_6dec": "0",
+      "spot_reserved_6dec": "0",
+      "usdc_6dec": "9993000000"
+     },
+     "agents": [],
+     "at_ms": 1800000102000,
+     "before": {
+      "collateral_6dec": "10000000000",
+      "in_positions_6dec": "0",
+      "reserved_orders_6dec": "0",
+      "spot_reserved_6dec": "0",
+      "usdc_6dec": "10000000000"
+     },
+     "cursor": "102.0.2",
+     "delta_6dec": "-7000000",
+     "explained": true,
+     "height": 102,
+     "kind": "balance_change",
+     "phase": "block",
+     "records": [
+      "102.0.1"
+     ],
+     "records_delta_6dec": "-7000000",
+     "seq": 2,
+     "since_cursor": null,
+     "since_height": 101,
+     "system": false,
+     "unexplained_6dec": "0"
+    },
+    {
+     "account": "0x4994ea57adee282ca28f276853b65b8473e20a0c",
+     "accounts": [
+      "0x4994ea57adee282ca28f276853b65b8473e20a0c"
+     ],
+     "agents": [],
+     "at_ms": 1800000102000,
+     "cursor": "103.0.1",
+     "destination": "0x4994ea57adee282ca28f276853b65b8473e20a0c",
+     "gross_6dec": "7000000",
+     "height": 103,
+     "kind": "withdrawal_refunded",
+     "legs": [
+      {
+       "account": "0x4994ea57adee282ca28f276853b65b8473e20a0c",
+       "account_delta_6dec": "7000000",
+       "balance_after_6dec": "9993000000"
+      }
+     ],
+     "move_seq": 0,
+     "nonce": 1,
+     "phase": "block",
+     "route": "legacy",
+     "seq": 1
+    },
+    {
+     "account": "0x4994ea57adee282ca28f276853b65b8473e20a0c",
+     "accounts": [
+      "0x4994ea57adee282ca28f276853b65b8473e20a0c"
+     ],
+     "after": {
+      "collateral_6dec": "10000000000",
+      "in_positions_6dec": "0",
+      "reserved_orders_6dec": "0",
+      "spot_reserved_6dec": "0",
+      "usdc_6dec": "10000000000"
+     },
+     "agents": [],
+     "at_ms": 1800000102000,
+     "before": {
+      "collateral_6dec": "9993000000",
+      "in_positions_6dec": "0",
+      "reserved_orders_6dec": "0",
+      "spot_reserved_6dec": "0",
+      "usdc_6dec": "9993000000"
+     },
+     "cursor": "103.0.2",
+     "delta_6dec": "7000000",
+     "explained": true,
+     "height": 103,
+     "kind": "balance_change",
+     "phase": "block",
+     "records": [
+      "103.0.1"
+     ],
+     "records_delta_6dec": "7000000",
+     "seq": 2,
+     "since_cursor": "102.0.2",
+     "since_height": 101,
+     "system": false,
+     "unexplained_6dec": "0"
+    },
+    {
+     "account": "0x4994ea57adee282ca28f276853b65b8473e20a0c",
+     "accounts": [
+      "0x4994ea57adee282ca28f276853b65b8473e20a0c"
+     ],
+     "agents": [],
+     "at_ms": 1800000102000,
+     "cursor": "103.0.1",
+     "destination": "0x4994ea57adee282ca28f276853b65b8473e20a0c",
+     "gross_6dec": "7000000",
+     "height": 103,
+     "kind": "fee_credit",
+     "legs": [
+      {
+       "account": "0x4994ea57adee282ca28f276853b65b8473e20a0c",
+       "account_delta_6dec": "7000000",
+       "balance_after_6dec": "9993000000"
+      }
+     ],
+     "move_seq": 0,
+     "nonce": 1,
+     "phase": "block",
+     "route": "legacy",
+     "seq": 1
+    }
+   ],
+   "expect": [
+    "match",
+    "not checked"
+   ]
+  },
+  {
+   "name": "a different record sharing a step's own cursor does not hide it",
+   "account": "0x4994ea57adee282ca28f276853b65b8473e20a0c",
+   "records": [
+    {
+     "account": "0x4994ea57adee282ca28f276853b65b8473e20a0c",
+     "accounts": [
+      "0x4994ea57adee282ca28f276853b65b8473e20a0c"
+     ],
+     "agents": [],
+     "at_ms": 1800000102000,
+     "cursor": "102.0.1",
+     "destination": "0x4994ea57adee282ca28f276853b65b8473e20a0c",
+     "gross_6dec": "7000000",
+     "height": 102,
+     "kind": "withdrawal_requested",
+     "legs": [
+      {
+       "account": "0x4994ea57adee282ca28f276853b65b8473e20a0c",
+       "account_delta_6dec": "-7000000",
+       "balance_after_6dec": "9993000000"
+      }
+     ],
+     "move_seq": 0,
+     "nonce": 1,
+     "phase": "block",
+     "route": "legacy",
+     "seq": 1
+    },
+    {
+     "account": "0x4994ea57adee282ca28f276853b65b8473e20a0c",
+     "accounts": [
+      "0x4994ea57adee282ca28f276853b65b8473e20a0c"
+     ],
+     "after": {
+      "collateral_6dec": "1",
+      "in_positions_6dec": "0",
+      "reserved_orders_6dec": "0",
+      "spot_reserved_6dec": "0",
+      "usdc_6dec": "1"
+     },
+     "agents": [],
+     "at_ms": 1800000102000,
+     "before": {
+      "collateral_6dec": "10000000000",
+      "in_positions_6dec": "0",
+      "reserved_orders_6dec": "0",
+      "spot_reserved_6dec": "0",
+      "usdc_6dec": "10000000000"
+     },
+     "cursor": "102.0.2",
+     "delta_6dec": "-7000000",
+     "explained": true,
+     "height": 102,
+     "kind": "balance_change",
+     "phase": "block",
+     "records": [
+      "102.0.1"
+     ],
+     "records_delta_6dec": "-7000000",
+     "seq": 2,
+     "since_cursor": null,
+     "since_height": 101,
+     "system": false,
+     "unexplained_6dec": "0"
+    },
+    {
+     "account": "0x4994ea57adee282ca28f276853b65b8473e20a0c",
+     "accounts": [
+      "0x4994ea57adee282ca28f276853b65b8473e20a0c"
+     ],
+     "agents": [],
+     "at_ms": 1800000102000,
+     "cursor": "103.0.1",
+     "destination": "0x4994ea57adee282ca28f276853b65b8473e20a0c",
+     "gross_6dec": "7000000",
+     "height": 103,
+     "kind": "withdrawal_refunded",
+     "legs": [
+      {
+       "account": "0x4994ea57adee282ca28f276853b65b8473e20a0c",
+       "account_delta_6dec": "7000000",
+       "balance_after_6dec": "9993000000"
+      }
+     ],
+     "move_seq": 0,
+     "nonce": 1,
+     "phase": "block",
+     "route": "legacy",
+     "seq": 1
+    },
+    {
+     "account": "0x4994ea57adee282ca28f276853b65b8473e20a0c",
+     "accounts": [
+      "0x4994ea57adee282ca28f276853b65b8473e20a0c"
+     ],
+     "after": {
+      "collateral_6dec": "10000000000",
+      "in_positions_6dec": "0",
+      "reserved_orders_6dec": "0",
+      "spot_reserved_6dec": "0",
+      "usdc_6dec": "10000000000"
+     },
+     "agents": [],
+     "at_ms": 1800000102000,
+     "before": {
+      "collateral_6dec": "9993000000",
+      "in_positions_6dec": "0",
+      "reserved_orders_6dec": "0",
+      "spot_reserved_6dec": "0",
+      "usdc_6dec": "9993000000"
+     },
+     "cursor": "103.0.2",
+     "delta_6dec": "7000000",
+     "explained": true,
+     "height": 103,
+     "kind": "balance_change",
+     "phase": "block",
+     "records": [
+      "103.0.1"
+     ],
+     "records_delta_6dec": "7000000",
+     "seq": 2,
+     "since_cursor": "102.0.2",
+     "since_height": 101,
+     "system": false,
+     "unexplained_6dec": "0"
+    },
+    {
+     "cursor": "102.0.2",
+     "kind": "fee_credit",
+     "legs": []
+    }
+   ],
+   "expect": [
+    "different",
+    "different"
+   ]
+  },
+  {
+   "name": "a record named twice: not checked",
+   "account": "0x4994ea57adee282ca28f276853b65b8473e20a0c",
+   "records": [
+    {
+     "account": "0x4994ea57adee282ca28f276853b65b8473e20a0c",
+     "accounts": [
+      "0x4994ea57adee282ca28f276853b65b8473e20a0c"
+     ],
+     "agents": [],
+     "at_ms": 1800000102000,
+     "cursor": "102.0.1",
+     "destination": "0x4994ea57adee282ca28f276853b65b8473e20a0c",
+     "gross_6dec": "7000000",
+     "height": 102,
+     "kind": "withdrawal_requested",
+     "legs": [
+      {
+       "account": "0x4994ea57adee282ca28f276853b65b8473e20a0c",
+       "account_delta_6dec": "-7000000",
+       "balance_after_6dec": "9993000000"
+      }
+     ],
+     "move_seq": 0,
+     "nonce": 1,
+     "phase": "block",
+     "route": "legacy",
+     "seq": 1
+    },
+    {
+     "account": "0x4994ea57adee282ca28f276853b65b8473e20a0c",
+     "accounts": [
+      "0x4994ea57adee282ca28f276853b65b8473e20a0c"
+     ],
+     "after": {
+      "collateral_6dec": "9993000000",
+      "in_positions_6dec": "0",
+      "reserved_orders_6dec": "0",
+      "spot_reserved_6dec": "0",
+      "usdc_6dec": "9993000000"
+     },
+     "agents": [],
+     "at_ms": 1800000102000,
+     "before": {
+      "collateral_6dec": "10000000000",
+      "in_positions_6dec": "0",
+      "reserved_orders_6dec": "0",
+      "spot_reserved_6dec": "0",
+      "usdc_6dec": "10000000000"
+     },
+     "cursor": "102.0.2",
+     "delta_6dec": "-7000000",
+     "explained": true,
+     "height": 102,
+     "kind": "balance_change",
+     "phase": "block",
+     "records": [
+      "102.0.1",
+      "102.0.1"
+     ],
+     "records_delta_6dec": "-7000000",
+     "seq": 2,
+     "since_cursor": null,
+     "since_height": 101,
+     "system": false,
+     "unexplained_6dec": "0"
+    },
+    {
+     "account": "0x4994ea57adee282ca28f276853b65b8473e20a0c",
+     "accounts": [
+      "0x4994ea57adee282ca28f276853b65b8473e20a0c"
+     ],
+     "agents": [],
+     "at_ms": 1800000102000,
+     "cursor": "103.0.1",
+     "destination": "0x4994ea57adee282ca28f276853b65b8473e20a0c",
+     "gross_6dec": "7000000",
+     "height": 103,
+     "kind": "withdrawal_refunded",
+     "legs": [
+      {
+       "account": "0x4994ea57adee282ca28f276853b65b8473e20a0c",
+       "account_delta_6dec": "7000000",
+       "balance_after_6dec": "9993000000"
+      }
+     ],
+     "move_seq": 0,
+     "nonce": 1,
+     "phase": "block",
+     "route": "legacy",
+     "seq": 1
+    },
+    {
+     "account": "0x4994ea57adee282ca28f276853b65b8473e20a0c",
+     "accounts": [
+      "0x4994ea57adee282ca28f276853b65b8473e20a0c"
+     ],
+     "after": {
+      "collateral_6dec": "10000000000",
+      "in_positions_6dec": "0",
+      "reserved_orders_6dec": "0",
+      "spot_reserved_6dec": "0",
+      "usdc_6dec": "10000000000"
+     },
+     "agents": [],
+     "at_ms": 1800000102000,
+     "before": {
+      "collateral_6dec": "9993000000",
+      "in_positions_6dec": "0",
+      "reserved_orders_6dec": "0",
+      "spot_reserved_6dec": "0",
+      "usdc_6dec": "9993000000"
+     },
+     "cursor": "103.0.2",
+     "delta_6dec": "7000000",
+     "explained": true,
+     "height": 103,
+     "kind": "balance_change",
+     "phase": "block",
+     "records": [
+      "103.0.1"
+     ],
+     "records_delta_6dec": "7000000",
+     "seq": 2,
+     "since_cursor": "102.0.2",
+     "since_height": 101,
+     "system": false,
+     "unexplained_6dec": "0"
+    }
+   ],
+   "expect": [
+    "not checked",
+    "match"
+   ]
+  },
+  {
+   "name": "unexplained_6dec not a number: different",
+   "account": "0x4994ea57adee282ca28f276853b65b8473e20a0c",
+   "records": [
+    {
+     "account": "0x4994ea57adee282ca28f276853b65b8473e20a0c",
+     "accounts": [
+      "0x4994ea57adee282ca28f276853b65b8473e20a0c"
+     ],
+     "agents": [],
+     "at_ms": 1800000102000,
+     "cursor": "102.0.1",
+     "destination": "0x4994ea57adee282ca28f276853b65b8473e20a0c",
+     "gross_6dec": "7000000",
+     "height": 102,
+     "kind": "withdrawal_requested",
+     "legs": [
+      {
+       "account": "0x4994ea57adee282ca28f276853b65b8473e20a0c",
+       "account_delta_6dec": "-7000000",
+       "balance_after_6dec": "9993000000"
+      }
+     ],
+     "move_seq": 0,
+     "nonce": 1,
+     "phase": "block",
+     "route": "legacy",
+     "seq": 1
+    },
+    {
+     "account": "0x4994ea57adee282ca28f276853b65b8473e20a0c",
+     "accounts": [
+      "0x4994ea57adee282ca28f276853b65b8473e20a0c"
+     ],
+     "after": {
+      "collateral_6dec": "9993000000",
+      "in_positions_6dec": "0",
+      "reserved_orders_6dec": "0",
+      "spot_reserved_6dec": "0",
+      "usdc_6dec": "9993000000"
+     },
+     "agents": [],
+     "at_ms": 1800000102000,
+     "before": {
+      "collateral_6dec": "10000000000",
+      "in_positions_6dec": "0",
+      "reserved_orders_6dec": "0",
+      "spot_reserved_6dec": "0",
+      "usdc_6dec": "10000000000"
+     },
+     "cursor": "102.0.2",
+     "delta_6dec": "-7000000",
+     "explained": true,
+     "height": 102,
+     "kind": "balance_change",
+     "phase": "block",
+     "records": [
+      "102.0.1"
+     ],
+     "records_delta_6dec": "-7000000",
+     "seq": 2,
+     "since_cursor": null,
+     "since_height": 101,
+     "system": false,
+     "unexplained_6dec": "0"
+    },
+    {
+     "account": "0x4994ea57adee282ca28f276853b65b8473e20a0c",
+     "accounts": [
+      "0x4994ea57adee282ca28f276853b65b8473e20a0c"
+     ],
+     "agents": [],
+     "at_ms": 1800000102000,
+     "cursor": "103.0.1",
+     "destination": "0x4994ea57adee282ca28f276853b65b8473e20a0c",
+     "gross_6dec": "7000000",
+     "height": 103,
+     "kind": "withdrawal_refunded",
+     "legs": [
+      {
+       "account": "0x4994ea57adee282ca28f276853b65b8473e20a0c",
+       "account_delta_6dec": "7000000",
+       "balance_after_6dec": "9993000000"
+      }
+     ],
+     "move_seq": 0,
+     "nonce": 1,
+     "phase": "block",
+     "route": "legacy",
+     "seq": 1
+    },
+    {
+     "account": "0x4994ea57adee282ca28f276853b65b8473e20a0c",
+     "accounts": [
+      "0x4994ea57adee282ca28f276853b65b8473e20a0c"
+     ],
+     "after": {
+      "collateral_6dec": "10000000000",
+      "in_positions_6dec": "0",
+      "reserved_orders_6dec": "0",
+      "spot_reserved_6dec": "0",
+      "usdc_6dec": "10000000000"
+     },
+     "agents": [],
+     "at_ms": 1800000102000,
+     "before": {
+      "collateral_6dec": "9993000000",
+      "in_positions_6dec": "0",
+      "reserved_orders_6dec": "0",
+      "spot_reserved_6dec": "0",
+      "usdc_6dec": "9993000000"
+     },
+     "cursor": "103.0.2",
+     "delta_6dec": "7000000",
+     "explained": true,
+     "height": 103,
+     "kind": "balance_change",
+     "phase": "block",
+     "records": [
+      "103.0.1"
+     ],
+     "records_delta_6dec": "7000000",
+     "seq": 2,
+     "since_cursor": "102.0.2",
+     "since_height": 101,
+     "system": false,
+     "unexplained_6dec": "1.5"
+    }
+   ],
+   "expect": [
+    "match",
+    "different"
+   ]
+  },
+  {
+   "name": "a fill whose taker part was not measured: not checked, never read as zero",
+   "account": "0x5341131cbd1fb25613edca6680e7d04cb6b9e72f",
+   "records": [
+    {
+     "accounts": [
+      "0x5341131cbd1fb25613edca6680e7d04cb6b9e72f"
+     ],
+     "agents": [],
+     "at_ms": 1800000102000,
+     "cursor": "102.0.1",
+     "fee": {
+      "maker_fee_basis": "maker_fee_cbps is the rate for a maker without a market-maker tier; a tier's rate shows in the maker leg's fee_paid_6dec / rebate_6dec",
+      "maker_fee_bps": 0,
+      "maker_fee_cbps": 0,
+      "note": "fee_paid_6dec is what the fill recorded; a referral discount can make it lower than the list rate",
+      "pair_config_applied": false,
+      "source": "compiled_default",
+      "taker_fee_bps": 3,
+      "taker_fee_cbps": 300
+     },
+     "fill_id": 1,
+     "height": 102,
+     "is_close": false,
+     "kind": "fill",
+     "maker": {
+      "account": null,
+      "counterparty": "vlp_pool",
+      "fee_paid_6dec": "0",
+      "realized_pnl_6dec": null,
+      "rebate_6dec": "0",
+      "role": "maker"
+     },
+     "market": "perp",
+     "order_type": 1,
+     "pair_id": 1,
+     "phase": "block",
+     "price_8dec": 3000000000,
+     "seq": 1,
+     "size_18dec": "10000000000000000000",
+     "taker": {
+      "account": "0x5341131cbd1fb25613edca6680e7d04cb6b9e72f",
+      "agent": null,
+      "balance_after_6dec": "9999910000",
+      "fee_paid_6dec": "90000",
+      "order_attribution": "none: no resting order of this account lost this size in the step",
+      "order_id": null,
+      "realized_pnl_6dec": "0",
+      "role": "taker",
+      "signed_with": "wallet",
+      "notes_missing": true
+     },
+     "taker_side": "buy",
+     "timestamp_secs": 1800000000
+    },
+    {
+     "kind": "balance_change",
+     "account": "0x5341131cbd1fb25613edca6680e7d04cb6b9e72f",
+     "cursor": "102.0.9",
+     "height": 102,
+     "before": {
+      "collateral_6dec": "100",
+      "usdc_6dec": "100",
+      "reserved_orders_6dec": "0",
+      "in_positions_6dec": "0",
+      "spot_reserved_6dec": "0"
+     },
+     "after": {
+      "collateral_6dec": "100",
+      "usdc_6dec": "100",
+      "reserved_orders_6dec": "0",
+      "in_positions_6dec": "0",
+      "spot_reserved_6dec": "0"
+     },
+     "records": [
+      "102.0.1"
+     ],
+     "delta_6dec": "0",
+     "records_delta_6dec": "0",
+     "unexplained_6dec": "0",
+     "explained": true,
+     "system": false,
+     "since_cursor": null
+    }
+   ],
+   "expect": [
+    "not checked"
+   ]
+  },
+  {
+   "name": "a fill whose taker part has no amount: different, never read as zero",
+   "account": "0x5341131cbd1fb25613edca6680e7d04cb6b9e72f",
+   "records": [
+    {
+     "accounts": [
+      "0x5341131cbd1fb25613edca6680e7d04cb6b9e72f"
+     ],
+     "agents": [],
+     "at_ms": 1800000102000,
+     "cursor": "102.0.1",
+     "fee": {
+      "maker_fee_basis": "maker_fee_cbps is the rate for a maker without a market-maker tier; a tier's rate shows in the maker leg's fee_paid_6dec / rebate_6dec",
+      "maker_fee_bps": 0,
+      "maker_fee_cbps": 0,
+      "note": "fee_paid_6dec is what the fill recorded; a referral discount can make it lower than the list rate",
+      "pair_config_applied": false,
+      "source": "compiled_default",
+      "taker_fee_bps": 3,
+      "taker_fee_cbps": 300
+     },
+     "fill_id": 1,
+     "height": 102,
+     "is_close": false,
+     "kind": "fill",
+     "maker": {
+      "account": null,
+      "counterparty": "vlp_pool",
+      "fee_paid_6dec": "0",
+      "realized_pnl_6dec": null,
+      "rebate_6dec": "0",
+      "role": "maker"
+     },
+     "market": "perp",
+     "order_type": 1,
+     "pair_id": 1,
+     "phase": "block",
+     "price_8dec": 3000000000,
+     "seq": 1,
+     "size_18dec": "10000000000000000000",
+     "taker": {
+      "account": "0x5341131cbd1fb25613edca6680e7d04cb6b9e72f",
+      "agent": null,
+      "balance_after_6dec": "9999910000",
+      "fee_paid_6dec": "90000",
+      "order_attribution": "none: no resting order of this account lost this size in the step",
+      "order_id": null,
+      "realized_pnl_6dec": "0",
+      "role": "taker",
+      "signed_with": "wallet"
+     },
+     "taker_side": "buy",
+     "timestamp_secs": 1800000000
+    },
+    {
+     "kind": "balance_change",
+     "account": "0x5341131cbd1fb25613edca6680e7d04cb6b9e72f",
+     "cursor": "102.0.9",
+     "height": 102,
+     "before": {
+      "collateral_6dec": "100",
+      "usdc_6dec": "100",
+      "reserved_orders_6dec": "0",
+      "in_positions_6dec": "0",
+      "spot_reserved_6dec": "0"
+     },
+     "after": {
+      "collateral_6dec": "100",
+      "usdc_6dec": "100",
+      "reserved_orders_6dec": "0",
+      "in_positions_6dec": "0",
+      "spot_reserved_6dec": "0"
+     },
+     "records": [
+      "102.0.1"
+     ],
+     "delta_6dec": "0",
+     "records_delta_6dec": "0",
+     "unexplained_6dec": "0",
+     "explained": true,
+     "system": false,
+     "since_cursor": null
+    }
+   ],
+   "expect": [
+    "different"
+   ]
+  },
+  {
+   "name": "one micro-USDC off with no totals on the record: the sum alone says different",
+   "account": "0x4994ea57adee282ca28f276853b65b8473e20a0c",
+   "records": [
+    {
+     "account": "0x4994ea57adee282ca28f276853b65b8473e20a0c",
+     "accounts": [
+      "0x4994ea57adee282ca28f276853b65b8473e20a0c"
+     ],
+     "agents": [],
+     "at_ms": 1800000102000,
+     "cursor": "102.0.1",
+     "destination": "0x4994ea57adee282ca28f276853b65b8473e20a0c",
+     "gross_6dec": "7000000",
+     "height": 102,
+     "kind": "withdrawal_requested",
+     "legs": [
+      {
+       "account": "0x4994ea57adee282ca28f276853b65b8473e20a0c",
+       "account_delta_6dec": "-7000000",
+       "balance_after_6dec": "9993000000"
+      }
+     ],
+     "move_seq": 0,
+     "nonce": 1,
+     "phase": "block",
+     "route": "legacy",
+     "seq": 1
+    },
+    {
+     "account": "0x4994ea57adee282ca28f276853b65b8473e20a0c",
+     "accounts": [
+      "0x4994ea57adee282ca28f276853b65b8473e20a0c"
+     ],
+     "after": {
+      "collateral_6dec": "9993000001",
+      "in_positions_6dec": "0",
+      "reserved_orders_6dec": "0",
+      "spot_reserved_6dec": "0",
+      "usdc_6dec": "9993000001"
+     },
+     "agents": [],
+     "at_ms": 1800000102000,
+     "before": {
+      "collateral_6dec": "10000000000",
+      "in_positions_6dec": "0",
+      "reserved_orders_6dec": "0",
+      "spot_reserved_6dec": "0",
+      "usdc_6dec": "10000000000"
+     },
+     "cursor": "102.0.2",
+     "delta_6dec": null,
+     "explained": true,
+     "height": 102,
+     "kind": "balance_change",
+     "phase": "block",
+     "records": [
+      "102.0.1"
+     ],
+     "records_delta_6dec": null,
+     "seq": 2,
+     "since_cursor": null,
+     "since_height": 101,
+     "system": false,
+     "unexplained_6dec": "0"
+    }
+   ],
+   "expect": [
+    "different"
+   ]
+  },
+  {
+   "name": "no since_cursor and it does not add up: different, never 'not checked'",
+   "account": "0x4994ea57adee282ca28f276853b65b8473e20a0c",
+   "records": [
+    {
+     "account": "0x4994ea57adee282ca28f276853b65b8473e20a0c",
+     "accounts": [
+      "0x4994ea57adee282ca28f276853b65b8473e20a0c"
+     ],
+     "agents": [],
+     "at_ms": 1800000102000,
+     "cursor": "102.0.1",
+     "destination": "0x4994ea57adee282ca28f276853b65b8473e20a0c",
+     "gross_6dec": "7000000",
+     "height": 102,
+     "kind": "withdrawal_requested",
+     "legs": [
+      {
+       "account": "0x4994ea57adee282ca28f276853b65b8473e20a0c",
+       "account_delta_6dec": "-7000000",
+       "balance_after_6dec": "9993000000"
+      }
+     ],
+     "move_seq": 0,
+     "nonce": 1,
+     "phase": "block",
+     "route": "legacy",
+     "seq": 1
+    },
+    {
+     "account": "0x4994ea57adee282ca28f276853b65b8473e20a0c",
+     "accounts": [
+      "0x4994ea57adee282ca28f276853b65b8473e20a0c"
+     ],
+     "after": {
+      "collateral_6dec": "9993000000",
+      "in_positions_6dec": "0",
+      "reserved_orders_6dec": "0",
+      "spot_reserved_6dec": "0",
+      "usdc_6dec": "9993000000"
+     },
+     "agents": [],
+     "at_ms": 1800000102000,
+     "before": {
+      "collateral_6dec": "10000000000",
+      "in_positions_6dec": "0",
+      "reserved_orders_6dec": "0",
+      "spot_reserved_6dec": "0",
+      "usdc_6dec": "10000000000"
+     },
+     "cursor": "102.0.2",
+     "delta_6dec": "-7000000",
+     "explained": true,
+     "height": 102,
+     "kind": "balance_change",
+     "phase": "block",
+     "records": [
+      "102.0.1"
+     ],
+     "records_delta_6dec": "-7000000",
+     "seq": 2,
+     "since_cursor": null,
+     "since_height": 101,
+     "system": false,
+     "unexplained_6dec": "0"
+    },
+    {
+     "account": "0x4994ea57adee282ca28f276853b65b8473e20a0c",
+     "accounts": [
+      "0x4994ea57adee282ca28f276853b65b8473e20a0c"
+     ],
+     "agents": [],
+     "at_ms": 1800000102000,
+     "cursor": "103.0.1",
+     "destination": "0x4994ea57adee282ca28f276853b65b8473e20a0c",
+     "gross_6dec": "7000000",
+     "height": 103,
+     "kind": "withdrawal_refunded",
+     "legs": [
+      {
+       "account": "0x4994ea57adee282ca28f276853b65b8473e20a0c",
+       "account_delta_6dec": "7000000",
+       "balance_after_6dec": "9993000000"
+      }
+     ],
+     "move_seq": 0,
+     "nonce": 1,
+     "phase": "block",
+     "route": "legacy",
+     "seq": 1
+    },
+    {
+     "account": "0x4994ea57adee282ca28f276853b65b8473e20a0c",
+     "accounts": [
+      "0x4994ea57adee282ca28f276853b65b8473e20a0c"
+     ],
+     "after": {
+      "collateral_6dec": "10009000000",
+      "in_positions_6dec": "0",
+      "reserved_orders_6dec": "0",
+      "spot_reserved_6dec": "0",
+      "usdc_6dec": "10009000000"
+     },
+     "agents": [],
+     "at_ms": 1800000102000,
+     "before": {
+      "collateral_6dec": "9993000000",
+      "in_positions_6dec": "0",
+      "reserved_orders_6dec": "0",
+      "spot_reserved_6dec": "0",
+      "usdc_6dec": "9993000000"
+     },
+     "cursor": "103.0.2",
+     "height": 103,
+     "kind": "balance_change",
+     "phase": "block",
+     "records": [
+      "103.0.1"
+     ],
+     "seq": 2,
+     "since_cursor": null,
+     "since_height": 101,
+     "system": false
+    }
+   ],
+   "expect": [
+    "match",
+    "different"
+   ]
+  },
+  {
+   "name": "two different balance records for one account on one cursor: both different",
+   "account": "0x4994ea57adee282ca28f276853b65b8473e20a0c",
+   "records": [
+    {
+     "account": "0x4994ea57adee282ca28f276853b65b8473e20a0c",
+     "accounts": [
+      "0x4994ea57adee282ca28f276853b65b8473e20a0c"
+     ],
+     "agents": [],
+     "at_ms": 1800000102000,
+     "cursor": "102.0.1",
+     "destination": "0x4994ea57adee282ca28f276853b65b8473e20a0c",
+     "gross_6dec": "7000000",
+     "height": 102,
+     "kind": "withdrawal_requested",
+     "legs": [
+      {
+       "account": "0x4994ea57adee282ca28f276853b65b8473e20a0c",
+       "account_delta_6dec": "-7000000",
+       "balance_after_6dec": "9993000000"
+      }
+     ],
+     "move_seq": 0,
+     "nonce": 1,
+     "phase": "block",
+     "route": "legacy",
+     "seq": 1
+    },
+    {
+     "account": "0x4994ea57adee282ca28f276853b65b8473e20a0c",
+     "accounts": [
+      "0x4994ea57adee282ca28f276853b65b8473e20a0c"
+     ],
+     "after": {
+      "collateral_6dec": "9993000000",
+      "in_positions_6dec": "0",
+      "reserved_orders_6dec": "0",
+      "spot_reserved_6dec": "0",
+      "usdc_6dec": "9993000000"
+     },
+     "agents": [],
+     "at_ms": 1800000102000,
+     "before": {
+      "collateral_6dec": "10000000000",
+      "in_positions_6dec": "0",
+      "reserved_orders_6dec": "0",
+      "spot_reserved_6dec": "0",
+      "usdc_6dec": "10000000000"
+     },
+     "cursor": "102.0.2",
+     "delta_6dec": "-7000000",
+     "explained": true,
+     "height": 102,
+     "kind": "balance_change",
+     "phase": "block",
+     "records": [
+      "102.0.1"
+     ],
+     "records_delta_6dec": "-7000000",
+     "seq": 2,
+     "since_cursor": null,
+     "since_height": 101,
+     "system": false,
+     "unexplained_6dec": "0"
+    },
+    {
+     "account": "0x4994ea57adee282ca28f276853b65b8473e20a0c",
+     "accounts": [
+      "0x4994ea57adee282ca28f276853b65b8473e20a0c"
+     ],
+     "after": {
+      "collateral_6dec": "1",
+      "in_positions_6dec": "0",
+      "reserved_orders_6dec": "0",
+      "spot_reserved_6dec": "0",
+      "usdc_6dec": "1"
+     },
+     "agents": [],
+     "at_ms": 1800000102000,
+     "before": {
+      "collateral_6dec": "10000000000",
+      "in_positions_6dec": "0",
+      "reserved_orders_6dec": "0",
+      "spot_reserved_6dec": "0",
+      "usdc_6dec": "10000000000"
+     },
+     "cursor": "102.0.2",
+     "delta_6dec": "-7000000",
+     "explained": true,
+     "height": 102,
+     "kind": "balance_change",
+     "phase": "block",
+     "records": [
+      "102.0.1"
+     ],
+     "records_delta_6dec": "-7000000",
+     "seq": 2,
+     "since_cursor": null,
+     "since_height": 101,
+     "system": false,
+     "unexplained_6dec": "0"
+    }
+   ],
+   "expect": [
+    "different",
+    "different"
+   ]
+  },
+  {
+   "name": "a named order_closed with no amount moves nothing: the step still adds up",
+   "account": "0x4994ea57adee282ca28f276853b65b8473e20a0c",
+   "records": [
+    {
+     "accounts": [
+      "0x4994ea57adee282ca28f276853b65b8473e20a0c"
+     ],
+     "cursor": "102.0.0",
+     "height": 102,
+     "kind": "fill",
+     "phase": "block",
+     "seq": 0,
+     "legs": [
+      {
+       "account": "0x4994ea57adee282ca28f276853b65b8473e20a0c",
+       "account_delta_6dec": "-7000000"
+      }
+     ]
+    },
+    {
+     "accounts": [
+      "0x4994ea57adee282ca28f276853b65b8473e20a0c"
+     ],
+     "cursor": "102.0.1",
+     "height": 102,
+     "kind": "order_closed",
+     "phase": "block",
+     "seq": 1,
+     "order_id": 5,
+     "status": "filled",
+     "remaining_18dec": "0",
+     "owner": "0x4994ea57adee282ca28f276853b65b8473e20a0c"
+    },
+    {
+     "account": "0x4994ea57adee282ca28f276853b65b8473e20a0c",
+     "accounts": [
+      "0x4994ea57adee282ca28f276853b65b8473e20a0c"
+     ],
+     "after": {
+      "collateral_6dec": "9993000000",
+      "in_positions_6dec": "0",
+      "reserved_orders_6dec": "0",
+      "spot_reserved_6dec": "0",
+      "usdc_6dec": "9993000000"
+     },
+     "agents": [],
+     "at_ms": 1800000102000,
+     "before": {
+      "collateral_6dec": "10000000000",
+      "in_positions_6dec": "0",
+      "reserved_orders_6dec": "0",
+      "spot_reserved_6dec": "0",
+      "usdc_6dec": "10000000000"
+     },
+     "cursor": "102.0.2",
+     "delta_6dec": "-7000000",
+     "explained": true,
+     "height": 102,
+     "kind": "balance_change",
+     "phase": "block",
+     "records": [
+      "102.0.0",
+      "102.0.1"
+     ],
+     "records_delta_6dec": "-7000000",
+     "seq": 2,
+     "since_cursor": null,
+     "since_height": 101,
+     "system": false,
+     "unexplained_6dec": "0"
+    }
+   ],
+   "expect": [
+    "match"
+   ]
+  },
+  {
+   "name": "a named non-money record of another account is not read for this one",
+   "account": "0x4994ea57adee282ca28f276853b65b8473e20a0c",
+   "records": [
+    {
+     "accounts": [
+      "0x4994ea57adee282ca28f276853b65b8473e20a0c"
+     ],
+     "cursor": "102.0.0",
+     "height": 102,
+     "kind": "fill",
+     "phase": "block",
+     "seq": 0,
+     "legs": [
+      {
+       "account": "0x4994ea57adee282ca28f276853b65b8473e20a0c",
+       "account_delta_6dec": "-7000000"
+      }
+     ]
+    },
+    {
+     "accounts": [
+      "0x1111111111111111111111111111111111111111"
+     ],
+     "cursor": "102.0.1",
+     "height": 102,
+     "kind": "order_closed",
+     "phase": "block",
+     "seq": 1,
+     "order_id": 5,
+     "status": "filled",
+     "remaining_18dec": "0",
+     "owner": "0x1111111111111111111111111111111111111111"
+    },
+    {
+     "account": "0x4994ea57adee282ca28f276853b65b8473e20a0c",
+     "accounts": [
+      "0x4994ea57adee282ca28f276853b65b8473e20a0c"
+     ],
+     "after": {
+      "collateral_6dec": "9993000000",
+      "in_positions_6dec": "0",
+      "reserved_orders_6dec": "0",
+      "spot_reserved_6dec": "0",
+      "usdc_6dec": "9993000000"
+     },
+     "agents": [],
+     "at_ms": 1800000102000,
+     "before": {
+      "collateral_6dec": "10000000000",
+      "in_positions_6dec": "0",
+      "reserved_orders_6dec": "0",
+      "spot_reserved_6dec": "0",
+      "usdc_6dec": "10000000000"
+     },
+     "cursor": "102.0.2",
+     "delta_6dec": "-7000000",
+     "explained": true,
+     "height": 102,
+     "kind": "balance_change",
+     "phase": "block",
+     "records": [
+      "102.0.0",
+      "102.0.1"
+     ],
+     "records_delta_6dec": "-7000000",
+     "seq": 2,
+     "since_cursor": null,
+     "since_height": 101,
+     "system": false,
+     "unexplained_6dec": "0"
+    }
+   ],
+   "expect": [
+    "not checked"
+   ]
+  },
+  {
+   "name": "two non-money records on one named cursor are not read",
+   "account": "0x4994ea57adee282ca28f276853b65b8473e20a0c",
+   "records": [
+    {
+     "accounts": [
+      "0x4994ea57adee282ca28f276853b65b8473e20a0c"
+     ],
+     "cursor": "102.0.0",
+     "height": 102,
+     "kind": "fill",
+     "phase": "block",
+     "seq": 0,
+     "legs": [
+      {
+       "account": "0x4994ea57adee282ca28f276853b65b8473e20a0c",
+       "account_delta_6dec": "-7000000"
+      }
+     ]
+    },
+    {
+     "accounts": [
+      "0x4994ea57adee282ca28f276853b65b8473e20a0c"
+     ],
+     "cursor": "102.0.1",
+     "height": 102,
+     "kind": "order_closed",
+     "phase": "block",
+     "seq": 1,
+     "order_id": 5,
+     "status": "filled",
+     "remaining_18dec": "0",
+     "owner": "0x4994ea57adee282ca28f276853b65b8473e20a0c"
+    },
+    {
+     "accounts": [
+      "0x4994ea57adee282ca28f276853b65b8473e20a0c"
+     ],
+     "cursor": "102.0.1",
+     "height": 102,
+     "kind": "order_closed",
+     "phase": "block",
+     "seq": 1,
+     "order_id": 5,
+     "status": "cancelled",
+     "remaining_18dec": "0",
+     "owner": "0x4994ea57adee282ca28f276853b65b8473e20a0c"
+    },
+    {
+     "account": "0x4994ea57adee282ca28f276853b65b8473e20a0c",
+     "accounts": [
+      "0x4994ea57adee282ca28f276853b65b8473e20a0c"
+     ],
+     "after": {
+      "collateral_6dec": "9993000000",
+      "in_positions_6dec": "0",
+      "reserved_orders_6dec": "0",
+      "spot_reserved_6dec": "0",
+      "usdc_6dec": "9993000000"
+     },
+     "agents": [],
+     "at_ms": 1800000102000,
+     "before": {
+      "collateral_6dec": "10000000000",
+      "in_positions_6dec": "0",
+      "reserved_orders_6dec": "0",
+      "spot_reserved_6dec": "0",
+      "usdc_6dec": "10000000000"
+     },
+     "cursor": "102.0.2",
+     "delta_6dec": "-7000000",
+     "explained": true,
+     "height": 102,
+     "kind": "balance_change",
+     "phase": "block",
+     "records": [
+      "102.0.0",
+      "102.0.1"
+     ],
+     "records_delta_6dec": "-7000000",
+     "seq": 2,
+     "since_cursor": null,
+     "since_height": 101,
+     "system": false,
+     "unexplained_6dec": "0"
+    }
+   ],
+   "expect": [
+    "not checked"
+   ]
+  },
+  {
+   "name": "a named order_closed with a top-level micro-USDC amount is not read as zero",
+   "account": "0x4994ea57adee282ca28f276853b65b8473e20a0c",
+   "records": [
+    {
+     "accounts": [
+      "0x4994ea57adee282ca28f276853b65b8473e20a0c"
+     ],
+     "cursor": "102.0.0",
+     "height": 102,
+     "kind": "fill",
+     "phase": "block",
+     "seq": 0,
+     "legs": [
+      {
+       "account": "0x4994ea57adee282ca28f276853b65b8473e20a0c",
+       "account_delta_6dec": "-7000000"
+      }
+     ]
+    },
+    {
+     "accounts": [
+      "0x4994ea57adee282ca28f276853b65b8473e20a0c"
+     ],
+     "cursor": "102.0.1",
+     "height": 102,
+     "kind": "order_closed",
+     "phase": "block",
+     "seq": 1,
+     "order_id": 5,
+     "status": "filled",
+     "remaining_18dec": "0",
+     "owner": "0x4994ea57adee282ca28f276853b65b8473e20a0c",
+     "refund_6dec": "5000000"
+    },
+    {
+     "account": "0x4994ea57adee282ca28f276853b65b8473e20a0c",
+     "accounts": [
+      "0x4994ea57adee282ca28f276853b65b8473e20a0c"
+     ],
+     "after": {
+      "collateral_6dec": "9993000000",
+      "in_positions_6dec": "0",
+      "reserved_orders_6dec": "0",
+      "spot_reserved_6dec": "0",
+      "usdc_6dec": "9993000000"
+     },
+     "agents": [],
+     "at_ms": 1800000102000,
+     "before": {
+      "collateral_6dec": "10000000000",
+      "in_positions_6dec": "0",
+      "reserved_orders_6dec": "0",
+      "spot_reserved_6dec": "0",
+      "usdc_6dec": "10000000000"
+     },
+     "cursor": "102.0.2",
+     "delta_6dec": "-7000000",
+     "explained": true,
+     "height": 102,
+     "kind": "balance_change",
+     "phase": "block",
+     "records": [
+      "102.0.0",
+      "102.0.1"
+     ],
+     "records_delta_6dec": "-7000000",
+     "seq": 2,
+     "since_cursor": null,
+     "since_height": 101,
+     "system": false,
+     "unexplained_6dec": "0"
+    }
+   ],
+   "expect": [
+    "not checked"
+   ]
+  },
+  {
+   "name": "a named order_closed with a nested micro-USDC amount is not read as zero",
+   "account": "0x4994ea57adee282ca28f276853b65b8473e20a0c",
+   "records": [
+    {
+     "accounts": [
+      "0x4994ea57adee282ca28f276853b65b8473e20a0c"
+     ],
+     "cursor": "102.0.0",
+     "height": 102,
+     "kind": "fill",
+     "phase": "block",
+     "seq": 0,
+     "legs": [
+      {
+       "account": "0x4994ea57adee282ca28f276853b65b8473e20a0c",
+       "account_delta_6dec": "-7000000"
+      }
+     ]
+    },
+    {
+     "accounts": [
+      "0x4994ea57adee282ca28f276853b65b8473e20a0c"
+     ],
+     "cursor": "102.0.1",
+     "height": 102,
+     "kind": "order_closed",
+     "phase": "block",
+     "seq": 1,
+     "order_id": 5,
+     "status": "filled",
+     "remaining_18dec": "0",
+     "owner": "0x4994ea57adee282ca28f276853b65b8473e20a0c",
+     "fees": {
+      "refund_6dec": "5000000"
+     }
+    },
+    {
+     "account": "0x4994ea57adee282ca28f276853b65b8473e20a0c",
+     "accounts": [
+      "0x4994ea57adee282ca28f276853b65b8473e20a0c"
+     ],
+     "after": {
+      "collateral_6dec": "9993000000",
+      "in_positions_6dec": "0",
+      "reserved_orders_6dec": "0",
+      "spot_reserved_6dec": "0",
+      "usdc_6dec": "9993000000"
+     },
+     "agents": [],
+     "at_ms": 1800000102000,
+     "before": {
+      "collateral_6dec": "10000000000",
+      "in_positions_6dec": "0",
+      "reserved_orders_6dec": "0",
+      "spot_reserved_6dec": "0",
+      "usdc_6dec": "10000000000"
+     },
+     "cursor": "102.0.2",
+     "delta_6dec": "-7000000",
+     "explained": true,
+     "height": 102,
+     "kind": "balance_change",
+     "phase": "block",
+     "records": [
+      "102.0.0",
+      "102.0.1"
+     ],
+     "records_delta_6dec": "-7000000",
+     "seq": 2,
+     "since_cursor": null,
+     "since_height": 101,
+     "system": false,
+     "unexplained_6dec": "0"
+    }
+   ],
+   "expect": [
+    "not checked"
+   ]
+  },
+  {
+   "name": "a named order_closed with a taker block for the account is not read as zero",
+   "account": "0x4994ea57adee282ca28f276853b65b8473e20a0c",
+   "records": [
+    {
+     "accounts": [
+      "0x4994ea57adee282ca28f276853b65b8473e20a0c"
+     ],
+     "cursor": "102.0.0",
+     "height": 102,
+     "kind": "fill",
+     "phase": "block",
+     "seq": 0,
+     "legs": [
+      {
+       "account": "0x4994ea57adee282ca28f276853b65b8473e20a0c",
+       "account_delta_6dec": "-7000000"
+      }
+     ]
+    },
+    {
+     "accounts": [
+      "0x4994ea57adee282ca28f276853b65b8473e20a0c"
+     ],
+     "cursor": "102.0.1",
+     "height": 102,
+     "kind": "order_closed",
+     "phase": "block",
+     "seq": 1,
+     "order_id": 5,
+     "status": "filled",
+     "remaining_18dec": "0",
+     "owner": "0x4994ea57adee282ca28f276853b65b8473e20a0c",
+     "taker": {
+      "account": "0x4994ea57adee282ca28f276853b65b8473e20a0c",
+      "account_delta_6dec": "-5000000"
+     }
+    },
+    {
+     "account": "0x4994ea57adee282ca28f276853b65b8473e20a0c",
+     "accounts": [
+      "0x4994ea57adee282ca28f276853b65b8473e20a0c"
+     ],
+     "after": {
+      "collateral_6dec": "9993000000",
+      "in_positions_6dec": "0",
+      "reserved_orders_6dec": "0",
+      "spot_reserved_6dec": "0",
+      "usdc_6dec": "9993000000"
+     },
+     "agents": [],
+     "at_ms": 1800000102000,
+     "before": {
+      "collateral_6dec": "10000000000",
+      "in_positions_6dec": "0",
+      "reserved_orders_6dec": "0",
+      "spot_reserved_6dec": "0",
+      "usdc_6dec": "10000000000"
+     },
+     "cursor": "102.0.2",
+     "delta_6dec": "-7000000",
+     "explained": true,
+     "height": 102,
+     "kind": "balance_change",
+     "phase": "block",
+     "records": [
+      "102.0.0",
+      "102.0.1"
+     ],
+     "records_delta_6dec": "-7000000",
+     "seq": 2,
+     "since_cursor": null,
+     "since_height": 101,
+     "system": false,
+     "unexplained_6dec": "0"
+    }
+   ],
+   "expect": [
+    "not checked"
+   ]
+  },
+  {
+   "name": "a named order_closed with a maker block is not read as zero",
+   "account": "0x4994ea57adee282ca28f276853b65b8473e20a0c",
+   "records": [
+    {
+     "accounts": [
+      "0x4994ea57adee282ca28f276853b65b8473e20a0c"
+     ],
+     "cursor": "102.0.0",
+     "height": 102,
+     "kind": "fill",
+     "phase": "block",
+     "seq": 0,
+     "legs": [
+      {
+       "account": "0x4994ea57adee282ca28f276853b65b8473e20a0c",
+       "account_delta_6dec": "-7000000"
+      }
+     ]
+    },
+    {
+     "accounts": [
+      "0x4994ea57adee282ca28f276853b65b8473e20a0c"
+     ],
+     "cursor": "102.0.1",
+     "height": 102,
+     "kind": "order_closed",
+     "phase": "block",
+     "seq": 1,
+     "order_id": 5,
+     "status": "filled",
+     "remaining_18dec": "0",
+     "owner": "0x4994ea57adee282ca28f276853b65b8473e20a0c",
+     "maker": {
+      "account": "0x4994ea57adee282ca28f276853b65b8473e20a0c",
+      "account_delta_6dec": "5000000"
+     }
+    },
+    {
+     "account": "0x4994ea57adee282ca28f276853b65b8473e20a0c",
+     "accounts": [
+      "0x4994ea57adee282ca28f276853b65b8473e20a0c"
+     ],
+     "after": {
+      "collateral_6dec": "9993000000",
+      "in_positions_6dec": "0",
+      "reserved_orders_6dec": "0",
+      "spot_reserved_6dec": "0",
+      "usdc_6dec": "9993000000"
+     },
+     "agents": [],
+     "at_ms": 1800000102000,
+     "before": {
+      "collateral_6dec": "10000000000",
+      "in_positions_6dec": "0",
+      "reserved_orders_6dec": "0",
+      "spot_reserved_6dec": "0",
+      "usdc_6dec": "10000000000"
+     },
+     "cursor": "102.0.2",
+     "delta_6dec": "-7000000",
+     "explained": true,
+     "height": 102,
+     "kind": "balance_change",
+     "phase": "block",
+     "records": [
+      "102.0.0",
+      "102.0.1"
+     ],
+     "records_delta_6dec": "-7000000",
+     "seq": 2,
+     "since_cursor": null,
+     "since_height": 101,
+     "system": false,
+     "unexplained_6dec": "0"
+    }
+   ],
+   "expect": [
+    "not checked"
+   ]
+  },
+  {
+   "name": "a named order_closed with an empty legs list is not read as zero",
+   "account": "0x4994ea57adee282ca28f276853b65b8473e20a0c",
+   "records": [
+    {
+     "accounts": [
+      "0x4994ea57adee282ca28f276853b65b8473e20a0c"
+     ],
+     "cursor": "102.0.0",
+     "height": 102,
+     "kind": "fill",
+     "phase": "block",
+     "seq": 0,
+     "legs": [
+      {
+       "account": "0x4994ea57adee282ca28f276853b65b8473e20a0c",
+       "account_delta_6dec": "-7000000"
+      }
+     ]
+    },
+    {
+     "accounts": [
+      "0x4994ea57adee282ca28f276853b65b8473e20a0c"
+     ],
+     "cursor": "102.0.1",
+     "height": 102,
+     "kind": "order_closed",
+     "phase": "block",
+     "seq": 1,
+     "order_id": 5,
+     "status": "filled",
+     "remaining_18dec": "0",
+     "owner": "0x4994ea57adee282ca28f276853b65b8473e20a0c",
+     "legs": []
+    },
+    {
+     "account": "0x4994ea57adee282ca28f276853b65b8473e20a0c",
+     "accounts": [
+      "0x4994ea57adee282ca28f276853b65b8473e20a0c"
+     ],
+     "after": {
+      "collateral_6dec": "9993000000",
+      "in_positions_6dec": "0",
+      "reserved_orders_6dec": "0",
+      "spot_reserved_6dec": "0",
+      "usdc_6dec": "9993000000"
+     },
+     "agents": [],
+     "at_ms": 1800000102000,
+     "before": {
+      "collateral_6dec": "10000000000",
+      "in_positions_6dec": "0",
+      "reserved_orders_6dec": "0",
+      "spot_reserved_6dec": "0",
+      "usdc_6dec": "10000000000"
+     },
+     "cursor": "102.0.2",
+     "delta_6dec": "-7000000",
+     "explained": true,
+     "height": 102,
+     "kind": "balance_change",
+     "phase": "block",
+     "records": [
+      "102.0.0",
+      "102.0.1"
+     ],
+     "records_delta_6dec": "-7000000",
+     "seq": 2,
+     "since_cursor": null,
+     "since_height": 101,
+     "system": false,
+     "unexplained_6dec": "0"
+    }
+   ],
+   "expect": [
+    "not checked"
+   ]
+  },
+  {
+   "name": "a named order_closed marked notes_missing is not read as zero",
+   "account": "0x4994ea57adee282ca28f276853b65b8473e20a0c",
+   "records": [
+    {
+     "accounts": [
+      "0x4994ea57adee282ca28f276853b65b8473e20a0c"
+     ],
+     "cursor": "102.0.0",
+     "height": 102,
+     "kind": "fill",
+     "phase": "block",
+     "seq": 0,
+     "legs": [
+      {
+       "account": "0x4994ea57adee282ca28f276853b65b8473e20a0c",
+       "account_delta_6dec": "-7000000"
+      }
+     ]
+    },
+    {
+     "accounts": [
+      "0x4994ea57adee282ca28f276853b65b8473e20a0c"
+     ],
+     "cursor": "102.0.1",
+     "height": 102,
+     "kind": "order_closed",
+     "phase": "block",
+     "seq": 1,
+     "order_id": 5,
+     "status": "filled",
+     "remaining_18dec": "0",
+     "owner": "0x4994ea57adee282ca28f276853b65b8473e20a0c",
+     "notes_missing": true
+    },
+    {
+     "account": "0x4994ea57adee282ca28f276853b65b8473e20a0c",
+     "accounts": [
+      "0x4994ea57adee282ca28f276853b65b8473e20a0c"
+     ],
+     "after": {
+      "collateral_6dec": "9993000000",
+      "in_positions_6dec": "0",
+      "reserved_orders_6dec": "0",
+      "spot_reserved_6dec": "0",
+      "usdc_6dec": "9993000000"
+     },
+     "agents": [],
+     "at_ms": 1800000102000,
+     "before": {
+      "collateral_6dec": "10000000000",
+      "in_positions_6dec": "0",
+      "reserved_orders_6dec": "0",
+      "spot_reserved_6dec": "0",
+      "usdc_6dec": "10000000000"
+     },
+     "cursor": "102.0.2",
+     "delta_6dec": "-7000000",
+     "explained": true,
+     "height": 102,
+     "kind": "balance_change",
+     "phase": "block",
+     "records": [
+      "102.0.0",
+      "102.0.1"
+     ],
+     "records_delta_6dec": "-7000000",
+     "seq": 2,
+     "since_cursor": null,
+     "since_height": 101,
+     "system": false,
+     "unexplained_6dec": "0"
+    }
+   ],
+   "expect": [
+    "not checked"
+   ]
+  },
+  {
+   "name": "a named record with no kind is not read as zero",
+   "account": "0x4994ea57adee282ca28f276853b65b8473e20a0c",
+   "records": [
+    {
+     "accounts": [
+      "0x4994ea57adee282ca28f276853b65b8473e20a0c"
+     ],
+     "cursor": "102.0.0",
+     "height": 102,
+     "kind": "fill",
+     "phase": "block",
+     "seq": 0,
+     "legs": [
+      {
+       "account": "0x4994ea57adee282ca28f276853b65b8473e20a0c",
+       "account_delta_6dec": "-7000000"
+      }
+     ]
+    },
+    {
+     "accounts": [
+      "0x4994ea57adee282ca28f276853b65b8473e20a0c"
+     ],
+     "cursor": "102.0.1",
+     "height": 102,
+     "phase": "block",
+     "seq": 1,
+     "order_id": 5,
+     "status": "filled",
+     "remaining_18dec": "0",
+     "owner": "0x4994ea57adee282ca28f276853b65b8473e20a0c"
+    },
+    {
+     "account": "0x4994ea57adee282ca28f276853b65b8473e20a0c",
+     "accounts": [
+      "0x4994ea57adee282ca28f276853b65b8473e20a0c"
+     ],
+     "after": {
+      "collateral_6dec": "9993000000",
+      "in_positions_6dec": "0",
+      "reserved_orders_6dec": "0",
+      "spot_reserved_6dec": "0",
+      "usdc_6dec": "9993000000"
+     },
+     "agents": [],
+     "at_ms": 1800000102000,
+     "before": {
+      "collateral_6dec": "10000000000",
+      "in_positions_6dec": "0",
+      "reserved_orders_6dec": "0",
+      "spot_reserved_6dec": "0",
+      "usdc_6dec": "10000000000"
+     },
+     "cursor": "102.0.2",
+     "delta_6dec": "-7000000",
+     "explained": true,
+     "height": 102,
+     "kind": "balance_change",
+     "phase": "block",
+     "records": [
+      "102.0.0",
+      "102.0.1"
+     ],
+     "records_delta_6dec": "-7000000",
+     "seq": 2,
+     "since_cursor": null,
+     "since_height": 101,
+     "system": false,
+     "unexplained_6dec": "0"
+    }
+   ],
+   "expect": [
+    "not checked"
+   ]
+  },
+  {
+   "name": "a named record of an unlisted kind with no amount is not read as zero",
+   "account": "0x4994ea57adee282ca28f276853b65b8473e20a0c",
+   "records": [
+    {
+     "accounts": [
+      "0x4994ea57adee282ca28f276853b65b8473e20a0c"
+     ],
+     "cursor": "102.0.0",
+     "height": 102,
+     "kind": "fill",
+     "phase": "block",
+     "seq": 0,
+     "legs": [
+      {
+       "account": "0x4994ea57adee282ca28f276853b65b8473e20a0c",
+       "account_delta_6dec": "-7000000"
+      }
+     ]
+    },
+    {
+     "accounts": [
+      "0x4994ea57adee282ca28f276853b65b8473e20a0c"
+     ],
+     "cursor": "102.0.1",
+     "height": 102,
+     "kind": "vault_fee",
+     "phase": "block",
+     "seq": 1,
+     "order_id": 5,
+     "status": "filled",
+     "remaining_18dec": "0",
+     "owner": "0x4994ea57adee282ca28f276853b65b8473e20a0c"
+    },
+    {
+     "account": "0x4994ea57adee282ca28f276853b65b8473e20a0c",
+     "accounts": [
+      "0x4994ea57adee282ca28f276853b65b8473e20a0c"
+     ],
+     "after": {
+      "collateral_6dec": "9993000000",
+      "in_positions_6dec": "0",
+      "reserved_orders_6dec": "0",
+      "spot_reserved_6dec": "0",
+      "usdc_6dec": "9993000000"
+     },
+     "agents": [],
+     "at_ms": 1800000102000,
+     "before": {
+      "collateral_6dec": "10000000000",
+      "in_positions_6dec": "0",
+      "reserved_orders_6dec": "0",
+      "spot_reserved_6dec": "0",
+      "usdc_6dec": "10000000000"
+     },
+     "cursor": "102.0.2",
+     "delta_6dec": "-7000000",
+     "explained": true,
+     "height": 102,
+     "kind": "balance_change",
+     "phase": "block",
+     "records": [
+      "102.0.0",
+      "102.0.1"
+     ],
+     "records_delta_6dec": "-7000000",
+     "seq": 2,
+     "since_cursor": null,
+     "since_height": 101,
+     "system": false,
+     "unexplained_6dec": "0"
+    }
+   ],
+   "expect": [
+    "not checked"
+   ]
+  },
+  {
+   "name": "a named non-money record with legs and no top-level amount is not read as zero",
+   "account": "0x4994ea57adee282ca28f276853b65b8473e20a0c",
+   "records": [
+    {
+     "accounts": [
+      "0x4994ea57adee282ca28f276853b65b8473e20a0c"
+     ],
+     "cursor": "102.0.0",
+     "height": 102,
+     "kind": "fill",
+     "phase": "block",
+     "seq": 0,
+     "legs": [
+      {
+       "account": "0x4994ea57adee282ca28f276853b65b8473e20a0c",
+       "account_delta_6dec": "-7000000"
+      }
+     ]
+    },
+    {
+     "accounts": [
+      "0x4994ea57adee282ca28f276853b65b8473e20a0c"
+     ],
+     "cursor": "102.0.1",
+     "height": 102,
+     "kind": "order_placed",
+     "phase": "block",
+     "seq": 1,
+     "order_id": 5,
+     "status": "filled",
+     "remaining_18dec": "0",
+     "owner": "0x4994ea57adee282ca28f276853b65b8473e20a0c",
+     "legs": [
+      {
+       "account": "0x4994ea57adee282ca28f276853b65b8473e20a0c",
+       "account_delta_6dec": "-7000000"
+      }
+     ]
+    },
+    {
+     "account": "0x4994ea57adee282ca28f276853b65b8473e20a0c",
+     "accounts": [
+      "0x4994ea57adee282ca28f276853b65b8473e20a0c"
+     ],
+     "after": {
+      "collateral_6dec": "9993000000",
+      "in_positions_6dec": "0",
+      "reserved_orders_6dec": "0",
+      "spot_reserved_6dec": "0",
+      "usdc_6dec": "9993000000"
+     },
+     "agents": [],
+     "at_ms": 1800000102000,
+     "before": {
+      "collateral_6dec": "10000000000",
+      "in_positions_6dec": "0",
+      "reserved_orders_6dec": "0",
+      "spot_reserved_6dec": "0",
+      "usdc_6dec": "10000000000"
+     },
+     "cursor": "102.0.2",
+     "delta_6dec": "-7000000",
+     "explained": true,
+     "height": 102,
+     "kind": "balance_change",
+     "phase": "block",
+     "records": [
+      "102.0.0",
+      "102.0.1"
+     ],
+     "records_delta_6dec": "-7000000",
+     "seq": 2,
+     "since_cursor": null,
+     "since_height": 101,
+     "system": false,
+     "unexplained_6dec": "0"
+    }
+   ],
+   "expect": [
+    "not checked"
+   ]
+  },
+  {
+   "name": "a named order_closed naming the account in capitals still counts as zero",
+   "account": "0x4994ea57adee282ca28f276853b65b8473e20a0c",
+   "records": [
+    {
+     "accounts": [
+      "0x4994ea57adee282ca28f276853b65b8473e20a0c"
+     ],
+     "cursor": "102.0.0",
+     "height": 102,
+     "kind": "fill",
+     "phase": "block",
+     "seq": 0,
+     "legs": [
+      {
+       "account": "0x4994ea57adee282ca28f276853b65b8473e20a0c",
+       "account_delta_6dec": "-7000000"
+      }
+     ]
+    },
+    {
+     "accounts": [
+      "0x4994EA57ADEE282CA28F276853B65B8473E20A0C"
+     ],
+     "cursor": "102.0.1",
+     "height": 102,
+     "kind": "order_closed",
+     "phase": "block",
+     "seq": 1,
+     "order_id": 5,
+     "status": "filled",
+     "remaining_18dec": "0",
+     "owner": "0x4994ea57adee282ca28f276853b65b8473e20a0c"
+    },
+    {
+     "account": "0x4994ea57adee282ca28f276853b65b8473e20a0c",
+     "accounts": [
+      "0x4994ea57adee282ca28f276853b65b8473e20a0c"
+     ],
+     "after": {
+      "collateral_6dec": "9993000000",
+      "in_positions_6dec": "0",
+      "reserved_orders_6dec": "0",
+      "spot_reserved_6dec": "0",
+      "usdc_6dec": "9993000000"
+     },
+     "agents": [],
+     "at_ms": 1800000102000,
+     "before": {
+      "collateral_6dec": "10000000000",
+      "in_positions_6dec": "0",
+      "reserved_orders_6dec": "0",
+      "spot_reserved_6dec": "0",
+      "usdc_6dec": "10000000000"
+     },
+     "cursor": "102.0.2",
+     "delta_6dec": "-7000000",
+     "explained": true,
+     "height": 102,
+     "kind": "balance_change",
+     "phase": "block",
+     "records": [
+      "102.0.0",
+      "102.0.1"
+     ],
+     "records_delta_6dec": "-7000000",
+     "seq": 2,
+     "since_cursor": null,
+     "since_height": 101,
+     "system": false,
+     "unexplained_6dec": "0"
+    }
+   ],
+   "expect": [
+    "match"
+   ]
+  },
+  {
+   "name": "a money record and an order_closed on one named cursor: the money record counts (as v2)",
+   "account": "0x4994ea57adee282ca28f276853b65b8473e20a0c",
+   "records": [
+    {
+     "accounts": [
+      "0x4994ea57adee282ca28f276853b65b8473e20a0c"
+     ],
+     "cursor": "102.0.0",
+     "height": 102,
+     "kind": "fill",
+     "phase": "block",
+     "seq": 0,
+     "legs": [
+      {
+       "account": "0x4994ea57adee282ca28f276853b65b8473e20a0c",
+       "account_delta_6dec": "-7000000"
+      }
+     ]
+    },
+    {
+     "accounts": [
+      "0x4994ea57adee282ca28f276853b65b8473e20a0c"
+     ],
+     "cursor": "102.0.1",
+     "height": 102,
+     "kind": "order_closed",
+     "phase": "block",
+     "seq": 1,
+     "order_id": 5,
+     "status": "filled",
+     "remaining_18dec": "0",
+     "owner": "0x4994ea57adee282ca28f276853b65b8473e20a0c"
+    },
+    {
+     "accounts": [
+      "0x4994ea57adee282ca28f276853b65b8473e20a0c"
+     ],
+     "cursor": "102.0.1",
+     "height": 102,
+     "kind": "fill",
+     "phase": "block",
+     "seq": 0,
+     "legs": [
+      {
+       "account": "0x4994ea57adee282ca28f276853b65b8473e20a0c",
+       "account_delta_6dec": "-7000000"
+      }
+     ]
+    },
+    {
+     "account": "0x4994ea57adee282ca28f276853b65b8473e20a0c",
+     "accounts": [
+      "0x4994ea57adee282ca28f276853b65b8473e20a0c"
+     ],
+     "after": {
+      "collateral_6dec": "9993000000",
+      "in_positions_6dec": "0",
+      "reserved_orders_6dec": "0",
+      "spot_reserved_6dec": "0",
+      "usdc_6dec": "9993000000"
+     },
+     "agents": [],
+     "at_ms": 1800000102000,
+     "before": {
+      "collateral_6dec": "10000000000",
+      "in_positions_6dec": "0",
+      "reserved_orders_6dec": "0",
+      "spot_reserved_6dec": "0",
+      "usdc_6dec": "10000000000"
+     },
+     "cursor": "102.0.2",
+     "delta_6dec": "-7000000",
+     "explained": true,
+     "height": 102,
+     "kind": "balance_change",
+     "phase": "block",
+     "records": [
+      "102.0.0",
+      "102.0.1"
+     ],
+     "records_delta_6dec": "-7000000",
+     "seq": 2,
+     "since_cursor": null,
+     "since_height": 101,
+     "system": false,
+     "unexplained_6dec": "0"
+    }
+   ],
+   "expect": [
+    "different"
+   ]
+  },
+  {
+   "name": "a named order_updated with no amount moves nothing: the step still adds up",
+   "account": "0x4994ea57adee282ca28f276853b65b8473e20a0c",
+   "records": [
+    {
+     "accounts": [
+      "0x4994ea57adee282ca28f276853b65b8473e20a0c"
+     ],
+     "cursor": "102.0.0",
+     "height": 102,
+     "kind": "fill",
+     "phase": "block",
+     "seq": 0,
+     "legs": [
+      {
+       "account": "0x4994ea57adee282ca28f276853b65b8473e20a0c",
+       "account_delta_6dec": "-7000000"
+      }
+     ]
+    },
+    {
+     "accounts": [
+      "0x4994ea57adee282ca28f276853b65b8473e20a0c"
+     ],
+     "cursor": "102.0.1",
+     "height": 102,
+     "kind": "order_updated",
+     "phase": "block",
+     "seq": 1,
+     "order_id": 5,
+     "status": "filled",
+     "remaining_18dec": "0",
+     "owner": "0x4994ea57adee282ca28f276853b65b8473e20a0c",
+     "size_after_18dec": "1",
+     "price_after_8dec": "1"
+    },
+    {
+     "account": "0x4994ea57adee282ca28f276853b65b8473e20a0c",
+     "accounts": [
+      "0x4994ea57adee282ca28f276853b65b8473e20a0c"
+     ],
+     "after": {
+      "collateral_6dec": "9993000000",
+      "in_positions_6dec": "0",
+      "reserved_orders_6dec": "0",
+      "spot_reserved_6dec": "0",
+      "usdc_6dec": "9993000000"
+     },
+     "agents": [],
+     "at_ms": 1800000102000,
+     "before": {
+      "collateral_6dec": "10000000000",
+      "in_positions_6dec": "0",
+      "reserved_orders_6dec": "0",
+      "spot_reserved_6dec": "0",
+      "usdc_6dec": "10000000000"
+     },
+     "cursor": "102.0.2",
+     "delta_6dec": "-7000000",
+     "explained": true,
+     "height": 102,
+     "kind": "balance_change",
+     "phase": "block",
+     "records": [
+      "102.0.0",
+      "102.0.1"
+     ],
+     "records_delta_6dec": "-7000000",
+     "seq": 2,
+     "since_cursor": null,
+     "since_height": 101,
+     "system": false,
+     "unexplained_6dec": "0"
+    }
+   ],
+   "expect": [
+    "match"
+   ]
+  },
+  {
+   "name": "a named order_updated with a micro-USDC amount is not read as zero",
+   "account": "0x4994ea57adee282ca28f276853b65b8473e20a0c",
+   "records": [
+    {
+     "accounts": [
+      "0x4994ea57adee282ca28f276853b65b8473e20a0c"
+     ],
+     "cursor": "102.0.0",
+     "height": 102,
+     "kind": "fill",
+     "phase": "block",
+     "seq": 0,
+     "legs": [
+      {
+       "account": "0x4994ea57adee282ca28f276853b65b8473e20a0c",
+       "account_delta_6dec": "-7000000"
+      }
+     ]
+    },
+    {
+     "accounts": [
+      "0x4994ea57adee282ca28f276853b65b8473e20a0c"
+     ],
+     "cursor": "102.0.1",
+     "height": 102,
+     "kind": "order_updated",
+     "phase": "block",
+     "seq": 1,
+     "order_id": 5,
+     "status": "filled",
+     "remaining_18dec": "0",
+     "owner": "0x4994ea57adee282ca28f276853b65b8473e20a0c",
+     "margin_6dec": "100"
+    },
+    {
+     "account": "0x4994ea57adee282ca28f276853b65b8473e20a0c",
+     "accounts": [
+      "0x4994ea57adee282ca28f276853b65b8473e20a0c"
+     ],
+     "after": {
+      "collateral_6dec": "9993000000",
+      "in_positions_6dec": "0",
+      "reserved_orders_6dec": "0",
+      "spot_reserved_6dec": "0",
+      "usdc_6dec": "9993000000"
+     },
+     "agents": [],
+     "at_ms": 1800000102000,
+     "before": {
+      "collateral_6dec": "10000000000",
+      "in_positions_6dec": "0",
+      "reserved_orders_6dec": "0",
+      "spot_reserved_6dec": "0",
+      "usdc_6dec": "10000000000"
+     },
+     "cursor": "102.0.2",
+     "delta_6dec": "-7000000",
+     "explained": true,
+     "height": 102,
+     "kind": "balance_change",
+     "phase": "block",
+     "records": [
+      "102.0.0",
+      "102.0.1"
+     ],
+     "records_delta_6dec": "-7000000",
+     "seq": 2,
+     "since_cursor": null,
+     "since_height": 101,
+     "system": false,
+     "unexplained_6dec": "0"
+    }
+   ],
+   "expect": [
+    "not checked"
+   ]
+  },
+  {
+   "name": "a named order_placed with no amount is not read as zero (only the listed kinds are)",
+   "account": "0x4994ea57adee282ca28f276853b65b8473e20a0c",
+   "records": [
+    {
+     "accounts": [
+      "0x4994ea57adee282ca28f276853b65b8473e20a0c"
+     ],
+     "cursor": "102.0.0",
+     "height": 102,
+     "kind": "fill",
+     "phase": "block",
+     "seq": 0,
+     "legs": [
+      {
+       "account": "0x4994ea57adee282ca28f276853b65b8473e20a0c",
+       "account_delta_6dec": "-7000000"
+      }
+     ]
+    },
+    {
+     "accounts": [
+      "0x4994ea57adee282ca28f276853b65b8473e20a0c"
+     ],
+     "cursor": "102.0.1",
+     "height": 102,
+     "kind": "order_placed",
+     "phase": "block",
+     "seq": 1,
+     "order_id": 5,
+     "status": "filled",
+     "remaining_18dec": "0",
+     "owner": "0x4994ea57adee282ca28f276853b65b8473e20a0c"
+    },
+    {
+     "account": "0x4994ea57adee282ca28f276853b65b8473e20a0c",
+     "accounts": [
+      "0x4994ea57adee282ca28f276853b65b8473e20a0c"
+     ],
+     "after": {
+      "collateral_6dec": "9993000000",
+      "in_positions_6dec": "0",
+      "reserved_orders_6dec": "0",
+      "spot_reserved_6dec": "0",
+      "usdc_6dec": "9993000000"
+     },
+     "agents": [],
+     "at_ms": 1800000102000,
+     "before": {
+      "collateral_6dec": "10000000000",
+      "in_positions_6dec": "0",
+      "reserved_orders_6dec": "0",
+      "spot_reserved_6dec": "0",
+      "usdc_6dec": "10000000000"
+     },
+     "cursor": "102.0.2",
+     "delta_6dec": "-7000000",
+     "explained": true,
+     "height": 102,
+     "kind": "balance_change",
+     "phase": "block",
+     "records": [
+      "102.0.0",
+      "102.0.1"
+     ],
+     "records_delta_6dec": "-7000000",
+     "seq": 2,
+     "since_cursor": null,
+     "since_height": 101,
+     "system": false,
+     "unexplained_6dec": "0"
+    }
+   ],
+   "expect": [
+    "not checked"
+   ]
+  },
+  {
+   "name": "a named order_closed with a taker block and no amount is not read as zero",
+   "account": "0x4994ea57adee282ca28f276853b65b8473e20a0c",
+   "records": [
+    {
+     "accounts": [
+      "0x4994ea57adee282ca28f276853b65b8473e20a0c"
+     ],
+     "cursor": "102.0.0",
+     "height": 102,
+     "kind": "fill",
+     "phase": "block",
+     "seq": 0,
+     "legs": [
+      {
+       "account": "0x4994ea57adee282ca28f276853b65b8473e20a0c",
+       "account_delta_6dec": "-7000000"
+      }
+     ]
+    },
+    {
+     "accounts": [
+      "0x4994ea57adee282ca28f276853b65b8473e20a0c"
+     ],
+     "cursor": "102.0.1",
+     "height": 102,
+     "kind": "order_closed",
+     "phase": "block",
+     "seq": 1,
+     "order_id": 5,
+     "status": "filled",
+     "remaining_18dec": "0",
+     "owner": "0x4994ea57adee282ca28f276853b65b8473e20a0c",
+     "taker": {
+      "account": "0x4994ea57adee282ca28f276853b65b8473e20a0c"
+     }
+    },
+    {
+     "account": "0x4994ea57adee282ca28f276853b65b8473e20a0c",
+     "accounts": [
+      "0x4994ea57adee282ca28f276853b65b8473e20a0c"
+     ],
+     "after": {
+      "collateral_6dec": "9993000000",
+      "in_positions_6dec": "0",
+      "reserved_orders_6dec": "0",
+      "spot_reserved_6dec": "0",
+      "usdc_6dec": "9993000000"
+     },
+     "agents": [],
+     "at_ms": 1800000102000,
+     "before": {
+      "collateral_6dec": "10000000000",
+      "in_positions_6dec": "0",
+      "reserved_orders_6dec": "0",
+      "spot_reserved_6dec": "0",
+      "usdc_6dec": "10000000000"
+     },
+     "cursor": "102.0.2",
+     "delta_6dec": "-7000000",
+     "explained": true,
+     "height": 102,
+     "kind": "balance_change",
+     "phase": "block",
+     "records": [
+      "102.0.0",
+      "102.0.1"
+     ],
+     "records_delta_6dec": "-7000000",
+     "seq": 2,
+     "since_cursor": null,
+     "since_height": 101,
+     "system": false,
+     "unexplained_6dec": "0"
+    }
+   ],
+   "expect": [
+    "not checked"
+   ]
+  },
+  {
+   "name": "a named order_closed with a maker block and no amount is not read as zero",
+   "account": "0x4994ea57adee282ca28f276853b65b8473e20a0c",
+   "records": [
+    {
+     "accounts": [
+      "0x4994ea57adee282ca28f276853b65b8473e20a0c"
+     ],
+     "cursor": "102.0.0",
+     "height": 102,
+     "kind": "fill",
+     "phase": "block",
+     "seq": 0,
+     "legs": [
+      {
+       "account": "0x4994ea57adee282ca28f276853b65b8473e20a0c",
+       "account_delta_6dec": "-7000000"
+      }
+     ]
+    },
+    {
+     "accounts": [
+      "0x4994ea57adee282ca28f276853b65b8473e20a0c"
+     ],
+     "cursor": "102.0.1",
+     "height": 102,
+     "kind": "order_closed",
+     "phase": "block",
+     "seq": 1,
+     "order_id": 5,
+     "status": "filled",
+     "remaining_18dec": "0",
+     "owner": "0x4994ea57adee282ca28f276853b65b8473e20a0c",
+     "maker": {
+      "account": "0x4994ea57adee282ca28f276853b65b8473e20a0c"
+     }
+    },
+    {
+     "account": "0x4994ea57adee282ca28f276853b65b8473e20a0c",
+     "accounts": [
+      "0x4994ea57adee282ca28f276853b65b8473e20a0c"
+     ],
+     "after": {
+      "collateral_6dec": "9993000000",
+      "in_positions_6dec": "0",
+      "reserved_orders_6dec": "0",
+      "spot_reserved_6dec": "0",
+      "usdc_6dec": "9993000000"
+     },
+     "agents": [],
+     "at_ms": 1800000102000,
+     "before": {
+      "collateral_6dec": "10000000000",
+      "in_positions_6dec": "0",
+      "reserved_orders_6dec": "0",
+      "spot_reserved_6dec": "0",
+      "usdc_6dec": "10000000000"
+     },
+     "cursor": "102.0.2",
+     "delta_6dec": "-7000000",
+     "explained": true,
+     "height": 102,
+     "kind": "balance_change",
+     "phase": "block",
+     "records": [
+      "102.0.0",
+      "102.0.1"
+     ],
+     "records_delta_6dec": "-7000000",
+     "seq": 2,
+     "since_cursor": null,
+     "since_height": 101,
+     "system": false,
+     "unexplained_6dec": "0"
+    }
+   ],
+   "expect": [
+    "not checked"
+   ]
+  },
+  {
+   "name": "a named order_closed with an amount inside a list is not read as zero",
+   "account": "0x4994ea57adee282ca28f276853b65b8473e20a0c",
+   "records": [
+    {
+     "accounts": [
+      "0x4994ea57adee282ca28f276853b65b8473e20a0c"
+     ],
+     "cursor": "102.0.0",
+     "height": 102,
+     "kind": "fill",
+     "phase": "block",
+     "seq": 0,
+     "legs": [
+      {
+       "account": "0x4994ea57adee282ca28f276853b65b8473e20a0c",
+       "account_delta_6dec": "-7000000"
+      }
+     ]
+    },
+    {
+     "accounts": [
+      "0x4994ea57adee282ca28f276853b65b8473e20a0c"
+     ],
+     "cursor": "102.0.1",
+     "height": 102,
+     "kind": "order_closed",
+     "phase": "block",
+     "seq": 1,
+     "order_id": 5,
+     "status": "filled",
+     "remaining_18dec": "0",
+     "owner": "0x4994ea57adee282ca28f276853b65b8473e20a0c",
+     "fills": [
+      {
+       "fee_6dec": "1"
+      }
+     ]
+    },
+    {
+     "account": "0x4994ea57adee282ca28f276853b65b8473e20a0c",
+     "accounts": [
+      "0x4994ea57adee282ca28f276853b65b8473e20a0c"
+     ],
+     "after": {
+      "collateral_6dec": "9993000000",
+      "in_positions_6dec": "0",
+      "reserved_orders_6dec": "0",
+      "spot_reserved_6dec": "0",
+      "usdc_6dec": "9993000000"
+     },
+     "agents": [],
+     "at_ms": 1800000102000,
+     "before": {
+      "collateral_6dec": "10000000000",
+      "in_positions_6dec": "0",
+      "reserved_orders_6dec": "0",
+      "spot_reserved_6dec": "0",
+      "usdc_6dec": "10000000000"
+     },
+     "cursor": "102.0.2",
+     "delta_6dec": "-7000000",
+     "explained": true,
+     "height": 102,
+     "kind": "balance_change",
+     "phase": "block",
+     "records": [
+      "102.0.0",
+      "102.0.1"
+     ],
+     "records_delta_6dec": "-7000000",
+     "seq": 2,
+     "since_cursor": null,
+     "since_height": 101,
+     "system": false,
+     "unexplained_6dec": "0"
+    }
+   ],
+   "expect": [
+    "not checked"
+   ]
+  }
+ ]
+}
