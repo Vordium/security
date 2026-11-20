@@ -1,4 +1,4 @@
-# Vordium security
+# Vordium Security Proofs
 
 This repository lists what is proven about the protections around Vordium — the network, the Vordex app, the SDKs and
 the hosted AI server — and how to re-run each check yourself. It is the **Vordium Security Proofs**.
