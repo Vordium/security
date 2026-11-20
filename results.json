@@ -1,5 +1,5 @@
 {
-  "name": "Vordium AI Audit",
+  "name": "Vordium Security Proofs",
   "date": "2026-11-18",
   "statuses": [
     "PROVED",
@@ -19,7 +19,7 @@
       "limits": "an order refused because of the daily loss lock carries the code reduce_only_or_side, not daily_loss_limit; the lock itself is shown in the agent's record and events. Exposure limits with an existing position, and the largest position, are not yet tested. Not yet checked on mainnet.",
       "check": "on the testnet, run the agent-control proof script with a funded test account, or create an agent in Vordex → Agents with a small largest order and one market, then ask it for a larger order or another market. The network refuses it.",
       "verifier": "`python3 verifiers/agent_control_proof.py`",
-      "docs": "https://docs.vordium.com/security/ai-audit/#agent-limits"
+      "docs": "https://docs.vordium.com/security/proofs/#agent-limits"
     },
     {
       "id": "shared-collateral",
@@ -33,7 +33,7 @@
       "limits": "it proves that two orders sent at once were judged one after the other within one block against one shared balance; it does not cover more than two signers at once. Not yet run on mainnet.",
       "check": "run by the team",
       "verifier": null,
-      "docs": "https://docs.vordium.com/security/ai-audit/#shared-collateral"
+      "docs": "https://docs.vordium.com/security/proofs/#shared-collateral"
     },
     {
       "id": "revoked-keys",
@@ -47,7 +47,7 @@
       "limits": "one in-flight order was taken in before the revoke applied and then left no order, fill or refusal record; it did not trade, but the network does not yet say what became of it. The order cancellation on revoke runs on the testnet; it is not yet on mainnet. Expired sessions, expired agents and expired agent policies are not yet tested on a network.",
       "check": "on the testnet, run the agent-control proof script with a funded test account; its revoke step records each order's outcome, the network's own record of the revoke, the agent's orders on the book before it and which of them the network cancelled.",
       "verifier": "`python3 verifiers/agent_control_proof.py`",
-      "docs": "https://docs.vordium.com/security/ai-audit/#revoked-keys"
+      "docs": "https://docs.vordium.com/security/proofs/#revoked-keys"
     },
     {
       "id": "stop-signers",
@@ -61,7 +61,7 @@
       "limits": "the network's records show the stop's effect: no session, no live agent, and no order after the stop. The refusals of the next orders happen before an order is recorded, so they rest on the run's own log, not on the network's records. This run did not check resting orders. Not yet available on mainnet, where the app ends each agent and the trading key one by one instead.",
       "check": "run by the team",
       "verifier": null,
-      "docs": "https://docs.vordium.com/security/ai-audit/#stop-signers"
+      "docs": "https://docs.vordium.com/security/proofs/#stop-signers"
     },
     {
       "id": "stop-everything",
@@ -75,7 +75,7 @@
       "limits": "the whole tap has not yet been run end to end on a network; its network stop is proven above. On your own computer, `stop_all` in the MCP server stops only that program; an AI connected to it can call `stop_all` itself, so text that misleads the AI can pause it and cancel your resting orders.",
       "check": "in Vordex → AI or Agents, **Stop everything now**; the card then lists what the network shows as stopped, or names anything still live.",
       "verifier": null,
-      "docs": "https://docs.vordium.com/security/ai-audit/#stop-everything"
+      "docs": "https://docs.vordium.com/security/proofs/#stop-everything"
     },
     {
       "id": "nonces",
@@ -89,7 +89,7 @@
       "limits": "one account signing from two computers at once, or with clocks that disagree, is not yet tested.",
       "check": "run by the team",
       "verifier": null,
-      "docs": "https://docs.vordium.com/security/ai-audit/#nonces"
+      "docs": "https://docs.vordium.com/security/proofs/#nonces"
     },
     {
       "id": "lost-answer",
@@ -103,7 +103,7 @@
       "limits": "a resend of the same request has not yet been run against a network. The network applies an identical cancel, or an identical take-profit or stop-loss change, each time it is sent.",
       "check": "run by the team",
       "verifier": null,
-      "docs": "https://docs.vordium.com/security/ai-audit/#lost-answer"
+      "docs": "https://docs.vordium.com/security/proofs/#lost-answer"
     },
     {
       "id": "browser-keys",
@@ -117,7 +117,7 @@
       "limits": "code running on the site itself can use the trading key and the agent key; the site's content security policy is what keeps other code out, and it is not covered by this audit. A copy of the whole browser profile carries the browser's key with it. No test yet runs an injected script or a browser extension against the keys.",
       "check": "run by the team; what the seal protects is described in Session Keys (https://docs.vordium.com/guides/session-keys)",
       "verifier": null,
-      "docs": "https://docs.vordium.com/security/ai-audit/#browser-keys"
+      "docs": "https://docs.vordium.com/security/proofs/#browser-keys"
     },
     {
       "id": "hosted-server",
@@ -131,7 +131,7 @@
       "limits": "the hosted mainnet server has not yet been checked for how it marks text from the network. No flood test has been recorded against the hosted server.",
       "check": "`curl -s https://mcp.vordium.com/testnet/health` shows the server's request limits and counters; the agent-control proof script (step 8) lists the hosted server's tools and asks it for an order.",
       "verifier": "`python3 verifiers/check_hosted_ai_server.py`",
-      "docs": "https://docs.vordium.com/security/ai-audit/#hosted-server"
+      "docs": "https://docs.vordium.com/security/proofs/#hosted-server"
     },
     {
       "id": "planted-data",
@@ -145,7 +145,7 @@
       "limits": "the planted agent name was not yet written on the network: the network refuses a name change made soon after an agent is registered. The newer server code that keeps network text as data is not yet in the published release. Your AI still reads the planted text. Orders inside the agent's limits are signed without asking when orders are set to sign automatically, so your limits are the bound. Some AI apps accept their own confirmation prompts without asking you. Not yet checked on mainnet.",
       "check": "run the agent-control proof script (step 7); it plants the text through a local relay, drives the AI server with the official MCP client, and records which layer stopped each order and whether anything was signed.",
       "verifier": "`python3 verifiers/agent_control_proof.py`",
-      "docs": "https://docs.vordium.com/security/ai-audit/#planted-data"
+      "docs": "https://docs.vordium.com/security/proofs/#planted-data"
     },
     {
       "id": "phishing",
@@ -159,7 +159,7 @@
       "limits": "this sign-in is not yet live on mainnet. Other signatures — enabling trading, registering an agent, a withdrawal — are not bound to our sites: check the site address and what your wallet shows before you sign. How wallets warn about a look-alike site has not yet been checked by hand.",
       "check": "run by the team",
       "verifier": null,
-      "docs": "https://docs.vordium.com/security/ai-audit/#phishing"
+      "docs": "https://docs.vordium.com/security/proofs/#phishing"
     },
     {
       "id": "builder-fees",
@@ -173,7 +173,7 @@
       "limits": "not checked on spot markets; spot fills write no fill record, so there only the app's totals can show the fee. When one match closes a position and opens the other side, the network writes it as two fill records and shows the app fee for the whole match on one of them; the totals still add up. Not yet run on mainnet.",
       "check": "on the testnet, with two funded test accounts, run the public builder-fee proof with the Vordium Python SDK: it approves an app, places orders that name it, fills them and claims the fees, and writes every answer of the network to a results file.",
       "verifier": "`python3 verifiers/builder_fee_proof.py`",
-      "docs": "https://docs.vordium.com/security/ai-audit/#builder-fees"
+      "docs": "https://docs.vordium.com/security/proofs/#builder-fees"
     },
     {
       "id": "domains",
@@ -187,7 +187,7 @@
       "limits": "the secure-only rule does not yet cover subdomains or the browsers' preload lists, and some redirects do not yet carry it. No watch yet covers name-server records, certificates issued for our domains, or domain expiry.",
       "check": "`curl -sI https://docs.vordium.com | grep -i strict-transport-security` shows that browsers are told to use only secure connections. Our official addresses are listed on the Token (https://docs.vordium.com/token) page.",
       "verifier": "`python3 verifiers/check_site_headers.py`",
-      "docs": "https://docs.vordium.com/security/ai-audit/#domains"
+      "docs": "https://docs.vordium.com/security/proofs/#domains"
     },
     {
       "id": "releases",
@@ -201,7 +201,7 @@
       "limits": "not every way of changing a live site goes through this check yet.",
       "check": "run by the team",
       "verifier": null,
-      "docs": "https://docs.vordium.com/security/ai-audit/#releases"
+      "docs": "https://docs.vordium.com/security/proofs/#releases"
     },
     {
       "id": "private-data",
@@ -215,7 +215,7 @@
       "limits": "the testnet app, the Labs sites and the hosted AI server are not yet re-read every day, and the public code repositories and packages are not yet scanned on a schedule. One of the checks that run every day currently reports findings.",
       "check": "run by the team",
       "verifier": null,
-      "docs": "https://docs.vordium.com/security/ai-audit/#private-data"
+      "docs": "https://docs.vordium.com/security/proofs/#private-data"
     },
     {
       "id": "current-text",
@@ -229,7 +229,7 @@
       "limits": "two of the checks that run every day currently report findings. Links to other sites are not followed, and the public code repositories have no such checks yet.",
       "check": "versions on these docs are read from the published packages when the site is built; compare them with PyPI (https://pypi.org/project/vordium/) and npm (https://www.npmjs.com/package/@vordium/sdk).",
       "verifier": null,
-      "docs": "https://docs.vordium.com/security/ai-audit/#current-text"
+      "docs": "https://docs.vordium.com/security/proofs/#current-text"
     },
     {
       "id": "failed-read",
@@ -243,7 +243,7 @@
       "limits": "the browser test that makes the network fail has not yet been run on the current release, and it is not yet scheduled. The agents dashboard keeps showing \"Reading…\" when its read fails.",
       "check": "run by the team",
       "verifier": null,
-      "docs": "https://docs.vordium.com/security/ai-audit/#failed-read"
+      "docs": "https://docs.vordium.com/security/proofs/#failed-read"
     },
     {
       "id": "pending-proposals",
@@ -257,7 +257,7 @@
       "limits": "proposals are off on mainnet, so this has not been run there.",
       "check": "run by the team",
       "verifier": null,
-      "docs": "https://docs.vordium.com/security/ai-audit/#pending-proposals"
+      "docs": "https://docs.vordium.com/security/proofs/#pending-proposals"
     },
     {
       "id": "impostors",
@@ -271,7 +271,7 @@
       "limits": "no watch yet looks for look-alike domains or certificates issued for them, the list of official social accounts is not checked, and the official domain list is checked on the docs only.",
       "check": "VORD is the network's native coin, with no token contract: any \"VORD\" token contract is not ours. Official addresses are on the Token (https://docs.vordium.com/token) page and at vordium.com/links (https://vordium.com/links/).",
       "verifier": null,
-      "docs": "https://docs.vordium.com/security/ai-audit/#impostors"
+      "docs": "https://docs.vordium.com/security/proofs/#impostors"
     },
     {
       "id": "block-links",
@@ -285,7 +285,7 @@
       "limits": "it does not recompute block hashes or check the validators' signatures, and it trusts what the public endpoint serves.",
       "check": "run the block-link verifier from the security repository (https://github.com/Vordium/security) on mainnet or the testnet",
       "verifier": "`python3 verifiers/verify_block_links.py`",
-      "docs": "https://docs.vordium.com/security/ai-audit/#block-links"
+      "docs": "https://docs.vordium.com/security/proofs/#block-links"
     },
     {
       "id": "state-checkpoint",
@@ -299,7 +299,7 @@
       "limits": "the signatures are checked against the validators seated now. This check alone does not recompute the root.",
       "check": "run the state-checkpoint verifier from the security repository (https://github.com/Vordium/security)",
       "verifier": "`python3 verifiers/verify_state_checkpoint.py`",
-      "docs": "https://docs.vordium.com/security/ai-audit/#state-checkpoint"
+      "docs": "https://docs.vordium.com/security/proofs/#state-checkpoint"
     },
     {
       "id": "state-root",
@@ -313,7 +313,7 @@
       "limits": "it needs the verifier program built from the node source and the testnet genesis file, and neither is published as a download yet, so outsiders cannot run it yet. Four fields are published as hashes only.",
       "check": "the state-checkpoint verifier from the security repository (https://github.com/Vordium/security), given the node's verifier program and the testnet genesis file",
       "verifier": "`python3 verifiers/verify_state_checkpoint.py`",
-      "docs": "https://docs.vordium.com/security/ai-audit/#state-root"
+      "docs": "https://docs.vordium.com/security/proofs/#state-root"
     },
     {
       "id": "fresh-node",
@@ -327,7 +327,7 @@
       "limits": "one run, on a release older than the current one.",
       "check": "run by the team",
       "verifier": null,
-      "docs": "https://docs.vordium.com/security/ai-audit/#fresh-node"
+      "docs": "https://docs.vordium.com/security/proofs/#fresh-node"
     },
     {
       "id": "reserves-coverage",
@@ -341,7 +341,7 @@
       "limits": "the adjustments inside the USDC held, for deposits not yet credited and payouts not yet settled, are the network's own figures and are not recomputed. See Proof of reserves (https://docs.vordium.com/security/reserves).",
       "check": "run the reserves verifier from the security repository (https://github.com/Vordium/security)",
       "verifier": "`python3 verifiers/verify_reserves.py`",
-      "docs": "https://docs.vordium.com/security/ai-audit/#reserves-coverage"
+      "docs": "https://docs.vordium.com/security/proofs/#reserves-coverage"
     },
     {
       "id": "reserves-inclusion",
@@ -355,7 +355,7 @@
       "limits": "it shows that your balance is included, not that the published total is right.",
       "check": "run the reserves verifier from the security repository (https://github.com/Vordium/security) with your address",
       "verifier": "`python3 verifiers/verify_reserves.py`",
-      "docs": "https://docs.vordium.com/security/ai-audit/#reserves-inclusion"
+      "docs": "https://docs.vordium.com/security/proofs/#reserves-inclusion"
     },
     {
       "id": "reserves-mainnet",
@@ -369,7 +369,7 @@
       "limits": "—",
       "check": "—",
       "verifier": null,
-      "docs": "https://docs.vordium.com/security/ai-audit/#reserves-mainnet"
+      "docs": "https://docs.vordium.com/security/proofs/#reserves-mainnet"
     },
     {
       "id": "records-digest",
@@ -383,7 +383,7 @@
       "limits": "—",
       "check": "run the records-digest verifier from the security repository (https://github.com/Vordium/security)",
       "verifier": "`python3 verifiers/verify_records_digest.py`",
-      "docs": "https://docs.vordium.com/security/ai-audit/#records-digest"
+      "docs": "https://docs.vordium.com/security/proofs/#records-digest"
     },
     {
       "id": "op-order",
@@ -397,7 +397,7 @@
       "limits": "each operation's own hash is not recomputed here.",
       "check": "run the operation-order verifier from the security repository (https://github.com/Vordium/security)",
       "verifier": "`python3 verifiers/verify_op_order.py`",
-      "docs": "https://docs.vordium.com/security/ai-audit/#op-order"
+      "docs": "https://docs.vordium.com/security/proofs/#op-order"
     },
     {
       "id": "explorer-hashes",
@@ -411,7 +411,7 @@
       "limits": "needs a browser; it is not one of the scripts in the repository.",
       "check": "run by the team (a browser check)",
       "verifier": null,
-      "docs": "https://docs.vordium.com/security/ai-audit/#explorer-hashes"
+      "docs": "https://docs.vordium.com/security/proofs/#explorer-hashes"
     },
     {
       "id": "fault-suite",
