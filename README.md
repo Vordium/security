@@ -1,10 +1,10 @@
 # Vordium security
 
 This repository lists what is proven about the protections around Vordium — the network, the Vordex app, the SDKs and
-the hosted AI server — and how to re-run each check yourself. It is the **Vordium AI Audit**.
+the hosted AI server — and how to re-run each check yourself. It is the **Vordium Security Proofs**.
 
 The items about trading, keys, the AI server, sign-in, the websites and the chain data are also on the docs, with the
-same words: https://docs.vordium.com/security/ai-audit/. The tests of the network itself are listed here.
+same words: https://docs.vordium.com/security/proofs/. The tests of the network itself are listed here.
 
 ## How to read it
 
